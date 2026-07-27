@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+
+<html lang="id"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Detail Pemesanan - LOGISLOT Supplier Dashboard</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&amp;family=JetBrains+Mono:wght@400&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "secondary-container": "#a5d0fd",
+                        "inverse-on-surface": "#eaf1ff",
+                        "tertiary-fixed-dim": "#f1bd81",
+                        "secondary-fixed": "#cfe5ff",
+                        "error": "#ba1a1a",
+                        "inverse-surface": "#213145",
+                        "on-secondary-fixed": "#001d33",
+                        "on-error": "#ffffff",
+                        "on-surface": "#0b1c30",
+                        "on-tertiary-fixed": "#2b1700",
+                        "primary-fixed": "#d6e3ff",
+                        "on-error-container": "#93000a",
+                        "primary-container": "#1b365d",
+                        "surface-container": "#e5eeff",
+                        "primary-fixed-dim": "#aec7f7",
+                        "tertiary-fixed": "#ffddb9",
+                        "inverse-primary": "#aec7f7",
+                        "surface-container-low": "#eff4ff",
+                        "background": "#f8f9ff",
+                        "surface-container-lowest": "#ffffff",
+                        "on-surface-variant": "#44474e",
+                        "on-tertiary-fixed-variant": "#623f0f",
+                        "on-secondary-fixed-variant": "#194a70",
+                        "on-background": "#0b1c30",
+                        "tertiary-container": "#4f2f00",
+                        "surface-variant": "#d3e4fe",
+                        "on-secondary-container": "#2c5980",
+                        "on-primary": "#ffffff",
+                        "primary": "#002046",
+                        "error-container": "#ffdad6",
+                        "on-primary-container": "#87a0cd",
+                        "surface": "#f8f9ff",
+                        "outline": "#74777f",
+                        "on-tertiary": "#ffffff",
+                        "on-primary-fixed": "#001b3d",
+                        "surface-tint": "#465f88",
+                        "surface-container-highest": "#d3e4fe",
+                        "tertiary": "#321c00",
+                        "on-tertiary-container": "#c6965e",
+                        "surface-dim": "#cbdbf5",
+                        "secondary-fixed-dim": "#a0cbf7",
+                        "surface-container-high": "#dce9ff",
+                        "outline-variant": "#c4c6cf",
+                        "on-secondary": "#ffffff",
+                        "secondary": "#356289",
+                        "on-primary-fixed-variant": "#2e476f",
+                        "surface-bright": "#f8f9ff"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "base": "8px",
+                        "lg": "24px",
+                        "xl": "32px",
+                        "sm": "8px",
+                        "md": "16px",
+                        "xs": "4px",
+                        "gutter": "24px",
+                        "container-max": "1440px"
+                    },
+                    "fontFamily": {
+                        "label-md": ["Inter"],
+                        "headline-sm": ["Inter"],
+                        "headline-lg-mobile": ["Inter"],
+                        "body-md": ["Inter"],
+                        "headline-md": ["Inter"],
+                        "headline-lg": ["Inter"],
+                        "code": ["JetBrains Mono"],
+                        "body-lg": ["Inter"]
+                    },
+                    "fontSize": {
+                        "label-md": ["12px", { "lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "600" }],
+                        "headline-sm": ["20px", { "lineHeight": "28px", "fontWeight": "600" }],
+                        "headline-lg-mobile": ["24px", { "lineHeight": "32px", "letterSpacing": "-0.01em", "fontWeight": "700" }],
+                        "body-md": ["14px", { "lineHeight": "20px", "fontWeight": "400" }],
+                        "headline-md": ["24px", { "lineHeight": "32px", "fontWeight": "600" }],
+                        "headline-lg": ["32px", { "lineHeight": "40px", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+                        "code": ["13px", { "lineHeight": "20px", "fontWeight": "400" }],
+                        "body-lg": ["16px", { "lineHeight": "24px", "fontWeight": "400" }]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        .slide-in-right {
+            animation: slideInRight 0.3s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+        }
+        @keyframes slideInRight {
+            from { transform: translateX(100%); opacity: 0; }
+            to { transform: translateX(0); opacity: 1; }
+        }
+        
+        .fade-in {
+            animation: fadeIn 0.2s ease-out forwards;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        /* Material Symbols Outline Settings */
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .material-symbols-outlined.fill {
+            font-variation-settings: 'FILL' 1, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+    </style>
+</head>
+<body class="bg-background text-on-background font-body-md antialiased overflow-hidden flex h-screen">
+<!-- SideNavBar (Background, Dimmed) -->
+<nav class="bg-primary dark:bg-primary text-on-primary dark:text-on-primary font-body-md text-body-md h-screen w-64 fixed left-0 top-0 border-r border-outline-variant dark:border-outline flat no shadows duration-200 ease-in-out flex flex-col h-full py-lg z-0 pointer-events-none opacity-50">
+<div class="px-gutter mb-xl flex items-center gap-3">
+<div class="w-8 h-8 rounded-full bg-secondary-container flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-on-secondary-container">local_shipping</span>
+</div>
+<div>
+<h1 class="font-headline-md text-headline-md font-bold text-on-primary dark:text-on-primary">LOGISLOT</h1>
+<p class="font-label-md text-label-md text-on-primary-container opacity-80">Supplier Portal</p>
+</div>
+</div>
+<div class="flex-1 overflow-y-auto mt-4 space-y-1">
+<a class="flex items-center gap-3 px-4 py-3 mx-2 my-1 text-on-primary hover:bg-on-primary-fixed-variant rounded-lg transition-colors" href="#">
+<span class="material-symbols-outlined">dashboard</span>
+<span>Home</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 mx-2 my-1 bg-primary-container text-on-primary-container rounded-lg transition-colors font-semibold" href="#">
+<span class="material-symbols-outlined fill">add_box</span>
+<span>Create Booking</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 mx-2 my-1 text-on-primary hover:bg-on-primary-fixed-variant rounded-lg transition-colors" href="#">
+<span class="material-symbols-outlined">list_alt</span>
+<span>My Bookings</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 mx-2 my-1 text-on-primary hover:bg-on-primary-fixed-variant rounded-lg transition-colors" href="#">
+<span class="material-symbols-outlined">history</span>
+<span>History</span>
+</a>
+</div>
+<div class="mt-auto space-y-1 pt-4 border-t border-on-primary-fixed-variant">
+<a class="flex items-center gap-3 px-4 py-3 mx-2 my-1 text-on-primary hover:bg-on-primary-fixed-variant rounded-lg transition-colors" href="#">
+<span class="material-symbols-outlined">settings</span>
+<span>Settings</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 mx-2 my-1 text-on-primary hover:bg-on-primary-fixed-variant rounded-lg transition-colors" href="#">
+<span class="material-symbols-outlined">help_outline</span>
+<span>Support</span>
+</a>
+</div>
+</nav>
+<!-- Main Content Area (Background, Dimmed) -->
+<div class="ml-64 flex-1 flex flex-col h-screen z-0 opacity-50 pointer-events-none">
+<!-- TopNavBar -->
+<header class="bg-surface-container-lowest dark:bg-surface text-primary dark:text-inverse-primary font-headline-sm text-headline-sm fixed top-0 right-0 w-[calc(100%-16rem)] h-16 border-b border-outline-variant dark:border-outline flat no shadows duration-200 ease-in-out flex justify-between items-center px-gutter max-w-container-max ml-auto z-10">
+<div class="flex-1">
+<!-- Search bar placeholder -->
+<div class="relative w-64">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-outline">search</span>
+<input class="w-full bg-surface-container-low border border-outline-variant rounded-lg py-2 pl-10 pr-4 font-body-md text-on-surface focus:outline-none" disabled="" placeholder="Search..." type="text"/>
+</div>
+</div>
+<div class="flex items-center gap-4">
+<button class="w-10 h-10 rounded-full hover:bg-surface-container transition-colors flex items-center justify-center text-on-surface-variant">
+<span class="material-symbols-outlined">notifications</span>
+</button>
+<button class="w-10 h-10 rounded-full hover:bg-surface-container transition-colors flex items-center justify-center text-on-surface-variant">
+<span class="material-symbols-outlined">apps</span>
+</button>
+<div class="w-8 h-8 rounded-full bg-secondary-container overflow-hidden ml-2 border border-outline-variant">
+<img class="w-full h-full object-cover" data-alt="A professional corporate headshot of a logistics manager in a modern office environment, wearing a dark blue suit, looking confident. Soft, flattering studio lighting with a neutral gray background. Crisp focus, highly detailed, realistic." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAgqHlyZkSNRYFQ0xyL1bUTxMAB934CjdwAIbBYI49nr4hRJnzv3FG_4cqQOURGoA5qiJPWvGi7oWbxW_3QVqK5uExfSzhES1nlNpEhgRWR4S0o24hom2f6X57OzzEgQqKViAm_izjGBqNQ3Pm9ZQioBWYGe139AyANk0KlZzfOak9dEKzQQ-hwZcSFsiNw8jTEew-VFJ42Yb4fVPLIYLW24PWr0ec0A3rrSVEWujzOnOEq-AZNqabnVB64xODvp6VztiZlvuJgkg"/>
+</div>
+</div>
+</header>
+<!-- Dummy Dashboard Content (Dimmed Background) -->
+<main class="flex-1 overflow-y-auto mt-16 p-gutter bg-background">
+<div class="max-w-container-max mx-auto space-y-6">
+<!-- Header -->
+<div class="flex justify-between items-end">
+<div>
+<h2 class="font-headline-lg text-headline-lg text-on-surface">Slot Booking</h2>
+<p class="font-body-md text-on-surface-variant mt-1">Select an available dock and time slot for your delivery.</p>
+</div>
+<div class="flex gap-3">
+<div class="px-4 py-2 bg-surface-container-lowest border border-outline-variant rounded-lg font-body-md text-on-surface flex items-center gap-2">
+<span class="material-symbols-outlined text-outline">calendar_today</span>
+                            24 Okt 2026
+                        </div>
+</div>
+</div>
+<!-- Grid/Calendar Placeholder -->
+<div class="bg-surface-container-lowest rounded-xl border border-outline-variant p-6 shadow-sm">
+<div class="h-[600px] bg-surface-container-low rounded-lg border border-outline-variant border-dashed flex items-center justify-center">
+<span class="font-headline-md text-on-surface-variant opacity-50">Interactive Slot Calendar (Background)</span>
+</div>
+</div>
+</div>
+</main>
+</div>
+<!-- Overlay / Backdrop -->
+<div aria-hidden="true" class="fixed inset-0 bg-on-background/40 z-40 fade-in"></div>
+<!-- Side-panel / Modal (Slide in from right) -->
+<aside class="fixed top-0 right-0 h-screen w-full md:w-[480px] bg-surface-container-lowest shadow-[-8px_0_24px_rgba(27,54,93,0.12)] z-50 flex flex-col slide-in-right overflow-hidden">
+<!-- Header -->
+<div class="px-gutter py-lg border-b border-outline-variant flex items-center justify-between bg-surface-container-lowest shrink-0">
+<h2 class="font-headline-md text-headline-md text-on-surface font-semibold">Detail Pemesanan</h2>
+<button class="w-10 h-10 rounded-full hover:bg-surface-container transition-colors flex items-center justify-center text-on-surface-variant focus:outline-none focus:ring-2 focus:ring-primary">
+<span class="material-symbols-outlined">close</span>
+</button>
+</div>
+<!-- Scrollable Content -->
+<div class="flex-1 overflow-y-auto p-gutter space-y-xl custom-scrollbar">
+<!-- Info Box (Grey Summary) -->
+<div class="bg-surface-container rounded-lg p-md border border-outline-variant relative overflow-hidden group">
+<div class="absolute top-0 left-0 w-1 h-full bg-primary rounded-l-lg"></div>
+<h3 class="font-label-md text-label-md text-on-surface-variant uppercase tracking-wider mb-sm">Slot Terpilih</h3>
+<div class="grid grid-cols-2 gap-4 mt-md">
+<div>
+<p class="font-label-md text-label-md text-on-surface-variant">Tanggal</p>
+<p class="font-body-lg text-on-surface font-semibold flex items-center gap-2 mt-xs">
+<span class="material-symbols-outlined text-secondary text-sm">calendar_month</span>
+                            24 Okt 2026
+                        </p>
+</div>
+<div>
+<p class="font-label-md text-label-md text-on-surface-variant">Waktu</p>
+<p class="font-body-lg text-on-surface font-semibold flex items-center gap-2 mt-xs">
+<span class="material-symbols-outlined text-secondary text-sm">schedule</span>
+                            09:00 - 10:00
+                        </p>
+</div>
+<div class="col-span-2 pt-2 border-t border-outline-variant/50">
+<p class="font-label-md text-label-md text-on-surface-variant">Lokasi</p>
+<p class="font-body-lg text-on-surface font-semibold flex items-center gap-2 mt-xs">
+<span class="material-symbols-outlined text-secondary text-sm">warehouse</span>
+                            Dock 1 - Main Distribution Center
+                        </p>
+</div>
+</div>
+</div>
+<!-- Form Fields -->
+<form class="space-y-6">
+<!-- Nomor PO -->
+<div>
+<label class="block font-label-md text-label-md text-on-surface mb-xs" for="poNumber">Nomor PO <span class="text-error">*</span></label>
+<div class="relative">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-outline">receipt</span>
+<input class="w-full bg-surface-container-lowest border border-outline-variant rounded-lg py-2 pl-10 pr-4 font-body-md text-on-surface focus:outline-none focus:border-secondary focus:ring-1 focus:ring-secondary transition-colors" id="poNumber" name="poNumber" placeholder="Masukkan Nomor Purchase Order" required="" type="text"/>
+</div>
+</div>
+<!-- Plat Nomor Truk -->
+<div>
+<label class="block font-label-md text-label-md text-on-surface mb-xs" for="truckPlate">Plat Nomor Truk <span class="text-error">*</span></label>
+<div class="relative">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-outline">pin</span>
+<input class="w-full bg-surface-container-lowest border border-outline-variant rounded-lg py-2 pl-10 pr-4 font-body-md text-on-surface uppercase focus:outline-none focus:border-secondary focus:ring-1 focus:ring-secondary transition-colors" id="truckPlate" name="truckPlate" placeholder="B 1234 XYZ" required="" type="text"/>
+</div>
+<p class="font-label-md text-label-md text-on-surface-variant mt-1 font-normal opacity-80">Format: Area - Nomor - Huruf Belakang</p>
+</div>
+<!-- Nama Sopir -->
+<div>
+<label class="block font-label-md text-label-md text-on-surface mb-xs" for="driverName">Nama Sopir <span class="text-error">*</span></label>
+<div class="relative">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-outline">person</span>
+<input class="w-full bg-surface-container-lowest border border-outline-variant rounded-lg py-2 pl-10 pr-4 font-body-md text-on-surface focus:outline-none focus:border-secondary focus:ring-1 focus:ring-secondary transition-colors" id="driverName" name="driverName" placeholder="Nama Lengkap Sopir" required="" type="text"/>
+</div>
+</div>
+<!-- Jenis Armada -->
+<div>
+<label class="block font-label-md text-label-md text-on-surface mb-xs" for="vehicleType">Jenis Armada <span class="text-error">*</span></label>
+<div class="relative">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-outline z-10 pointer-events-none">local_shipping</span>
+<select class="w-full bg-surface-container-lowest border border-outline-variant rounded-lg py-2 pl-10 pr-10 font-body-md text-on-surface appearance-none focus:outline-none focus:border-secondary focus:ring-1 focus:ring-secondary transition-colors cursor-pointer" id="vehicleType" name="vehicleType" required="">
+<option disabled="" selected="" value="">Pilih Jenis Armada</option>
+<option value="Truk Box">Truk Box</option>
+<option value="Truk Engkel">Truk Engkel</option>
+<option value="Truk Fuso">Truk Fuso</option>
+<option value="Trailer">Trailer</option>
+</select>
+<span class="material-symbols-outlined absolute right-3 top-1/2 -translate-y-1/2 text-outline pointer-events-none">arrow_drop_down</span>
+</div>
+</div>
+</form>
+<!-- Decorative Visual/Illustration Placeholder (optional high-end touch) -->
+<div class="mt-lg rounded-xl overflow-hidden h-32 relative border border-outline-variant bg-surface-container-low flex items-center justify-center">
+<img class="absolute inset-0 w-full h-full object-cover opacity-60" data-alt="A minimalist flat-vector geometric illustration in deep navy blue and white, depicting a stylized delivery truck reversing into a modern loading dock. Clean lines, corporate aesthetic, subtle grid background, conveying logistics efficiency and precision." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDFjFDEcrhBAAgQz1hixoaYF4c9gpyTWiy0jU4oFb4u2EaX6STiAKi8SliZVMwZhjT2fSNZHfZN0ZrkbK1pwoirUhqLdkFnf390R06d_45AGB36CfbA33y03tm9WKsAlPRDzWLqLUlROChuHbJ1sAgoaxANrnfycxjWkpQKuaa5hbmY3bpvQdzW9a926wqm12j0leoJS7ZqOvJqlhVf2q2mwdglCZKx5HDfh6UmnsrrNbU7o6o6GmAkApZXG6umo7Dsq733u9Kjjg"/>
+<div class="absolute inset-0 bg-gradient-to-t from-surface-container-lowest to-transparent"></div>
+</div>
+</div>
+<!-- Footer / Action Area -->
+<div class="p-gutter border-t border-outline-variant bg-surface-container-lowest shrink-0">
+<button class="w-full bg-primary-container hover:bg-primary text-on-primary font-body-lg font-semibold py-3 px-6 rounded-lg transition-colors duration-200 flex items-center justify-center gap-2 shadow-sm" type="submit">
+<span class="material-symbols-outlined text-sm">check_circle</span>
+                Konfirmasi Booking
+            </button>
+<p class="font-label-md text-label-md text-center text-on-surface-variant mt-sm font-normal">Pastikan semua data sesuai sebelum konfirmasi.</p>
+</div>
+</aside>
+<style>
+        /* Custom Scrollbar for the side panel */
+        .custom-scrollbar::-webkit-scrollbar {
+            width: 6px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-track {
+            background: transparent;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background-color: #c4c6cf; /* outline-variant */
+            border-radius: 20px;
+        }
+        .custom-scrollbar:hover::-webkit-scrollbar-thumb {
+            background-color: #74777f; /* outline */
+        }
+    </style>
+</body></html>

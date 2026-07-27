@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+
+<html lang="id"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Input Manual - Check-In/Out</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "tertiary-container": "#4f2f00",
+                        "on-tertiary-fixed-variant": "#623f0f",
+                        "inverse-on-surface": "#eaf1ff",
+                        "surface-container-lowest": "#ffffff",
+                        "surface-container": "#e5eeff",
+                        "tertiary-fixed": "#ffddb9",
+                        "secondary-container": "#a5d0fd",
+                        "background": "#f8f9ff",
+                        "on-error-container": "#93000a",
+                        "inverse-surface": "#213145",
+                        "on-surface": "#0b1c30",
+                        "surface-container-highest": "#d3e4fe",
+                        "surface-container-high": "#dce9ff",
+                        "primary-container": "#1b365d",
+                        "on-error": "#ffffff",
+                        "surface-dim": "#cbdbf5",
+                        "primary-fixed-dim": "#aec7f7",
+                        "outline-variant": "#c4c6cf",
+                        "primary-fixed": "#d6e3ff",
+                        "error-container": "#ffdad6",
+                        "on-secondary-fixed-variant": "#194a70",
+                        "surface-bright": "#f8f9ff",
+                        "on-primary-fixed-variant": "#2e476f",
+                        "on-tertiary-container": "#c6965e",
+                        "surface": "#f8f9ff",
+                        "secondary": "#356289",
+                        "tertiary-fixed-dim": "#f1bd81",
+                        "on-secondary": "#ffffff",
+                        "tertiary": "#321c00",
+                        "primary": "#002046",
+                        "outline": "#74777f",
+                        "surface-container-low": "#eff4ff",
+                        "on-background": "#0b1c30",
+                        "secondary-fixed-dim": "#a0cbf7",
+                        "secondary-fixed": "#cfe5ff",
+                        "on-secondary-fixed": "#001d33",
+                        "on-secondary-container": "#2c5980",
+                        "on-primary-fixed": "#001b3d",
+                        "on-primary": "#ffffff",
+                        "on-tertiary-fixed": "#2b1700",
+                        "surface-variant": "#d3e4fe",
+                        "on-tertiary": "#ffffff",
+                        "error": "#ba1a1a",
+                        "surface-tint": "#465f88",
+                        "inverse-primary": "#aec7f7",
+                        "on-surface-variant": "#44474e",
+                        "on-primary-container": "#87a0cd"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "sm": "8px",
+                        "gutter": "24px",
+                        "md": "16px",
+                        "container-max": "1440px",
+                        "xl": "32px",
+                        "lg": "24px",
+                        "xs": "4px",
+                        "base": "8px"
+                    },
+                    "fontFamily": {
+                        "headline-lg-mobile": ["Inter"],
+                        "body-md": ["Inter"],
+                        "label-md": ["Inter"],
+                        "body-lg": ["Inter"],
+                        "headline-sm": ["Inter"],
+                        "headline-lg": ["Inter"],
+                        "headline-md": ["Inter"],
+                        "code": ["JetBrains Mono"]
+                    },
+                    "fontSize": {
+                        "headline-lg-mobile": ["24px", {"lineHeight": "32px", "letterSpacing": "-0.01em", "fontWeight": "700"}],
+                        "body-md": ["14px", {"lineHeight": "20px", "fontWeight": "400"}],
+                        "label-md": ["12px", {"lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "600"}],
+                        "body-lg": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                        "headline-sm": ["20px", {"lineHeight": "28px", "fontWeight": "600"}],
+                        "headline-lg": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                        "headline-md": ["24px", {"lineHeight": "32px", "fontWeight": "600"}],
+                        "code": ["13px", {"lineHeight": "20px", "fontWeight": "400"}]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        body { font-family: 'Inter', sans-serif; }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background min-h-screen flex flex-col items-center">
+<!-- TopAppBar -->
+<header class="bg-primary flex justify-between items-center px-lg w-full h-20 docked full-width top-0 z-50">
+<div class="flex items-center">
+<span class="font-headline-md text-headline-md font-bold text-on-primary tracking-tight">LOGISLOT</span>
+</div>
+<div class="flex-1 flex justify-center">
+<span class="font-headline-sm text-headline-sm text-on-primary">POS GERBANG - CHECK-IN/OUT</span>
+</div>
+<div class="flex items-center space-x-md">
+<span class="font-headline-md text-headline-md text-on-primary" id="realtime-clock">14:45:32</span>
+<div class="w-10 h-10 rounded-full bg-surface-container-high flex items-center justify-center overflow-hidden border-2 border-primary-container">
+<img alt="Officer profile photo" class="w-full h-full object-cover" data-alt="Professional headshot of a logistics security officer in a high-vis uniform, neutral background, sharp focus, corporate lighting." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDI7qLX6f1diq0yegaGyib99vsdJYDvrFLYQeSx8wlMG_eHGAe5s4aVsWscf49LQt1jLitgMO9aWz9ovmMYShmQgv52lKMOY4PBkCMdfLPET4P8QUCQjPPQSspJ_AfRGQTaa7_oXcZFkaUsOUEaW3eIT1eA1B_m50hz8IWWR1xBpIOE27l5j9-9B31Bq7fLC8zzCuzPPwE0dValVtv6DZsT7QSts_KC62Nofv0ztBoJHSuxAZiBErdgOYMQUX1xZsTaQ1JSJUfnsg"/>
+</div>
+<span class="material-symbols-outlined text-on-primary cursor-pointer hover:bg-primary-container transition-colors rounded-full p-2" data-icon="emergency_home">emergency_home</span>
+</div>
+</header>
+<!-- Main Content Canvas -->
+<main class="flex-1 w-full max-w-container-max mx-auto p-gutter md:p-xl flex flex-col items-center justify-start mt-8 space-y-xl">
+<!-- Search Card -->
+<div class="w-full max-w-3xl bg-surface-container-lowest border border-outline-variant rounded-xl p-xl shadow-sm">
+<h1 class="font-headline-lg text-headline-lg text-on-surface mb-xl text-center">Cari Booking Manual</h1>
+<div class="space-y-lg mb-xl">
+<div>
+<label class="block font-headline-sm text-headline-sm text-on-surface-variant mb-sm" for="nopol">Nomor Polisi Truk</label>
+<input autocomplete="off" class="w-full h-20 px-6 font-headline-lg text-headline-lg text-on-surface border border-outline-variant rounded-lg bg-surface focus:ring-2 focus:ring-secondary focus:border-secondary uppercase placeholder-outline transition-colors shadow-inner" id="nopol" placeholder="Contoh: B 1234 XYZ" type="text"/>
+</div>
+<!-- Error State (Hidden by default, shown for demo) -->
+<div class="flex items-center p-md bg-error-container rounded-lg border border-error hidden" id="error-state">
+<span class="material-symbols-outlined text-error mr-sm" data-weight="fill">error</span>
+<span class="font-body-lg text-body-lg text-error">Booking Tidak Ditemukan — Hubungi Security Pengawas</span>
+</div>
+</div>
+<!-- Virtual Keyboard -->
+<div class="grid grid-cols-10 gap-sm mb-xl bg-surface p-md rounded-lg border border-outline-variant">
+<!-- A simple representation of a large tablet keyboard -->
+<button class="h-16 bg-surface-container-highest rounded font-headline-md text-headline-md text-on-surface hover:bg-primary hover:text-on-primary transition-colors active:scale-95 shadow-sm border border-outline-variant">Q</button>
+<button class="h-16 bg-surface-container-highest rounded font-headline-md text-headline-md text-on-surface hover:bg-primary hover:text-on-primary transition-colors active:scale-95 shadow-sm border border-outline-variant">W</button>
+<button class="h-16 bg-surface-container-highest rounded font-headline-md text-headline-md text-on-surface hover:bg-primary hover:text-on-primary transition-colors active:scale-95 shadow-sm border border-outline-variant">E</button>
+<button class="h-16 bg-surface-container-highest rounded font-headline-md text-headline-md text-on-surface hover:bg-primary hover:text-on-primary transition-colors active:scale-95 shadow-sm border border-outline-variant">R</button>
+<button class="h-16 bg-surface-container-highest rounded font-headline-md text-headline-md text-on-surface hover:bg-primary hover:text-on-primary transition-colors active:scale-95 shadow-sm border border-outline-variant">T</button>
+<button class="h-16 bg-surface-container-highest rounded font-headline-md text-headline-md text-on-surface hover:bg-primary hover:text-on-primary transition-colors active:scale-95 shadow-sm border border-outline-variant">Y</button>
+<button class="h-16 bg-surface-container-highest rounded font-headline-md text-headline-md text-on-surface hover:bg-primary hover:text-on-primary transition-colors active:scale-95 shadow-sm border border-outline-variant">U</button>
+<button class="h-16 bg-surface-container-highest rounded font-headline-md text-headline-md text-on-surface hover:bg-primary hover:text-on-primary transition-colors active:scale-95 shadow-sm border border-outline-variant">I</button>
+<button class="h-16 bg-surface-container-highest rounded font-headline-md text-headline-md text-on-surface hover:bg-primary hover:text-on-primary transition-colors active:scale-95 shadow-sm border border-outline-variant">O</button>
+<button class="h-16 bg-surface-container-highest rounded font-headline-md text-headline-md text-on-surface hover:bg-primary hover:text-on-primary transition-colors active:scale-95 shadow-sm border border-outline-variant">P</button>
+<button class="h-16 bg-surface-container-highest rounded font-headline-md text-headline-md text-on-surface hover:bg-primary hover:text-on-primary transition-colors active:scale-95 shadow-sm border border-outline-variant col-start-2">A</button>
+<button class="h-16 bg-surface-container-highest rounded font-headline-md text-headline-md text-on-surface hover:bg-primary hover:text-on-primary transition-colors active:scale-95 shadow-sm border border-outline-variant">S</button>
+<button class="h-16 bg-surface-container-highest rounded font-headline-md text-headline-md text-on-surface hover:bg-primary hover:text-on-primary transition-colors active:scale-95 shadow-sm border border-outline-variant">D</button>
+<button class="h-16 bg-surface-container-highest rounded font-headline-md text-headline-md text-on-surface hover:bg-primary hover:text-on-primary transition-colors active:scale-95 shadow-sm border border-outline-variant">F</button>
+<button class="h-16 bg-surface-container-highest rounded font-headline-md text-headline-md text-on-surface hover:bg-primary hover:text-on-primary transition-colors active:scale-95 shadow-sm border border-outline-variant">G</button>
+<button class="h-16 bg-surface-container-highest rounded font-headline-md text-headline-md text-on-surface hover:bg-primary hover:text-on-primary transition-colors active:scale-95 shadow-sm border border-outline-variant">H</button>
+<button class="h-16 bg-surface-container-highest rounded font-headline-md text-headline-md text-on-surface hover:bg-primary hover:text-on-primary transition-colors active:scale-95 shadow-sm border border-outline-variant">J</button>
+<button class="h-16 bg-surface-container-highest rounded font-headline-md text-headline-md text-on-surface hover:bg-primary hover:text-on-primary transition-colors active:scale-95 shadow-sm border border-outline-variant">K</button>
+<button class="h-16 bg-surface-container-highest rounded font-headline-md text-headline-md text-on-surface hover:bg-primary hover:text-on-primary transition-colors active:scale-95 shadow-sm border border-outline-variant">L</button>
+<button class="h-16 bg-surface-container-highest rounded font-headline-md text-headline-md text-on-surface hover:bg-primary hover:text-on-primary transition-colors active:scale-95 shadow-sm border border-outline-variant col-start-3">Z</button>
+<button class="h-16 bg-surface-container-highest rounded font-headline-md text-headline-md text-on-surface hover:bg-primary hover:text-on-primary transition-colors active:scale-95 shadow-sm border border-outline-variant">X</button>
+<button class="h-16 bg-surface-container-highest rounded font-headline-md text-headline-md text-on-surface hover:bg-primary hover:text-on-primary transition-colors active:scale-95 shadow-sm border border-outline-variant">C</button>
+<button class="h-16 bg-surface-container-highest rounded font-headline-md text-headline-md text-on-surface hover:bg-primary hover:text-on-primary transition-colors active:scale-95 shadow-sm border border-outline-variant">V</button>
+<button class="h-16 bg-surface-container-highest rounded font-headline-md text-headline-md text-on-surface hover:bg-primary hover:text-on-primary transition-colors active:scale-95 shadow-sm border border-outline-variant">B</button>
+<button class="h-16 bg-surface-container-highest rounded font-headline-md text-headline-md text-on-surface hover:bg-primary hover:text-on-primary transition-colors active:scale-95 shadow-sm border border-outline-variant">N</button>
+<button class="h-16 bg-surface-container-highest rounded font-headline-md text-headline-md text-on-surface hover:bg-primary hover:text-on-primary transition-colors active:scale-95 shadow-sm border border-outline-variant">M</button>
+<button class="h-16 bg-surface-variant rounded font-headline-sm text-headline-sm text-on-surface hover:bg-primary hover:text-on-primary transition-colors active:scale-95 shadow-sm border border-outline-variant col-span-2 flex items-center justify-center">
+<span class="material-symbols-outlined">backspace</span>
+</button>
+<button class="h-16 bg-surface-container-highest rounded font-headline-md text-headline-md text-on-surface hover:bg-primary hover:text-on-primary transition-colors active:scale-95 shadow-sm border border-outline-variant col-span-2">123</button>
+<button class="h-16 bg-surface-container-highest rounded font-headline-md text-headline-md text-on-surface hover:bg-primary hover:text-on-primary transition-colors active:scale-95 shadow-sm border border-outline-variant col-span-6">SPACE</button>
+<button class="h-16 bg-surface-container-highest rounded font-headline-md text-headline-md text-on-surface hover:bg-primary hover:text-on-primary transition-colors active:scale-95 shadow-sm border border-outline-variant col-span-2">. -</button>
+</div>
+<button class="w-full bg-primary-container text-on-primary h-20 rounded-lg font-headline-md text-headline-md shadow-sm hover:bg-primary transition-colors active:scale-[0.99] flex items-center justify-center">
+<span class="material-symbols-outlined mr-sm text-on-primary" data-weight="fill">search</span>
+                Cari
+            </button>
+</div>
+<!-- Result Card (Shown after search) -->
+<div class="w-full max-w-3xl bg-surface-container-lowest border border-outline-variant rounded-xl p-xl shadow-sm flex flex-col space-y-lg">
+<div class="flex items-center space-x-xl pb-lg border-b border-outline-variant">
+<div class="w-32 h-32 rounded-lg bg-surface-container flex items-center justify-center flex-shrink-0 overflow-hidden border border-outline-variant">
+<img alt="Truck placeholder" class="w-full h-full object-cover" data-alt="A clean, modern heavy duty commercial logistics truck cab in bright daylight, high contrast, industrial outdoor setting, corporate aesthetic." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDAYkqxignBpfsyziBlBg_CiftDL2rQfE2yy1E10d6h8oGgvXR3_TogAgAsTpX1mFQVLITIKYCgv_W97RGDsE9hFOqNxy44lVG0E3V0aXgAi8PIVrfMyYjpQB-Y9oB9X8WN5gmwx_D0bqu8uSzg1QMnHuVwnzMlBtczQs-5YOvUZ96kzYRgJ75a2ykXzn2I0C0n12On2z9rz9gkFUBADIAdV6UuEeRf9FJhBl2URxoH5I8Ih2tF6IGLRHHH7sTfaj5VzAgOqG098w"/>
+</div>
+<div class="flex-1">
+<h2 class="font-headline-lg text-headline-lg text-on-surface font-bold tracking-tight mb-xs">B 9182 TEQ</h2>
+<p class="font-headline-sm text-headline-sm text-secondary mb-md">PT Global Logistik Sejahtera</p>
+<div class="inline-flex items-center px-4 py-2 bg-surface-container-highest rounded-md border border-outline-variant">
+<span class="material-symbols-outlined text-on-surface-variant mr-sm">schedule</span>
+<span class="font-body-lg text-body-lg text-on-surface font-semibold">Jam Slot: 10:00 - 11:00</span>
+</div>
+</div>
+<div class="flex flex-col items-end justify-center">
+<span class="inline-flex items-center justify-center px-4 py-1 bg-[#E8F5E9] text-[#1B5E20] rounded-full font-label-md text-label-md border border-[#A5D6A7] mb-md">
+                        ON TIME
+                    </span>
+<span class="font-body-md text-body-md text-on-surface-variant">Gate: A-01</span>
+</div>
+</div>
+<button class="w-full bg-[#2E7D32] text-white h-20 rounded-lg font-headline-md text-headline-md shadow-sm hover:bg-[#1B5E20] transition-colors active:scale-[0.99] flex items-center justify-center">
+<span class="material-symbols-outlined mr-sm text-white" data-weight="fill">check_circle</span>
+                Konfirmasi Check-in
+            </button>
+</div>
+</main>
+<script>
+        function updateClock() {
+            const now = new Date();
+            const timeString = now.toLocaleTimeString('en-US', { hour12: false });
+            document.getElementById('realtime-clock').textContent = timeString;
+        }
+        setInterval(updateClock, 1000);
+        updateClock();
+    </script>
+</body></html>

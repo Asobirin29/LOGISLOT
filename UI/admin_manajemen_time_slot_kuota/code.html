@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Manajemen Time Slot & Kuota - LOGISLOT</title>
+<!-- Material Symbols -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap" rel="stylesheet"/>
+<!-- Tailwind CSS with configuration -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "tertiary-fixed": "#ffddb9",
+                        "outline": "#74777f",
+                        "on-surface": "#0b1c30",
+                        "surface-tint": "#465f88",
+                        "tertiary-container": "#4f2f00",
+                        "inverse-on-surface": "#eaf1ff",
+                        "surface-container-low": "#eff4ff",
+                        "on-background": "#0b1c30",
+                        "primary": "#002046",
+                        "on-tertiary": "#ffffff",
+                        "on-error-container": "#93000a",
+                        "surface-container": "#e5eeff",
+                        "secondary-container": "#a5d0fd",
+                        "primary-fixed-dim": "#aec7f7",
+                        "on-primary-fixed": "#001b3d",
+                        "inverse-primary": "#aec7f7",
+                        "background": "#f8f9ff",
+                        "surface-variant": "#d3e4fe",
+                        "surface-bright": "#f8f9ff",
+                        "on-secondary-container": "#2c5980",
+                        "on-error": "#ffffff",
+                        "primary-container": "#1b365d",
+                        "secondary-fixed": "#cfe5ff",
+                        "on-secondary": "#ffffff",
+                        "secondary": "#356289",
+                        "on-primary": "#ffffff",
+                        "inverse-surface": "#213145",
+                        "tertiary-fixed-dim": "#f1bd81",
+                        "secondary-fixed-dim": "#a0cbf7",
+                        "on-secondary-fixed-variant": "#194a70",
+                        "surface-dim": "#cbdbf5",
+                        "surface-container-lowest": "#ffffff",
+                        "tertiary": "#321c00",
+                        "surface-container-highest": "#d3e4fe",
+                        "on-primary-container": "#87a0cd",
+                        "surface": "#f8f9ff",
+                        "error-container": "#ffdad6",
+                        "outline-variant": "#c4c6cf",
+                        "on-secondary-fixed": "#001d33",
+                        "on-primary-fixed-variant": "#2e476f",
+                        "on-tertiary-fixed-variant": "#623f0f",
+                        "error": "#ba1a1a",
+                        "on-tertiary-container": "#c6965e",
+                        "on-surface-variant": "#44474e",
+                        "surface-container-high": "#dce9ff",
+                        "primary-fixed": "#d6e3ff",
+                        "on-tertiary-fixed": "#2b1700"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "xs": "4px",
+                        "xl": "32px",
+                        "lg": "24px",
+                        "container-max": "1440px",
+                        "base": "8px",
+                        "md": "16px",
+                        "gutter": "24px",
+                        "sm": "8px"
+                    },
+                    "fontFamily": {
+                        "body-lg": ["Inter"],
+                        "headline-sm": ["Inter"],
+                        "headline-lg": ["Inter"],
+                        "body-md": ["Inter"],
+                        "label-md": ["Inter"],
+                        "headline-md": ["Inter"],
+                        "headline-lg-mobile": ["Inter"],
+                        "code": ["JetBrains Mono"]
+                    },
+                    "fontSize": {
+                        "body-lg": ["16px", { "lineHeight": "24px", "fontWeight": "400" }],
+                        "headline-sm": ["20px", { "lineHeight": "28px", "fontWeight": "600" }],
+                        "headline-lg": ["32px", { "lineHeight": "40px", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+                        "body-md": ["14px", { "lineHeight": "20px", "fontWeight": "400" }],
+                        "label-md": ["12px", { "lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "600" }],
+                        "headline-md": ["24px", { "lineHeight": "32px", "fontWeight": "600" }],
+                        "headline-lg-mobile": ["24px", { "lineHeight": "32px", "letterSpacing": "-0.01em", "fontWeight": "700" }],
+                        "code": ["13px", { "lineHeight": "20px", "fontWeight": "400" }]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        /* Base styles to prevent horizontal scroll issues */
+        body {
+            overflow-x: hidden;
+        }
+        
+        /* Material symbols specific styling */
+        .material-symbols-outlined {
+            font-variation-settings:
+            'FILL' 0,
+            'wght' 400,
+            'GRAD' 0,
+            'opsz' 24;
+        }
+        
+        .material-symbols-outlined.fill {
+            font-variation-settings:
+            'FILL' 1,
+            'wght' 400,
+            'GRAD' 0,
+            'opsz' 24;
+        }
+    </style>
+</head>
+<body class="bg-background text-on-background font-body-md min-h-screen flex">
+<!-- SideNavBar -->
+<aside class="bg-surface border-r border-outline-variant h-screen w-64 fixed left-0 top-0 flex flex-col p-md gap-xs z-50">
+<!-- Brand/Logo Area -->
+<div class="px-md py-lg mb-lg">
+<h1 class="font-headline-sm text-headline-sm font-bold text-primary">Administrasi Sistem</h1>
+<p class="font-label-md text-label-md text-on-surface-variant mt-1">Enterprise Console</p>
+</div>
+<!-- Navigation Links -->
+<nav class="flex-1 flex flex-col gap-xs overflow-y-auto">
+<a class="flex items-center gap-md px-md py-sm font-label-md text-label-md text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high transition-all duration-200 ease-in-out rounded-lg group" href="#">
+<span class="material-symbols-outlined text-on-surface-variant group-hover:text-on-surface" data-icon="group">group</span>
+                Manajemen User
+            </a>
+<a class="flex items-center gap-md px-md py-sm font-label-md text-label-md text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high transition-all duration-200 ease-in-out rounded-lg group" href="#">
+<span class="material-symbols-outlined text-on-surface-variant group-hover:text-on-surface" data-icon="dock">dock</span>
+                Loading Dock
+            </a>
+<!-- Active State -->
+<a class="flex items-center gap-md px-md py-sm font-label-md text-label-md text-primary font-bold bg-secondary-container rounded-lg transition-all duration-200 ease-in-out" href="#">
+<span class="material-symbols-outlined text-primary fill" data-icon="schedule" data-weight="fill" style="font-variation-settings: 'FILL' 1;">schedule</span>
+                Time Slot & Kuota
+            </a>
+<a class="flex items-center gap-md px-md py-sm font-label-md text-label-md text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high transition-all duration-200 ease-in-out rounded-lg group" href="#">
+<span class="material-symbols-outlined text-on-surface-variant group-hover:text-on-surface" data-icon="receipt_long">receipt_long</span>
+                Audit Log
+            </a>
+<a class="flex items-center gap-md px-md py-sm font-label-md text-label-md text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high transition-all duration-200 ease-in-out rounded-lg group" href="#">
+<span class="material-symbols-outlined text-on-surface-variant group-hover:text-on-surface" data-icon="health_and_safety">health_and_safety</span>
+                Kesehatan Sistem
+            </a>
+</nav>
+<!-- Footer Actions -->
+<div class="mt-auto border-t border-outline-variant pt-sm">
+<a class="flex items-center gap-md px-md py-sm font-label-md text-label-md text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high transition-all duration-200 ease-in-out rounded-lg group" href="#">
+<span class="material-symbols-outlined text-on-surface-variant group-hover:text-on-surface" data-icon="help">help</span>
+                Pusat Bantuan
+            </a>
+<a class="flex items-center gap-md px-md py-sm font-label-md text-label-md text-error hover:bg-error-container transition-all duration-200 ease-in-out rounded-lg group mt-xs" href="#">
+<span class="material-symbols-outlined text-error" data-icon="logout">logout</span>
+                Logout
+            </a>
+<!-- Admin Profile Thumbnail -->
+<div class="mt-md px-md py-sm flex items-center gap-md">
+<img class="w-8 h-8 rounded-full object-cover border border-outline-variant" data-alt="A small, professional circular avatar portrait of a logistics system administrator. The lighting is bright and modern, set against a subtle corporate office background. The overall tone is authoritative and approachable, adhering to high-end professional photography standards." src="https://lh3.googleusercontent.com/aida-public/AB6AXuA8kw9-LmoLqBEA2jp2Oah5xsp8Pq4BDq5AjIEBB_DeSbF8wQHNeoSaQ13s8y3etyBCC379fN3dRfgp5cGcavqUQ9gm3dCzIlzKk3oE1AxJC8eU-tKISofqNU_v9Z6szN60KAXZ9Hne5uMrRt0MJZS3Y4N64T6ZvFnz8EPpIlc-JPE38ePyxQa_p51L2_SVQh6XL_TjlBUy3IHjQKKKa2qzg0ZZse96HGeu8bXIvTBanVG44ciE-Ji5BSSs_ZTF2orrjnfywiUsBA"/>
+<div>
+<p class="font-label-md text-label-md font-bold text-on-surface">LOGISLOT Admin</p>
+<p class="font-label-md text-label-md font-normal text-on-surface-variant opacity-80">Online</p>
+</div>
+</div>
+</div>
+</aside>
+<!-- Main Content Canvas -->
+<main class="ml-64 flex-1 flex flex-col min-h-screen">
+<!-- Top Navigation Bar (Simplified for inner page context) -->
+<header class="bg-surface-container-lowest border-b border-outline-variant sticky top-0 z-40 w-full px-lg py-sm flex justify-between items-center">
+<div class="flex items-center gap-4">
+<h2 class="font-headline-md text-headline-md font-bold text-primary">LOGISLOT</h2>
+</div>
+<div class="flex items-center gap-md">
+<!-- Search Input -->
+<div class="relative hidden md:block">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-outline" data-icon="search">search</span>
+<input class="pl-10 pr-4 py-2 bg-surface border border-outline-variant rounded-lg font-body-md text-body-md focus:outline-none focus:border-secondary focus:ring-1 focus:ring-secondary w-64 transition-colors" placeholder="Cari..." type="text"/>
+</div>
+<button class="p-2 text-on-surface-variant hover:bg-surface-container-low rounded-full transition-colors active:opacity-80">
+<span class="material-symbols-outlined" data-icon="notifications">notifications</span>
+</button>
+<button class="p-2 text-on-surface-variant hover:bg-surface-container-low rounded-full transition-colors active:opacity-80">
+<span class="material-symbols-outlined" data-icon="settings">settings</span>
+</button>
+<img class="w-10 h-10 rounded-full object-cover ml-2 border border-outline-variant cursor-pointer active:opacity-80" data-alt="A professional circular avatar portrait of an administrator for a logistics system top nav bar. Modern lighting, clean background, high-end professional photography." src="https://lh3.googleusercontent.com/aida-public/AB6AXuC3Uir8ba7FlL5cdJ_ZZzv_nCAw-sBbG7faTaz-1svQf0ZuHm_SRY6osbFFEWsoutfYkeOTXAdBRvpR-3yY2kZsUnbQvb0Af4u3LdB_Kkw_gZ6U_cm2j07TcFlvIYSNV32pIpXFJklXaZApQix--nkijik6Imjxf_JggoXcpbq4SAXC3Y2Suq5rOTA9hV-swBKIN1ka0FeWPONwOtSVo6-sHwlZ-af3RxJ8W6KLsevGC5O816l1prthNWDwubMRAgG7cTjFLTCOCw"/>
+</div>
+</header>
+<!-- Page Content -->
+<div class="p-lg max-w-container-max mx-auto w-full flex-1">
+<!-- Page Header -->
+<div class="flex justify-between items-center mb-lg">
+<h2 class="font-headline-lg text-headline-lg font-bold text-primary-container">Pengaturan Jam Operasional & Kuota</h2>
+<button class="bg-primary text-on-primary font-label-md text-label-md px-6 py-3 rounded-lg hover:bg-primary-container transition-colors flex items-center gap-2 active:opacity-80">
+<span class="material-symbols-outlined" data-icon="add">add</span>
+                    Tambah Slot
+                </button>
+</div>
+<!-- Info Box -->
+<div class="bg-surface-container-low border border-secondary-fixed rounded-lg p-md mb-lg flex items-start gap-md">
+<span class="material-symbols-outlined text-secondary mt-1" data-icon="info">info</span>
+<div>
+<p class="font-body-md text-body-md text-on-surface">Total kapasitas per hari saat ini: <strong class="text-primary font-bold">120 slot truk</strong> (24 jam operasional x rata-rata 5 kuota)</p>
+</div>
+</div>
+<!-- Settings Table Card -->
+<div class="bg-surface-container-lowest border border-outline-variant rounded-xl overflow-hidden">
+<div class="overflow-x-auto">
+<table class="w-full text-left border-collapse">
+<thead>
+<tr class="bg-surface border-b border-outline-variant">
+<th class="font-label-md text-label-md text-on-surface-variant py-4 px-6">Jam Mulai</th>
+<th class="font-label-md text-label-md text-on-surface-variant py-4 px-6">Jam Selesai</th>
+<th class="font-label-md text-label-md text-on-surface-variant py-4 px-6">Kuota Maksimal per Dock</th>
+<th class="font-label-md text-label-md text-on-surface-variant py-4 px-6">Berlaku untuk Hari</th>
+<th class="font-label-md text-label-md text-on-surface-variant py-4 px-6 text-center">Aksi</th>
+</tr>
+</thead>
+<tbody class="font-body-md text-body-md text-on-surface">
+<!-- Row 1 -->
+<tr class="border-b border-outline-variant hover:bg-surface-bright transition-colors">
+<td class="py-4 px-6 font-code">00:00</td>
+<td class="py-4 px-6 font-code">04:00</td>
+<td class="py-4 px-6">
+<div class="flex items-center gap-2">
+<input class="w-16 px-2 py-1 border border-outline-variant rounded text-center focus:outline-none focus:border-secondary focus:ring-1 focus:ring-secondary text-sm" type="number" value="3"/>
+<button class="text-outline hover:text-secondary transition-colors" title="Edit">
+<span class="material-symbols-outlined text-[18px]" data-icon="edit">edit</span>
+</button>
+</div>
+</td>
+<td class="py-4 px-6">
+<div class="flex gap-1 flex-wrap">
+<span class="px-2 py-1 bg-primary text-on-primary rounded text-xs font-bold">Sen</span>
+<span class="px-2 py-1 bg-primary text-on-primary rounded text-xs font-bold">Sel</span>
+<span class="px-2 py-1 bg-primary text-on-primary rounded text-xs font-bold">Rab</span>
+<span class="px-2 py-1 bg-primary text-on-primary rounded text-xs font-bold">Kam</span>
+<span class="px-2 py-1 bg-primary text-on-primary rounded text-xs font-bold">Jum</span>
+<span class="px-2 py-1 border border-outline text-outline rounded text-xs font-medium">Sab</span>
+<span class="px-2 py-1 border border-outline text-outline rounded text-xs font-medium">Min</span>
+</div>
+</td>
+<td class="py-4 px-6 text-center">
+<button class="text-error opacity-70 hover:opacity-100 hover:bg-error-container p-2 rounded-full transition-all" title="Hapus">
+<span class="material-symbols-outlined" data-icon="delete">delete</span>
+</button>
+</td>
+</tr>
+<!-- Row 2 -->
+<tr class="border-b border-outline-variant bg-surface-bright hover:bg-surface transition-colors">
+<td class="py-4 px-6 font-code">04:00</td>
+<td class="py-4 px-6 font-code">08:00</td>
+<td class="py-4 px-6">
+<div class="flex items-center gap-2">
+<input class="w-16 px-2 py-1 border border-outline-variant rounded text-center focus:outline-none focus:border-secondary focus:ring-1 focus:ring-secondary text-sm" type="number" value="5"/>
+<button class="text-outline hover:text-secondary transition-colors" title="Edit">
+<span class="material-symbols-outlined text-[18px]" data-icon="edit">edit</span>
+</button>
+</div>
+</td>
+<td class="py-4 px-6">
+<div class="flex gap-1 flex-wrap">
+<span class="px-2 py-1 bg-primary text-on-primary rounded text-xs font-bold">Sen</span>
+<span class="px-2 py-1 bg-primary text-on-primary rounded text-xs font-bold">Sel</span>
+<span class="px-2 py-1 bg-primary text-on-primary rounded text-xs font-bold">Rab</span>
+<span class="px-2 py-1 bg-primary text-on-primary rounded text-xs font-bold">Kam</span>
+<span class="px-2 py-1 bg-primary text-on-primary rounded text-xs font-bold">Jum</span>
+<span class="px-2 py-1 bg-primary text-on-primary rounded text-xs font-bold">Sab</span>
+<span class="px-2 py-1 bg-primary text-on-primary rounded text-xs font-bold">Min</span>
+</div>
+</td>
+<td class="py-4 px-6 text-center">
+<button class="text-error opacity-70 hover:opacity-100 hover:bg-error-container p-2 rounded-full transition-all" title="Hapus">
+<span class="material-symbols-outlined" data-icon="delete">delete</span>
+</button>
+</td>
+</tr>
+<!-- Row 3 -->
+<tr class="border-b border-outline-variant hover:bg-surface-bright transition-colors">
+<td class="py-4 px-6 font-code">08:00</td>
+<td class="py-4 px-6 font-code">12:00</td>
+<td class="py-4 px-6">
+<div class="flex items-center gap-2">
+<input class="w-16 px-2 py-1 border border-outline-variant rounded text-center focus:outline-none focus:border-secondary focus:ring-1 focus:ring-secondary text-sm" type="number" value="8"/>
+<button class="text-outline hover:text-secondary transition-colors" title="Edit">
+<span class="material-symbols-outlined text-[18px]" data-icon="edit">edit</span>
+</button>
+</div>
+</td>
+<td class="py-4 px-6">
+<div class="flex gap-1 flex-wrap">
+<span class="px-2 py-1 bg-primary text-on-primary rounded text-xs font-bold">Sen</span>
+<span class="px-2 py-1 bg-primary text-on-primary rounded text-xs font-bold">Sel</span>
+<span class="px-2 py-1 bg-primary text-on-primary rounded text-xs font-bold">Rab</span>
+<span class="px-2 py-1 bg-primary text-on-primary rounded text-xs font-bold">Kam</span>
+<span class="px-2 py-1 bg-primary text-on-primary rounded text-xs font-bold">Jum</span>
+<span class="px-2 py-1 border border-outline text-outline rounded text-xs font-medium">Sab</span>
+<span class="px-2 py-1 border border-outline text-outline rounded text-xs font-medium">Min</span>
+</div>
+</td>
+<td class="py-4 px-6 text-center">
+<button class="text-error opacity-70 hover:opacity-100 hover:bg-error-container p-2 rounded-full transition-all" title="Hapus">
+<span class="material-symbols-outlined" data-icon="delete">delete</span>
+</button>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+</main>
+</body></html>

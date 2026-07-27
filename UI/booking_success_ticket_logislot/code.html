@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+
+<html lang="id"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Booking Success - LOGISLOT</title>
+<!-- Google Fonts: Inter & JetBrains Mono -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&amp;family=JetBrains+Mono:wght@400&amp;display=swap" rel="stylesheet"/>
+<!-- Material Symbols -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind CSS -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<!-- Tailwind Config injected from Design System -->
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "error": "#ba1a1a",
+                        "on-surface-variant": "#44474e",
+                        "surface-container-highest": "#d3e4fe",
+                        "on-tertiary": "#ffffff",
+                        "on-background": "#0b1c30",
+                        "error-container": "#ffdad6",
+                        "outline-variant": "#c4c6cf",
+                        "on-secondary-container": "#2c5980",
+                        "outline": "#74777f",
+                        "surface-dim": "#cbdbf5",
+                        "background": "#f8f9ff",
+                        "surface-container": "#e5eeff",
+                        "on-secondary": "#ffffff",
+                        "surface-container-high": "#dce9ff",
+                        "on-primary-fixed-variant": "#2e476f",
+                        "secondary-fixed-dim": "#a0cbf7",
+                        "secondary-fixed": "#cfe5ff",
+                        "on-primary": "#ffffff",
+                        "inverse-primary": "#aec7f7",
+                        "on-error-container": "#93000a",
+                        "surface-variant": "#d3e4fe",
+                        "on-tertiary-fixed": "#2b1700",
+                        "on-tertiary-fixed-variant": "#623f0f",
+                        "primary": "#002046",
+                        "surface-container-lowest": "#ffffff",
+                        "surface-container-low": "#eff4ff",
+                        "primary-container": "#1b365d",
+                        "surface": "#f8f9ff",
+                        "primary-fixed-dim": "#aec7f7",
+                        "secondary": "#356289",
+                        "on-primary-container": "#87a0cd",
+                        "surface-tint": "#465f88",
+                        "inverse-surface": "#213145",
+                        "inverse-on-surface": "#eaf1ff",
+                        "on-secondary-fixed-variant": "#194a70",
+                        "on-tertiary-container": "#c6965e",
+                        "secondary-container": "#a5d0fd",
+                        "on-error": "#ffffff",
+                        "on-primary-fixed": "#001b3d",
+                        "primary-fixed": "#d6e3ff",
+                        "tertiary-fixed-dim": "#f1bd81",
+                        "tertiary": "#321c00",
+                        "on-secondary-fixed": "#001d33",
+                        "tertiary-fixed": "#ffddb9",
+                        "surface-bright": "#f8f9ff",
+                        "tertiary-container": "#4f2f00",
+                        "on-surface": "#0b1c30"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "base": "8px",
+                        "gutter": "24px",
+                        "sm": "8px",
+                        "container-max": "1440px",
+                        "xs": "4px",
+                        "md": "16px",
+                        "lg": "24px",
+                        "xl": "32px"
+                    },
+                    "fontFamily": {
+                        "body-md": ["Inter"],
+                        "label-md": ["Inter"],
+                        "headline-sm": ["Inter"],
+                        "body-lg": ["Inter"],
+                        "headline-md": ["Inter"],
+                        "headline-lg-mobile": ["Inter"],
+                        "code": ["JetBrains Mono"],
+                        "headline-lg": ["Inter"]
+                    },
+                    "fontSize": {
+                        "body-md": ["14px", { "lineHeight": "20px", "fontWeight": "400" }],
+                        "label-md": ["12px", { "lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "600" }],
+                        "headline-sm": ["20px", { "lineHeight": "28px", "fontWeight": "600" }],
+                        "body-lg": ["16px", { "lineHeight": "24px", "fontWeight": "400" }],
+                        "headline-md": ["24px", { "lineHeight": "32px", "fontWeight": "600" }],
+                        "headline-lg-mobile": ["24px", { "lineHeight": "32px", "letterSpacing": "-0.01em", "fontWeight": "700" }],
+                        "code": ["13px", { "lineHeight": "20px", "fontWeight": "400" }],
+                        "headline-lg": ["32px", { "lineHeight": "40px", "letterSpacing": "-0.02em", "fontWeight": "700" }]
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-background font-body-md text-on-background overflow-hidden">
+<!-- Shell Context (Dimmed Background) -->
+<!-- SideNavBar (Predicted Context) -->
+<nav class="bg-primary dark:bg-primary text-on-primary dark:text-on-primary font-body-md text-body-md h-screen w-64 fixed left-0 top-0 border-r border-outline-variant dark:border-outline flat no shadows duration-200 ease-in-out flex flex-col h-full py-lg z-0 opacity-40 blur-sm pointer-events-none">
+<!-- Header / Brand -->
+<div class="px-lg mb-8 flex flex-col gap-1">
+<h1 class="font-headline-md text-headline-md font-bold text-on-primary dark:text-on-primary">LOGISLOT</h1>
+<span class="text-on-primary-container text-xs opacity-80">Supplier Portal</span>
+</div>
+<!-- Main Navigation Tabs -->
+<div class="flex-1 flex flex-col gap-sm px-sm">
+<a class="text-on-primary hover:bg-on-primary-fixed-variant rounded-lg mx-2 my-1 px-md py-3 flex items-center gap-3 transition-colors duration-200 ease-in-out" href="#">
+<span class="material-symbols-outlined" data-icon="dashboard">dashboard</span>
+<span class="font-body-md text-body-md">Home</span>
+</a>
+<!-- Active Tab (Create Booking Context) -->
+<a class="bg-primary-container text-on-primary-container rounded-lg mx-2 my-1 px-md py-3 flex items-center gap-3 transition-colors duration-200 ease-in-out" href="#">
+<span class="material-symbols-outlined" data-icon="add_box" data-weight="fill" style="font-variation-settings: 'FILL' 1;">add_box</span>
+<span class="font-body-md text-body-md font-bold">Create Booking</span>
+</a>
+<a class="text-on-primary hover:bg-on-primary-fixed-variant rounded-lg mx-2 my-1 px-md py-3 flex items-center gap-3 transition-colors duration-200 ease-in-out" href="#">
+<span class="material-symbols-outlined" data-icon="list_alt">list_alt</span>
+<span class="font-body-md text-body-md">My Bookings</span>
+</a>
+<a class="text-on-primary hover:bg-on-primary-fixed-variant rounded-lg mx-2 my-1 px-md py-3 flex items-center gap-3 transition-colors duration-200 ease-in-out" href="#">
+<span class="material-symbols-outlined" data-icon="history">history</span>
+<span class="font-body-md text-body-md">History</span>
+</a>
+</div>
+<!-- Footer Navigation Tabs -->
+<div class="mt-auto flex flex-col gap-sm px-sm pt-4 border-t border-on-primary-fixed-variant/30 mx-lg">
+<a class="text-on-primary hover:bg-on-primary-fixed-variant rounded-lg mx-2 my-1 px-md py-2 flex items-center gap-3 transition-colors duration-200 ease-in-out text-sm" href="#">
+<span class="material-symbols-outlined text-[20px]" data-icon="settings">settings</span>
+<span>Settings</span>
+</a>
+<a class="text-on-primary hover:bg-on-primary-fixed-variant rounded-lg mx-2 my-1 px-md py-2 flex items-center gap-3 transition-colors duration-200 ease-in-out text-sm" href="#">
+<span class="material-symbols-outlined text-[20px]" data-icon="help_outline">help_outline</span>
+<span>Support</span>
+</a>
+</div>
+</nav>
+<!-- TopNavBar (Predicted Context) -->
+<header class="bg-surface-container-lowest dark:bg-surface text-primary dark:text-inverse-primary font-headline-sm text-headline-sm fixed top-0 right-0 w-[calc(100%-16rem)] h-16 border-b border-outline-variant dark:border-outline flat no shadows duration-200 ease-in-out flex justify-between items-center px-gutter max-w-container-max ml-auto z-0 opacity-40 blur-sm pointer-events-none">
+<!-- Left: Search (Implicit based on JSON 'search_bar': 'on_left') -->
+<div class="flex-1 flex items-center">
+<div class="relative w-64">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-outline text-[20px]">search</span>
+<input class="w-full pl-10 pr-4 py-2 bg-background border border-outline-variant rounded-lg font-body-md text-body-md text-on-surface focus:outline-none focus:border-secondary focus:ring-1 focus:ring-secondary transition-colors" disabled="" placeholder="Search..." type="text"/>
+</div>
+</div>
+<!-- Right: Actions & Profile -->
+<div class="flex items-center gap-4">
+<button class="w-10 h-10 rounded-full flex items-center justify-center text-on-surface-variant hover:bg-surface-container dark:hover:bg-surface-container-high transition-colors duration-200 ease-in-out">
+<span class="material-symbols-outlined" data-icon="notifications">notifications</span>
+</button>
+<button class="w-10 h-10 rounded-full flex items-center justify-center text-on-surface-variant hover:bg-surface-container dark:hover:bg-surface-container-high transition-colors duration-200 ease-in-out">
+<span class="material-symbols-outlined" data-icon="apps">apps</span>
+</button>
+<div class="w-8 h-8 rounded-full bg-primary-container overflow-hidden border border-outline-variant">
+<img alt="User Profile Avatar" class="w-full h-full object-cover" data-alt="A professional headshot of a corporate logistics manager, wearing a crisp navy suit, neutral bright white background, highly detailed, photorealistic, cinematic lighting, corporate modern style, sharp focus." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDCjGJAxPFaJ6d4-z2wtjb3rBQEMyuQ5BS1MQWyl1DmO9KVg3XL5yAnIT-Y8jNwDIxFBYnrBKjD9Yse_2CrWjliW3wAV8_HDzYtYbx5JcEy7SbAYCBCx6jDYHa6m8UNCc2VKF4teDc4_vh2cxFUMLqwERnGRBxUTKCM_AQD-4Ge_nlcJIyqe6huv44G0MjfsY_dGSPlTWuQsV4SoPvT_YPrqJAd_7hy-QpeWo_EAV-TLl0KlJOSCO3Ig0cEvIY0BvXSixhuOnfE9w"/>
+</div>
+</div>
+</header>
+<!-- Main Content Area Background (Dimmed) -->
+<main class="ml-64 pt-16 min-h-screen bg-background p-lg z-0 opacity-40 blur-sm pointer-events-none">
+<div class="w-full h-full border-2 border-dashed border-outline-variant rounded-xl flex items-center justify-center text-outline-variant font-headline-md">
+            Background Canvas Context
+        </div>
+</main>
+<!-- Modal Overlay & Container (The Focus) -->
+<div class="fixed inset-0 z-50 flex items-center justify-center bg-on-background/60 backdrop-blur-sm p-4 animate-in fade-in duration-300">
+<!-- Modal Card -->
+<div class="bg-surface-container-lowest rounded-2xl shadow-[0_8px_32px_rgba(11,28,48,0.12)] w-full max-w-[420px] overflow-hidden flex flex-col relative animate-in zoom-in-95 duration-300">
+<!-- Modal Content Padding Area -->
+<div class="p-lg flex flex-col items-center">
+<!-- Success Header -->
+<div class="w-16 h-16 rounded-full bg-[#2E7D32] flex items-center justify-center shadow-sm mb-4">
+<span class="material-symbols-outlined text-white text-[40px]" style="font-variation-settings: 'FILL' 1;">check</span>
+</div>
+<h2 class="font-headline-sm text-[18px] leading-snug font-bold text-center text-primary mb-6">
+                    Booking Anda Berhasil Dikonfirmasi!
+                </h2>
+<!-- Ticket Component -->
+<div class="w-full bg-surface-container-lowest border border-outline-variant rounded-xl overflow-hidden shadow-sm flex flex-col relative mb-6">
+<!-- Ticket Top (Navy) -->
+<div class="bg-primary-container text-on-primary-container p-4 text-center">
+<span class="font-label-md text-label-md text-inverse-primary/80 uppercase tracking-wider block mb-1">TIKET BOOKING LOGISLOT</span>
+<div class="font-code text-code text-[18px] text-white font-bold tracking-tight">
+                            #LGS-20260728-0042
+                        </div>
+</div>
+<!-- Ticket Middle (Grid Info) -->
+<div class="p-5 grid grid-cols-2 gap-y-4 gap-x-2 bg-surface-container-lowest relative z-10">
+<!-- Info Item -->
+<div>
+<span class="block text-[11px] text-outline uppercase font-semibold tracking-wider mb-1">Tanggal</span>
+<span class="block font-body-md text-[13px] font-semibold text-on-surface">24 Okt 2026</span>
+</div>
+<!-- Info Item -->
+<div>
+<span class="block text-[11px] text-outline uppercase font-semibold tracking-wider mb-1">Jam Slot</span>
+<span class="block font-body-md text-[13px] font-semibold text-on-surface">09:00 - 10:00</span>
+</div>
+<!-- Info Item (Full Width) -->
+<div class="col-span-2">
+<span class="block text-[11px] text-outline uppercase font-semibold tracking-wider mb-1">Loading Dock</span>
+<span class="block font-body-md text-[13px] font-semibold text-on-surface">Dock 1 - Main Distribution Center</span>
+</div>
+<!-- Info Item -->
+<div>
+<span class="block text-[11px] text-outline uppercase font-semibold tracking-wider mb-1">Plat Nomor</span>
+<span class="block font-code text-[13px] font-bold text-on-surface">B 1234 XYZ</span>
+</div>
+<!-- Info Item -->
+<div>
+<span class="block text-[11px] text-outline uppercase font-semibold tracking-wider mb-1">Jenis Armada</span>
+<span class="block font-body-md text-[13px] font-semibold text-on-surface">Truk Box</span>
+</div>
+<!-- Info Item (Full Width) -->
+<div class="col-span-2">
+<span class="block text-[11px] text-outline uppercase font-semibold tracking-wider mb-1">Nama Sopir</span>
+<span class="block font-body-md text-[13px] font-semibold text-on-surface">Ahmad Rivai</span>
+</div>
+</div>
+<!-- Perforation Line -->
+<div class="relative w-full h-8 flex items-center bg-surface-container-lowest z-10">
+<!-- Cutout Left -->
+<div class="absolute left-[-16px] w-8 h-8 bg-surface-container-low rounded-full shadow-[inset_-2px_0_4px_rgba(0,0,0,0.04)] border-r border-outline-variant"></div>
+<!-- Dashed Line -->
+<div class="w-full h-px border-b-2 border-dashed border-outline-variant mx-4"></div>
+<!-- Cutout Right -->
+<div class="absolute right-[-16px] w-8 h-8 bg-surface-container-low rounded-full shadow-[inset_2px_0_4px_rgba(0,0,0,0.04)] border-l border-outline-variant"></div>
+</div>
+<!-- Ticket Bottom (QR Code) -->
+<div class="p-6 flex flex-col items-center bg-surface-container-lowest relative z-10 rounded-b-xl">
+<!-- Mock QR Code Image Placeholder -->
+<div class="w-[160px] h-[160px] bg-white border border-outline-variant p-2 mb-3 rounded-md flex items-center justify-center">
+<img alt="Booking QR Code" class="w-full h-full object-contain mix-blend-multiply" data-alt="A clean, crisp, high-contrast, black and white square QR code centered on a stark white background. Sharp edges, digital native vector style, perfectly square aspect ratio. No soft blurring, strictly high-fidelity scan-ready graphic." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBi0mY0kYaPUV9rya5WFQuFa3P_VpOwwAnSd-FZva24hj3hDbqvOvdwTT9-EXLIHN8h8kJbvkTBRX-lCPAT1CTbYP5C6wEXEO2VOwIZg6NL2-edXqQRL-V7PQoTt0tNuSr9kZDvlmY4V64TqISXlPHMeldcf_Re1rG-MXBdeFfqNfUNBNnID95PYmkTxfyD-gxIjv61O8fWc5Xneh02of_VW1JBDTQMXfIZ0vS-2TwsMSEAdHmJjsouTMbje5W2jOAe8MN866Oe8Q"/>
+</div>
+<span class="font-code text-[12px] text-on-surface-variant mb-3 tracking-widest bg-surface-container px-2 py-1 rounded">LGS-0042-XYZ</span>
+<p class="text-[12px] text-center text-outline leading-tight max-w-[240px]">
+                            Tunjukkan QR Code ini ke Security saat tiba di gerbang pabrik
+                        </p>
+</div>
+</div>
+<!-- Action Buttons -->
+<div class="w-full grid grid-cols-2 gap-3 mb-6">
+<button class="h-11 rounded-lg border-2 border-primary-container text-primary-container font-body-md font-semibold flex items-center justify-center gap-2 hover:bg-surface-container transition-colors focus:ring-2 focus:ring-primary-container focus:ring-offset-2">
+<span class="material-symbols-outlined text-[20px]">download</span>
+                        Unduh PDF
+                    </button>
+<button class="h-11 rounded-lg bg-primary-container text-white font-body-md font-semibold flex items-center justify-center gap-2 hover:bg-primary transition-colors shadow-sm focus:ring-2 focus:ring-primary focus:ring-offset-2">
+<span class="material-symbols-outlined text-[20px]" style="font-variation-settings: 'FILL' 1;">print</span>
+                        Cetak Tiket
+                    </button>
+</div>
+<!-- Footer Action -->
+<button class="text-[13px] text-outline font-semibold hover:text-on-surface transition-colors focus:outline-none focus:underline underline-offset-4">
+                    Tutup
+                </button>
+</div>
+</div>
+</div>
+</body></html>

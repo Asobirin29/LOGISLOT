@@ -1,0 +1,436 @@
+<!DOCTYPE html>
+
+<html lang="id"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Laporan Analisis SLA Kedatangan Supplier - LOGISLOT</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": {
+                      "surface": "#f8f9ff",
+                      "on-secondary": "#ffffff",
+                      "tertiary-container": "#4f2f00",
+                      "surface-container-low": "#eff4ff",
+                      "on-primary-container": "#87a0cd",
+                      "primary": "#002046",
+                      "surface-container": "#e5eeff",
+                      "secondary-fixed": "#cfe5ff",
+                      "on-error": "#ffffff",
+                      "surface-variant": "#d3e4fe",
+                      "inverse-on-surface": "#eaf1ff",
+                      "on-tertiary-fixed": "#2b1700",
+                      "surface-container-lowest": "#ffffff",
+                      "on-surface": "#0b1c30",
+                      "on-secondary-fixed": "#001d33",
+                      "surface-dim": "#cbdbf5",
+                      "secondary-fixed-dim": "#a0cbf7",
+                      "surface-tint": "#465f88",
+                      "surface-container-highest": "#d3e4fe",
+                      "primary-fixed": "#d6e3ff",
+                      "on-primary-fixed": "#001b3d",
+                      "on-tertiary-container": "#c6965e",
+                      "on-background": "#0b1c30",
+                      "inverse-primary": "#aec7f7",
+                      "on-tertiary-fixed-variant": "#623f0f",
+                      "on-surface-variant": "#44474e",
+                      "on-secondary-fixed-variant": "#194a70",
+                      "outline-variant": "#c4c6cf",
+                      "surface-container-high": "#dce9ff",
+                      "secondary-container": "#a5d0fd",
+                      "on-tertiary": "#ffffff",
+                      "error": "#ba1a1a",
+                      "on-primary-fixed-variant": "#2e476f",
+                      "tertiary-fixed-dim": "#f1bd81",
+                      "primary-fixed-dim": "#aec7f7",
+                      "inverse-surface": "#213145",
+                      "on-primary": "#ffffff",
+                      "on-error-container": "#93000a",
+                      "secondary": "#356289",
+                      "error-container": "#ffdad6",
+                      "tertiary-fixed": "#ffddb9",
+                      "tertiary": "#321c00",
+                      "surface-bright": "#f8f9ff",
+                      "primary-container": "#1b365d",
+                      "outline": "#74777f",
+                      "background": "#f8f9ff",
+                      "on-secondary-container": "#2c5980"
+              },
+              "borderRadius": {
+                      "DEFAULT": "0.25rem",
+                      "lg": "0.5rem",
+                      "xl": "0.75rem",
+                      "full": "9999px"
+              },
+              "spacing": {
+                      "md": "16px",
+                      "lg": "24px",
+                      "base": "8px",
+                      "xl": "32px",
+                      "gutter": "24px",
+                      "sm": "8px",
+                      "xs": "4px",
+                      "container-max": "1440px"
+              },
+              "fontFamily": {
+                      "headline-sm": [
+                              "Inter"
+                      ],
+                      "label-md": [
+                              "Inter"
+                      ],
+                      "headline-md": [
+                              "Inter"
+                      ],
+                      "headline-lg": [
+                              "Inter"
+                      ],
+                      "headline-lg-mobile": [
+                              "Inter"
+                      ],
+                      "body-md": [
+                              "Inter"
+                      ],
+                      "body-lg": [
+                              "Inter"
+                      ],
+                      "code": [
+                              "JetBrains Mono"
+                      ]
+              },
+              "fontSize": {
+                      "headline-sm": [
+                              "20px",
+                              {
+                                      "lineHeight": "28px",
+                                      "fontWeight": "600"
+                              }
+                      ],
+                      "label-md": [
+                              "12px",
+                              {
+                                      "lineHeight": "16px",
+                                      "letterSpacing": "0.05em",
+                                      "fontWeight": "600"
+                              }
+                      ],
+                      "headline-md": [
+                              "24px",
+                              {
+                                      "lineHeight": "32px",
+                                      "fontWeight": "600"
+                              }
+                      ],
+                      "headline-lg": [
+                              "32px",
+                              {
+                                      "lineHeight": "40px",
+                                      "letterSpacing": "-0.02em",
+                                      "fontWeight": "700"
+                              }
+                      ],
+                      "headline-lg-mobile": [
+                              "24px",
+                              {
+                                      "lineHeight": "32px",
+                                      "letterSpacing": "-0.01em",
+                                      "fontWeight": "700"
+                              }
+                      ],
+                      "body-md": [
+                              "14px",
+                              {
+                                      "lineHeight": "20px",
+                                      "fontWeight": "400"
+                              }
+                      ],
+                      "body-lg": [
+                              "16px",
+                              {
+                                      "lineHeight": "24px",
+                                      "fontWeight": "400"
+                              }
+                      ],
+                      "code": [
+                              "13px",
+                              {
+                                      "lineHeight": "20px",
+                                      "fontWeight": "400"
+                              }
+                      ]
+              }
+      },
+          },
+        }
+      </script>
+<style>
+        body {
+            background-color: #F4F6F9;
+        }
+        .card-shadow {
+            box-shadow: 0 4px 12px rgba(27, 54, 93, 0.08);
+        }
+      </style>
+</head>
+<body class="flex h-screen overflow-hidden font-body-md text-on-surface">
+<!-- SideNavBar -->
+<nav class="hidden md:flex flex-col py-lg gap-base bg-primary dark:bg-primary-container h-full w-64 docked left-0 flex-shrink-0 z-10 transition-all duration-200 ease-in-out">
+<div class="px-lg pb-6 mb-4 border-b border-surface-tint border-opacity-30">
+<h1 class="font-headline-md text-headline-md font-bold text-on-primary">LOGISLOT</h1>
+<p class="font-label-md text-label-md text-on-primary-container mt-1">Enterprise Logistics</p>
+</div>
+<ul class="flex flex-col gap-sm">
+<li>
+<a class="flex items-center gap-3 px-4 py-3 text-on-primary-container hover:text-on-primary hover:bg-primary-fixed-variant mx-2 rounded-lg transition-colors" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 0;">monitor_heart</span>
+<span class="font-body-lg text-body-lg">Monitoring Kedatangan</span>
+</a>
+</li>
+<li>
+<a class="flex items-center gap-3 px-4 py-3 bg-secondary-container text-on-secondary-container rounded-lg mx-2 transition-colors" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">assessment</span>
+<span class="font-body-lg text-body-lg font-semibold">Laporan SLA</span>
+</a>
+</li>
+<li>
+<a class="flex items-center gap-3 px-4 py-3 text-on-primary-container hover:text-on-primary hover:bg-primary-fixed-variant mx-2 rounded-lg transition-colors" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 0;">star</span>
+<span class="font-body-lg text-body-lg">Prioritas Booking</span>
+</a>
+</li>
+</ul>
+</nav>
+<!-- Main Content Canvas -->
+<main class="flex-1 flex flex-col h-full overflow-hidden">
+<!-- TopNavBar (Mobile Only) -->
+<header class="md:hidden flex justify-between items-center w-full px-gutter h-16 bg-surface border-b border-outline-variant flat no shadows docked full-width top-0 z-20">
+<h1 class="font-headline-lg-mobile text-headline-lg-mobile font-bold text-primary">LOGISLOT</h1>
+<div class="flex items-center gap-4 text-primary">
+<span class="material-symbols-outlined cursor-pointer hover:bg-surface-container-high transition-colors active:opacity-80 rounded-full p-2">notifications</span>
+<span class="material-symbols-outlined cursor-pointer hover:bg-surface-container-high transition-colors active:opacity-80 rounded-full p-2">settings</span>
+</div>
+</header>
+<div class="flex-1 overflow-auto p-4 md:p-8">
+<div class="max-w-[container-max] mx-auto space-y-6">
+<!-- Page Header -->
+<div class="flex flex-col md:flex-row md:items-end justify-between gap-4">
+<div>
+<h2 class="font-headline-lg text-headline-lg text-[#1B365D]">Laporan Analisis SLA Kedatangan Supplier</h2>
+<p class="font-body-lg text-body-lg text-on-surface-variant mt-2">Bandingkan performa ketepatan waktu antar supplier</p>
+</div>
+<!-- Controls -->
+<div class="flex flex-wrap items-center gap-3">
+<div class="relative bg-white border border-[#CBD5E1] rounded-lg px-3 py-2 flex items-center gap-2 focus-within:border-secondary focus-within:border-2 transition-all">
+<span class="material-symbols-outlined text-outline text-sm">calendar_month</span>
+<span class="font-body-md text-body-md text-on-surface">Periode: 1 Okt 2026 - 31 Okt 2026</span>
+</div>
+<div class="relative bg-white border border-[#CBD5E1] rounded-lg px-3 py-2 flex items-center gap-2 focus-within:border-secondary focus-within:border-2 transition-all cursor-pointer">
+<span class="material-symbols-outlined text-outline text-sm">local_shipping</span>
+<select class="appearance-none bg-transparent font-body-md text-body-md border-none focus:ring-0 p-0 pr-6 text-on-surface cursor-pointer">
+<option>Semua Supplier</option>
+<option>PT Global Logistik Nusantara</option>
+<option>CV Bintang Timur Armada</option>
+</select>
+<span class="material-symbols-outlined absolute right-2 pointer-events-none text-outline text-sm">arrow_drop_down</span>
+</div>
+<button class="bg-transparent border border-secondary text-secondary rounded-lg px-4 py-2 flex items-center gap-2 hover:bg-surface-container-low transition-colors font-body-md text-body-md font-semibold">
+<span class="material-symbols-outlined text-sm">download</span>
+                            Export ke Excel
+                        </button>
+</div>
+</div>
+<!-- Bento Grid Layout -->
+<div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+<!-- Main Chart Card -->
+<div class="lg:col-span-2 bg-white rounded-xl border border-[#E2E8F0] p-6 card-shadow">
+<h3 class="font-headline-sm text-headline-sm text-on-surface mb-6">Perbandingan Ketepatan Waktu per Supplier</h3>
+<!-- Pseudo Horizontal Stacked Bar Chart -->
+<div class="space-y-4">
+<!-- Supplier 1 -->
+<div>
+<div class="flex justify-between font-label-md text-label-md mb-1 text-on-surface-variant">
+<span>PT Global Logistik Nusantara</span>
+<span>92% Tepat Waktu</span>
+</div>
+<div class="h-4 w-full flex rounded-full overflow-hidden">
+<div class="bg-[#10B981] h-full" style="width: 85%" title="Tepat Waktu: 85%"></div>
+<div class="bg-[#F59E0B] h-full" style="width: 10%" title="Terlambat Ringan: 10%"></div>
+<div class="bg-[#EF4444] h-full" style="width: 5%" title="Terlambat Signifikan: 5%"></div>
+</div>
+</div>
+<!-- Supplier 2 -->
+<div>
+<div class="flex justify-between font-label-md text-label-md mb-1 text-on-surface-variant">
+<span>CV Bintang Timur Armada</span>
+<span>78% Tepat Waktu</span>
+</div>
+<div class="h-4 w-full flex rounded-full overflow-hidden">
+<div class="bg-[#10B981] h-full" style="width: 70%" title="Tepat Waktu: 70%"></div>
+<div class="bg-[#F59E0B] h-full" style="width: 20%" title="Terlambat Ringan: 20%"></div>
+<div class="bg-[#EF4444] h-full" style="width: 10%" title="Terlambat Signifikan: 10%"></div>
+</div>
+</div>
+<!-- Supplier 3 -->
+<div>
+<div class="flex justify-between font-label-md text-label-md mb-1 text-on-surface-variant">
+<span>Koperasi Karyawan Sejahtera</span>
+<span>45% Tepat Waktu</span>
+</div>
+<div class="h-4 w-full flex rounded-full overflow-hidden">
+<div class="bg-[#10B981] h-full" style="width: 40%" title="Tepat Waktu: 40%"></div>
+<div class="bg-[#F59E0B] h-full" style="width: 35%" title="Terlambat Ringan: 35%"></div>
+<div class="bg-[#EF4444] h-full" style="width: 25%" title="Terlambat Signifikan: 25%"></div>
+</div>
+</div>
+<!-- Supplier 4 -->
+<div>
+<div class="flex justify-between font-label-md text-label-md mb-1 text-on-surface-variant">
+<span>Maju Bersama Logistics</span>
+<span>88% Tepat Waktu</span>
+</div>
+<div class="h-4 w-full flex rounded-full overflow-hidden">
+<div class="bg-[#10B981] h-full" style="width: 80%" title="Tepat Waktu: 80%"></div>
+<div class="bg-[#F59E0B] h-full" style="width: 15%" title="Terlambat Ringan: 15%"></div>
+<div class="bg-[#EF4444] h-full" style="width: 5%" title="Terlambat Signifikan: 5%"></div>
+</div>
+</div>
+</div>
+<!-- Legend -->
+<div class="flex gap-4 mt-6 font-label-md text-label-md text-on-surface-variant justify-center">
+<div class="flex items-center gap-1"><span class="w-3 h-3 rounded-full bg-[#10B981]"></span>Tepat Waktu</div>
+<div class="flex items-center gap-1"><span class="w-3 h-3 rounded-full bg-[#F59E0B]"></span>Terlambat &lt; 30m</div>
+<div class="flex items-center gap-1"><span class="w-3 h-3 rounded-full bg-[#EF4444]"></span>Terlambat &gt; 30m</div>
+</div>
+</div>
+<!-- Summary Cards Stack -->
+<div class="lg:col-span-1 flex flex-col gap-6">
+<div class="bg-white rounded-xl border border-[#E2E8F0] p-6 card-shadow flex-1 flex flex-col justify-center">
+<div class="flex items-center gap-3 mb-2">
+<div class="p-2 bg-surface-container rounded-lg text-primary">
+<span class="material-symbols-outlined">schedule</span>
+</div>
+<h4 class="font-label-md text-label-md text-on-surface-variant uppercase tracking-wider">Rata-rata Keterlambatan</h4>
+</div>
+<div class="text-4xl font-bold text-on-surface">14 <span class="text-xl font-normal text-on-surface-variant">Menit</span></div>
+</div>
+<div class="bg-white rounded-xl border border-[#E2E8F0] p-6 card-shadow flex-1 flex flex-col justify-center">
+<div class="flex items-center gap-3 mb-2">
+<div class="p-2 bg-[#D1FAE5] rounded-lg text-[#065F46]">
+<span class="material-symbols-outlined">emoji_events</span>
+</div>
+<h4 class="font-label-md text-label-md text-on-surface-variant uppercase tracking-wider">Supplier Tercepat</h4>
+</div>
+<div class="font-headline-sm text-headline-sm text-on-surface mb-2">PT Global Logistik Nusantara</div>
+<div><span class="inline-block px-2 py-1 bg-[#D1FAE5] text-[#065F46] font-label-md text-label-md rounded-full border border-[#34D399]">92% SLA</span></div>
+</div>
+<div class="bg-white rounded-xl border border-[#E2E8F0] p-6 card-shadow flex-1 flex flex-col justify-center">
+<div class="flex items-center gap-3 mb-2">
+<div class="p-2 bg-[#FEE2E2] rounded-lg text-[#991B1B]">
+<span class="material-symbols-outlined">warning</span>
+</div>
+<h4 class="font-label-md text-label-md text-on-surface-variant uppercase tracking-wider">Perlu Perhatian</h4>
+</div>
+<div class="font-headline-sm text-headline-sm text-on-surface mb-2">Koperasi Karyawan Sejahtera</div>
+<div><span class="inline-block px-2 py-1 bg-[#FEE2E2] text-[#991B1B] font-label-md text-label-md rounded-full border border-[#F87171]">45% SLA</span></div>
+</div>
+</div>
+</div>
+<!-- Detailed Table -->
+<div class="bg-white rounded-xl border border-[#E2E8F0] overflow-hidden card-shadow">
+<div class="px-6 py-4 border-b border-[#E2E8F0] bg-surface-bright">
+<h3 class="font-headline-sm text-headline-sm text-on-surface">Detail Performa Supplier</h3>
+</div>
+<div class="overflow-x-auto">
+<table class="w-full text-left font-body-md text-body-md border-collapse">
+<thead>
+<tr class="bg-surface text-on-surface-variant border-b border-[#E2E8F0]">
+<th class="px-6 py-3 font-semibold whitespace-nowrap cursor-pointer hover:bg-surface-variant transition-colors">
+<div class="flex items-center gap-1">Supplier <span class="material-symbols-outlined text-sm">arrow_upward</span></div>
+</th>
+<th class="px-6 py-3 font-semibold whitespace-nowrap cursor-pointer hover:bg-surface-variant transition-colors text-right">
+<div class="flex items-center justify-end gap-1">Total Kedatangan <span class="material-symbols-outlined text-sm text-outline-variant">unfold_more</span></div>
+</th>
+<th class="px-6 py-3 font-semibold whitespace-nowrap cursor-pointer hover:bg-surface-variant transition-colors text-right">
+<div class="flex items-center justify-end gap-1">Tepat Waktu <span class="material-symbols-outlined text-sm text-outline-variant">unfold_more</span></div>
+</th>
+<th class="px-6 py-3 font-semibold whitespace-nowrap cursor-pointer hover:bg-surface-variant transition-colors text-right">
+<div class="flex items-center justify-end gap-1">Terlambat <span class="material-symbols-outlined text-sm text-outline-variant">unfold_more</span></div>
+</th>
+<th class="px-6 py-3 font-semibold whitespace-nowrap cursor-pointer hover:bg-surface-variant transition-colors text-right">
+<div class="flex items-center justify-end gap-1">Rata-rata Selisih <span class="material-symbols-outlined text-sm text-outline-variant">unfold_more</span></div>
+</th>
+<th class="px-6 py-3 font-semibold whitespace-nowrap cursor-pointer hover:bg-surface-variant transition-colors text-center">
+<div class="flex items-center justify-center gap-1">Skor SLA <span class="material-symbols-outlined text-sm text-outline-variant">unfold_more</span></div>
+</th>
+</tr>
+</thead>
+<tbody>
+<tr class="border-b border-[#E2E8F0] hover:bg-surface-container-low transition-colors bg-white">
+<td class="px-6 py-4 font-semibold">PT Global Logistik Nusantara</td>
+<td class="px-6 py-4 text-right">145</td>
+<td class="px-6 py-4 text-right text-[#10B981]">134</td>
+<td class="px-6 py-4 text-right text-[#EF4444]">11</td>
+<td class="px-6 py-4 text-right">+4 mnt</td>
+<td class="px-6 py-4 text-center">
+<span class="inline-block px-3 py-1 bg-[#D1FAE5] text-[#065F46] font-label-md text-label-md rounded-full border border-[#34D399]">92.4%</span>
+</td>
+</tr>
+<tr class="border-b border-[#E2E8F0] hover:bg-surface-container-low transition-colors bg-surface-bright">
+<td class="px-6 py-4 font-semibold">Maju Bersama Logistics</td>
+<td class="px-6 py-4 text-right">89</td>
+<td class="px-6 py-4 text-right text-[#10B981]">78</td>
+<td class="px-6 py-4 text-right text-[#EF4444]">11</td>
+<td class="px-6 py-4 text-right">-12 mnt</td>
+<td class="px-6 py-4 text-center">
+<span class="inline-block px-3 py-1 bg-[#D1FAE5] text-[#065F46] font-label-md text-label-md rounded-full border border-[#34D399]">87.6%</span>
+</td>
+</tr>
+<tr class="border-b border-[#E2E8F0] hover:bg-surface-container-low transition-colors bg-white">
+<td class="px-6 py-4 font-semibold">CV Bintang Timur Armada</td>
+<td class="px-6 py-4 text-right">210</td>
+<td class="px-6 py-4 text-right text-[#10B981]">164</td>
+<td class="px-6 py-4 text-right text-[#EF4444]">46</td>
+<td class="px-6 py-4 text-right">-22 mnt</td>
+<td class="px-6 py-4 text-center">
+<span class="inline-block px-3 py-1 bg-[#FEF3C7] text-[#92400E] font-label-md text-label-md rounded-full border border-[#FCD34D]">78.1%</span>
+</td>
+</tr>
+<tr class="border-b border-[#E2E8F0] hover:bg-surface-container-low transition-colors bg-surface-bright">
+<td class="px-6 py-4 font-semibold">Koperasi Karyawan Sejahtera</td>
+<td class="px-6 py-4 text-right">54</td>
+<td class="px-6 py-4 text-right text-[#10B981]">24</td>
+<td class="px-6 py-4 text-right text-[#EF4444]">30</td>
+<td class="px-6 py-4 text-right text-[#EF4444] font-bold">-48 mnt</td>
+<td class="px-6 py-4 text-center">
+<span class="inline-block px-3 py-1 bg-[#FEE2E2] text-[#991B1B] font-label-md text-label-md rounded-full border border-[#F87171]">44.4%</span>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+</div>
+</main>
+<!-- BottomNavBar (Mobile Only) -->
+<nav class="md:hidden flex justify-around items-center w-full h-16 bg-surface border-t border-outline-variant flat no shadows docked full-width bottom-0 z-20">
+<a class="flex flex-col items-center justify-center w-full h-full text-on-surface-variant hover:bg-surface-container-high transition-colors" href="#">
+<span class="material-symbols-outlined mb-1 text-[24px]">monitor_heart</span>
+<span class="font-label-md text-[10px]">Monitoring</span>
+</a>
+<a class="flex flex-col items-center justify-center w-full h-full text-primary font-bold border-t-2 border-primary pt-1 bg-surface-container-high" href="#">
+<span class="material-symbols-outlined mb-1 text-[24px]" style="font-variation-settings: 'FILL' 1;">assessment</span>
+<span class="font-label-md text-[10px]">Laporan</span>
+</a>
+<a class="flex flex-col items-center justify-center w-full h-full text-on-surface-variant hover:bg-surface-container-high transition-colors" href="#">
+<span class="material-symbols-outlined mb-1 text-[24px]">star</span>
+<span class="font-label-md text-[10px]">Prioritas</span>
+</a>
+</nav>
+</body></html>

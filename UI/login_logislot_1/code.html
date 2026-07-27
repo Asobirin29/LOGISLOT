@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+
+<html lang="id"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>LOGISLOT - Login</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&amp;family=JetBrains+Mono:wght@400&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": {
+                      "tertiary": "#321c00",
+                      "primary-fixed": "#d6e3ff",
+                      "background": "#f8f9ff",
+                      "surface-tint": "#465f88",
+                      "secondary-fixed": "#cfe5ff",
+                      "outline": "#74777f",
+                      "on-error": "#ffffff",
+                      "inverse-surface": "#213145",
+                      "tertiary-container": "#4f2f00",
+                      "surface-variant": "#d3e4fe",
+                      "on-primary-fixed-variant": "#2e476f",
+                      "surface-bright": "#f8f9ff",
+                      "surface-container-low": "#eff4ff",
+                      "surface-container-high": "#dce9ff",
+                      "inverse-on-surface": "#eaf1ff",
+                      "on-primary-container": "#87a0cd",
+                      "secondary": "#356289",
+                      "on-secondary-fixed-variant": "#194a70",
+                      "primary-container": "#1b365d",
+                      "outline-variant": "#c4c6cf",
+                      "surface-dim": "#cbdbf5",
+                      "primary": "#002046",
+                      "on-tertiary-container": "#c6965e",
+                      "on-background": "#0b1c30",
+                      "tertiary-fixed-dim": "#f1bd81",
+                      "on-surface": "#0b1c30",
+                      "on-surface-variant": "#44474e",
+                      "surface-container-lowest": "#ffffff",
+                      "on-primary-fixed": "#001b3d",
+                      "on-tertiary": "#ffffff",
+                      "surface-container-highest": "#d3e4fe",
+                      "on-tertiary-fixed-variant": "#623f0f",
+                      "primary-fixed-dim": "#aec7f7",
+                      "secondary-container": "#a5d0fd",
+                      "on-primary": "#ffffff",
+                      "on-tertiary-fixed": "#2b1700",
+                      "surface-container": "#e5eeff",
+                      "error-container": "#ffdad6",
+                      "tertiary-fixed": "#ffddb9",
+                      "error": "#ba1a1a",
+                      "on-error-container": "#93000a",
+                      "on-secondary-fixed": "#001d33",
+                      "inverse-primary": "#aec7f7",
+                      "secondary-fixed-dim": "#a0cbf7",
+                      "on-secondary-container": "#2c5980",
+                      "surface": "#f8f9ff",
+                      "on-secondary": "#ffffff"
+              },
+              "borderRadius": {
+                      "DEFAULT": "0.25rem",
+                      "lg": "0.5rem",
+                      "xl": "0.75rem",
+                      "full": "9999px"
+              },
+              "spacing": {
+                      "container-max": "1440px",
+                      "xl": "32px",
+                      "sm": "8px",
+                      "base": "8px",
+                      "gutter": "24px",
+                      "xs": "4px",
+                      "lg": "24px",
+                      "md": "16px"
+              },
+              "fontFamily": {
+                      "body-lg": ["Inter"],
+                      "headline-lg": ["Inter"],
+                      "headline-lg-mobile": ["Inter"],
+                      "headline-sm": ["Inter"],
+                      "headline-md": ["Inter"],
+                      "code": ["JetBrains Mono"],
+                      "body-md": ["Inter"],
+                      "label-md": ["Inter"]
+              },
+              "fontSize": {
+                      "body-lg": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                      "headline-lg": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                      "headline-lg-mobile": ["24px", {"lineHeight": "32px", "letterSpacing": "-0.01em", "fontWeight": "700"}],
+                      "headline-sm": ["20px", {"lineHeight": "28px", "fontWeight": "600"}],
+                      "headline-md": ["24px", {"lineHeight": "32px", "fontWeight": "600"}],
+                      "code": ["13px", {"lineHeight": "20px", "fontWeight": "400"}],
+                      "body-md": ["14px", {"lineHeight": "20px", "fontWeight": "400"}],
+                      "label-md": ["12px", {"lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "600"}]
+              }
+      },
+          },
+        }
+    </script>
+</head>
+<body class="bg-background min-h-screen flex flex-col md:flex-row antialiased text-on-background font-body-lg">
+<!-- Left Column (Brand/Value Prop) -->
+<div class="md:w-[60%] flex flex-col justify-between p-lg md:p-xl bg-gradient-to-br from-primary-container to-[#2E5B82] text-white">
+<!-- Header -->
+<div class="mb-lg">
+<h1 class="font-headline-lg text-headline-lg-mobile md:text-headline-lg text-white mb-xs tracking-tight">LOGISLOT</h1>
+<p class="font-body-md text-body-md text-secondary-fixed">Truck Booking &amp; Fleet Tracking System</p>
+</div>
+<!-- Center Illustration -->
+<div class="flex-grow flex items-center justify-center py-xl relative max-w-[80%] mx-auto w-full">
+<img alt="Logistics Platform Illustration" class="w-full h-auto max-h-[400px] object-contain drop-shadow-2xl opacity-90 rounded-xl" src="https://lh3.googleusercontent.com/aida-public/AB6AXuD8OMz9bOdWnkz0b2Yed6ay6v_6E_dPDKqRjdB61HuEnYQqx-MdTEZETymObjnUrmLW69Fy6DFL4Zy9n9s2J2MkB_vED7yRRR8SKHzrdv5B6ms8nGmNlwyeGWyh28RTIJU3hUVKI_-OxFoAuc6SzZ1CTol63WZKqJGYOC5GarSxbu12diS00Yyr9zlol9qwnJmNRf2KyIl_1cvB40ZzuoXm8rbDUCHb2r9nq_lDvlfp0kDJf4fDZtcKcZaI--IUuy7VHOpMcSvybQ"/>
+</div>
+<!-- Value Props -->
+<div class="mt-auto space-y-md md:max-w-md">
+<div class="flex items-center gap-md">
+<div class="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-white" data-icon="schedule" data-weight="fill" style="font-variation-settings: 'FILL' 1;">schedule</span>
+</div>
+<span class="font-body-md text-body-md text-white/90 font-medium">Booking slot tanpa antre</span>
+</div>
+<div class="flex items-center gap-md">
+<div class="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-white" data-icon="my_location" data-weight="fill" style="font-variation-settings: 'FILL' 1;">my_location</span>
+</div>
+<span class="font-body-md text-body-md text-white/90 font-medium">Tracking real-time</span>
+</div>
+<div class="flex items-center gap-md">
+<div class="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-white" data-icon="domain" data-weight="fill" style="font-variation-settings: 'FILL' 1;">domain</span>
+</div>
+<span class="font-body-md text-body-md text-white/90 font-medium">Terintegrasi dari gerbang sampai gudang</span>
+</div>
+</div>
+</div>
+<!-- Right Column (Login Form) -->
+<div class="md:w-[40%] flex flex-col justify-center items-center p-lg md:p-xl bg-surface relative min-h-[60vh] md:min-h-screen">
+<div class="w-full max-w-[380px] bg-surface-container-lowest rounded-xl border border-outline-variant p-lg shadow-sm">
+<div class="mb-xl text-center md:text-left">
+<h2 class="font-headline-md text-headline-md text-primary mb-xs">Masuk ke Akun Anda</h2>
+<p class="font-body-md text-body-md text-on-surface-variant">Kelola pemesanan slot dan pelacakan armada Anda</p>
+</div>
+<form class="space-y-lg">
+<!-- Email Field (Error State) -->
+<div>
+<label class="block font-label-md text-label-md text-on-surface mb-xs">Email</label>
+<div class="relative">
+<div class="absolute inset-y-0 left-0 pl-sm flex items-center pointer-events-none">
+<span class="material-symbols-outlined text-error" data-icon="mail">mail</span>
+</div>
+<input class="w-full pl-xl pr-sm py-sm font-body-md text-body-md text-on-surface bg-error-container/20 border-error focus:ring-2 focus:ring-error focus:border-error rounded-lg transition-colors placeholder:text-outline" placeholder="Masukkan email" type="email" value="user@supplier.com"/>
+</div>
+</div>
+<!-- Password Field (Error State) -->
+<div>
+<div class="flex justify-between items-center mb-xs">
+<label class="block font-label-md text-label-md text-on-surface">Kata Sandi</label>
+<a class="font-label-md text-label-md text-secondary hover:text-primary transition-colors" href="#">Lupa kata sandi?</a>
+</div>
+<div class="relative">
+<div class="absolute inset-y-0 left-0 pl-sm flex items-center pointer-events-none">
+<span class="material-symbols-outlined text-error" data-icon="lock">lock</span>
+</div>
+<input class="w-full pl-xl pr-xl py-sm font-body-md text-body-md text-on-surface bg-error-container/20 border-error focus:ring-2 focus:ring-error focus:border-error rounded-lg transition-colors placeholder:text-outline" placeholder="Masukkan kata sandi" type="password" value="wrongpassword"/>
+<button class="absolute inset-y-0 right-0 pr-sm flex items-center text-outline hover:text-on-surface transition-colors" type="button">
+<span class="material-symbols-outlined" data-icon="visibility_off">visibility_off</span>
+</button>
+</div>
+<p class="mt-sm font-label-md text-label-md text-error flex items-center gap-xs">
+<span class="material-symbols-outlined text-[16px]" data-icon="error">error</span> Email atau kata sandi salah
+                    </p>
+</div>
+<!-- Submit -->
+<button class="w-full bg-primary hover:bg-primary/90 text-on-primary font-body-lg text-body-lg font-bold py-md rounded-lg transition-colors flex justify-center items-center gap-sm mt-md" type="submit">
+                    Masuk
+                </button>
+<!-- Divider -->
+<div class="relative flex items-center py-md">
+<div class="flex-grow border-t border-outline-variant"></div>
+<span class="flex-shrink-0 mx-md text-outline font-label-md text-label-md">atau</span>
+<div class="flex-grow border-t border-outline-variant"></div>
+</div>
+<!-- Register Link -->
+<div class="text-center">
+<p class="font-body-md text-body-md text-on-surface-variant">
+                        Belum punya akun sebagai Supplier? <br/>
+<a class="font-medium text-secondary hover:text-primary transition-colors hover:underline" href="#">Daftar di sini</a>
+</p>
+</div>
+</form>
+</div>
+<!-- Footer -->
+<div class="absolute bottom-lg w-full text-center px-lg">
+<p class="font-label-md text-label-md text-outline">© 2026 LOGISLOT — Internal Use Only</p>
+</div>
+</div>
+</body></html>

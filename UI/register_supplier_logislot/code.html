@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>LOGISLOT - Register as Supplier</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&amp;family=JetBrains+Mono:wght@400&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "surface-variant": "#d3e4fe",
+                    "on-secondary-fixed-variant": "#194a70",
+                    "outline-variant": "#c4c6cf",
+                    "primary-fixed-dim": "#aec7f7",
+                    "on-tertiary": "#ffffff",
+                    "tertiary-fixed": "#ffddb9",
+                    "surface-container-highest": "#d3e4fe",
+                    "on-tertiary-fixed": "#2b1700",
+                    "on-secondary-fixed": "#001d33",
+                    "surface-container-lowest": "#ffffff",
+                    "secondary-fixed": "#cfe5ff",
+                    "surface-container-high": "#dce9ff",
+                    "inverse-surface": "#213145",
+                    "outline": "#74777f",
+                    "on-background": "#0b1c30",
+                    "inverse-primary": "#aec7f7",
+                    "tertiary-fixed-dim": "#f1bd81",
+                    "surface-bright": "#f8f9ff",
+                    "on-tertiary-fixed-variant": "#623f0f",
+                    "background": "#f8f9ff",
+                    "on-secondary-container": "#2c5980",
+                    "surface": "#f8f9ff",
+                    "surface-dim": "#cbdbf5",
+                    "on-primary": "#ffffff",
+                    "on-tertiary-container": "#c6965e",
+                    "surface-tint": "#465f88",
+                    "secondary-fixed-dim": "#a0cbf7",
+                    "on-error": "#ffffff",
+                    "primary-fixed": "#d6e3ff",
+                    "on-surface": "#0b1c30",
+                    "on-primary-container": "#87a0cd",
+                    "primary": "#002046",
+                    "on-surface-variant": "#44474e",
+                    "on-secondary": "#ffffff",
+                    "surface-container-low": "#eff4ff",
+                    "on-error-container": "#93000a",
+                    "tertiary-container": "#4f2f00",
+                    "tertiary": "#321c00",
+                    "primary-container": "#1b365d",
+                    "on-primary-fixed": "#001b3d",
+                    "secondary-container": "#a5d0fd",
+                    "surface-container": "#e5eeff",
+                    "error": "#ba1a1a",
+                    "inverse-on-surface": "#eaf1ff",
+                    "on-primary-fixed-variant": "#2e476f",
+                    "error-container": "#ffdad6",
+                    "secondary": "#356289"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "md": "16px",
+                    "lg": "24px",
+                    "base": "8px",
+                    "xs": "4px",
+                    "sm": "8px",
+                    "xl": "32px",
+                    "gutter": "24px",
+                    "container-max": "1440px"
+            },
+            "fontFamily": {
+                    "label-md": [
+                            "Inter"
+                    ],
+                    "headline-lg": [
+                            "Inter"
+                    ],
+                    "headline-md": [
+                            "Inter"
+                    ],
+                    "headline-lg-mobile": [
+                            "Inter"
+                    ],
+                    "headline-sm": [
+                            "Inter"
+                    ],
+                    "code": [
+                            "JetBrains Mono"
+                    ],
+                    "body-md": [
+                            "Inter"
+                    ],
+                    "body-lg": [
+                            "Inter"
+                    ]
+            },
+            "fontSize": {
+                    "label-md": [
+                            "12px",
+                            {
+                                    "lineHeight": "16px",
+                                    "letterSpacing": "0.05em",
+                                    "fontWeight": "600"
+                            }
+                    ],
+                    "headline-lg": [
+                            "32px",
+                            {
+                                    "lineHeight": "40px",
+                                    "letterSpacing": "-0.02em",
+                                    "fontWeight": "700"
+                            }
+                    ],
+                    "headline-md": [
+                            "24px",
+                            {
+                                    "lineHeight": "32px",
+                                    "fontWeight": "600"
+                            }
+                    ],
+                    "headline-lg-mobile": [
+                            "24px",
+                            {
+                                    "lineHeight": "32px",
+                                    "letterSpacing": "-0.01em",
+                                    "fontWeight": "700"
+                            }
+                    ],
+                    "headline-sm": [
+                            "20px",
+                            {
+                                    "lineHeight": "28px",
+                                    "fontWeight": "600"
+                            }
+                    ],
+                    "code": [
+                            "13px",
+                            {
+                                    "lineHeight": "20px",
+                                    "fontWeight": "400"
+                            }
+                    ],
+                    "body-md": [
+                            "14px",
+                            {
+                                    "lineHeight": "20px",
+                                    "fontWeight": "400"
+                            }
+                    ],
+                    "body-lg": [
+                            "16px",
+                            {
+                                    "lineHeight": "24px",
+                                    "fontWeight": "400"
+                            }
+                    ]
+            }
+    },
+        },
+      }
+    </script>
+<style>
+        /* Custom styles for strength bar */
+        .strength-weak { width: 33%; background-color: #ef4444; }
+        .strength-medium { width: 66%; background-color: #eab308; }
+        .strength-strong { width: 100%; background-color: #22c55e; }
+    </style>
+</head>
+<body class="bg-background text-on-background font-body-md min-h-screen flex flex-col md:flex-row">
+<!-- Left Column (60%) -->
+<div class="hidden md:flex flex-col w-full md:w-[60%] bg-primary-container p-xl justify-between relative overflow-hidden">
+<!-- Subtle Gradient Overlay -->
+<div class="absolute inset-0 bg-gradient-to-br from-primary/80 to-primary-container z-0 pointer-events-none"></div>
+<div class="relative z-10 flex flex-col h-full justify-between">
+<div>
+<div class="flex items-center gap-xs mb-sm">
+<span class="material-symbols-outlined text-on-primary text-[32px]" style="font-variation-settings: 'FILL' 1;">package_2</span>
+<h1 class="font-headline-lg text-headline-lg text-on-primary">LOGISLOT</h1>
+</div>
+<p class="font-body-lg text-body-lg text-secondary-fixed">Truck Booking &amp; Fleet Tracking System</p>
+</div>
+<div class="my-xl max-w-[80%] mx-auto relative h-64 w-full">
+<img alt="Logistics platform illustration" class="w-full h-full object-contain filter drop-shadow-xl" src="https://lh3.googleusercontent.com/aida/AP1WRLv0IgccIhgtVH1lm396S18TiLmdoOzj5crj2X3Bva6Mtg56wnxVpgDjC6MUwjuof3dTKUSkNn6r_Vu_71KXYo0KW4crcPzWfs1mb8nJdLvk6lfsvDDM3VrYzh5gn6oFZKSMM96EizIIg2b189z5AfaQYz50Dg6grSFlpzzsMiSOT7Kql4N7MzvbXXfFIxc_L-G7LGTV_RjPu0yjbXiyjX6YP2yuc40BBxtlqw1lNvqyp2ykPfalDR6TPg"/>
+</div>
+<div class="space-y-md">
+<div class="flex items-start gap-md">
+<div class="bg-primary/50 p-xs rounded-full mt-xs">
+<span class="material-symbols-outlined text-secondary-fixed text-sm" style="font-variation-settings: 'FILL' 1;">schedule</span>
+</div>
+<div>
+<h3 class="font-headline-sm text-headline-sm text-on-primary">Booking slot tanpa antre</h3>
+<p class="font-body-md text-body-md text-secondary-fixed">Jadwalkan kedatangan armada Anda dengan presisi.</p>
+</div>
+</div>
+<div class="flex items-start gap-md">
+<div class="bg-primary/50 p-xs rounded-full mt-xs">
+<span class="material-symbols-outlined text-secondary-fixed text-sm" style="font-variation-settings: 'FILL' 1;">location_on</span>
+</div>
+<div>
+<h3 class="font-headline-sm text-headline-sm text-on-primary">Tracking real-time</h3>
+<p class="font-body-md text-body-md text-secondary-fixed">Pantau pergerakan armada secara akurat.</p>
+</div>
+</div>
+<div class="flex items-start gap-md">
+<div class="bg-primary/50 p-xs rounded-full mt-xs">
+<span class="material-symbols-outlined text-secondary-fixed text-sm" style="font-variation-settings: 'FILL' 1;">warehouse</span>
+</div>
+<div>
+<h3 class="font-headline-sm text-headline-sm text-on-primary">Terintegrasi dari gerbang sampai gudang</h3>
+<p class="font-body-md text-body-md text-secondary-fixed">Alur kerja logistik yang mulus dan termonitor.</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Right Column (40%) -->
+<div class="w-full md:w-[40%] bg-surface-container-lowest flex flex-col justify-center p-xl md:p-[48px] overflow-y-auto">
+<!-- Mobile Header (Hidden on Desktop) -->
+<div class="md:hidden flex items-center gap-xs mb-lg justify-center">
+<span class="material-symbols-outlined text-primary text-[28px]" style="font-variation-settings: 'FILL' 1;">package_2</span>
+<h1 class="font-headline-md text-headline-md text-primary font-bold">LOGISLOT</h1>
+</div>
+<div class="max-w-[440px] w-full mx-auto">
+<h2 class="font-headline-md text-headline-md text-primary-container mb-xs">Daftar sebagai Supplier</h2>
+<p class="font-body-md text-body-md text-on-surface-variant mb-xl">Lengkapi data perusahaan Anda untuk mulai memesan slot pengiriman.</p>
+<form class="space-y-md">
+<!-- Field 1: Nama Lengkap PIC -->
+<div>
+<label class="block font-label-md text-label-md text-on-surface mb-xs" for="picName">Nama Lengkap PIC</label>
+<div class="relative">
+<div class="absolute inset-y-0 left-0 pl-sm flex items-center pointer-events-none">
+<span class="material-symbols-outlined text-outline">person</span>
+</div>
+<input class="block w-full pl-[40px] pr-sm py-sm bg-surface-container-lowest border border-outline-variant rounded-lg text-on-surface focus:ring-secondary focus:border-secondary transition-colors" id="picName" placeholder="Masukkan nama lengkap" type="text"/>
+</div>
+</div>
+<!-- Field 2: Nama Perusahaan/Instansi -->
+<div>
+<label class="block font-label-md text-label-md text-on-surface mb-xs" for="companyName">Nama Perusahaan/Instansi</label>
+<div class="relative">
+<div class="absolute inset-y-0 left-0 pl-sm flex items-center pointer-events-none">
+<span class="material-symbols-outlined text-outline">domain</span>
+</div>
+<input class="block w-full pl-[40px] pr-sm py-sm bg-surface-container-lowest border border-outline-variant rounded-lg text-on-surface focus:ring-secondary focus:border-secondary transition-colors" id="companyName" placeholder="PT. Contoh Logistik" type="text"/>
+</div>
+</div>
+<!-- Field 3: Email Perusahaan -->
+<div>
+<label class="block font-label-md text-label-md text-on-surface mb-xs" for="email">Email Perusahaan</label>
+<div class="relative">
+<div class="absolute inset-y-0 left-0 pl-sm flex items-center pointer-events-none">
+<span class="material-symbols-outlined text-outline">mail</span>
+</div>
+<input class="block w-full pl-[40px] pr-sm py-sm bg-surface-container-lowest border border-outline-variant rounded-lg text-on-surface focus:ring-secondary focus:border-secondary transition-colors" id="email" placeholder="email@perusahaan.com" type="email"/>
+</div>
+<p class="font-body-md text-[12px] text-on-surface-variant mt-xs">Gunakan email resmi perusahaan</p>
+</div>
+<!-- Field 4: Nomor Telepon/WhatsApp -->
+<div>
+<label class="block font-label-md text-label-md text-on-surface mb-xs" for="phone">Nomor Telepon/WhatsApp</label>
+<div class="flex">
+<span class="inline-flex items-center px-sm py-sm rounded-l-lg border border-r-0 border-outline-variant bg-surface-container-low text-on-surface font-body-md">
+                            +62
+                        </span>
+<input class="block w-full px-sm py-sm bg-surface-container-lowest border border-outline-variant rounded-r-lg text-on-surface focus:ring-secondary focus:border-secondary transition-colors" id="phone" placeholder="81234567890" type="tel"/>
+</div>
+</div>
+<!-- Field 5: Kata Sandi -->
+<div>
+<label class="block font-label-md text-label-md text-on-surface mb-xs" for="password">Kata Sandi</label>
+<div class="relative">
+<div class="absolute inset-y-0 left-0 pl-sm flex items-center pointer-events-none">
+<span class="material-symbols-outlined text-outline">lock</span>
+</div>
+<input class="block w-full pl-[40px] pr-sm py-sm bg-surface-container-lowest border border-outline-variant rounded-lg text-on-surface focus:ring-secondary focus:border-secondary transition-colors" id="password" placeholder="••••••••" type="password"/>
+</div>
+<!-- Password Strength Indicator -->
+<div class="mt-sm">
+<div class="h-[4px] w-full bg-surface-container-highest rounded-full overflow-hidden flex">
+<!-- JS will update these widths -->
+<div class="h-full bg-red-500 w-1/3 transition-all duration-300"></div>
+<div class="h-full bg-surface-container-highest w-1/3 transition-all duration-300"></div>
+<div class="h-full bg-surface-container-highest w-1/3 transition-all duration-300"></div>
+</div>
+</div>
+</div>
+<!-- Field 6: Konfirmasi Kata Sandi -->
+<div>
+<label class="block font-label-md text-label-md text-on-surface mb-xs" for="confirmPassword">Konfirmasi Kata Sandi</label>
+<div class="relative">
+<div class="absolute inset-y-0 left-0 pl-sm flex items-center pointer-events-none">
+<span class="material-symbols-outlined text-outline">lock</span>
+</div>
+<input class="block w-full pl-[40px] pr-sm py-sm bg-surface-container-lowest border border-outline-variant rounded-lg text-on-surface focus:ring-secondary focus:border-secondary transition-colors" id="confirmPassword" placeholder="••••••••" type="password"/>
+</div>
+</div>
+<!-- Checkbox -->
+<div class="flex items-start pt-xs">
+<div class="flex items-center h-5">
+<input class="w-4 h-4 border border-outline-variant rounded bg-surface-container-lowest focus:ring-secondary text-primary-container" id="terms" type="checkbox"/>
+</div>
+<label class="ml-sm font-body-md text-[13px] text-on-surface-variant leading-tight" for="terms">
+                        Saya menyetujui Syarat &amp; Ketentuan penggunaan sistem LOGISLOT
+                    </label>
+</div>
+<!-- CTA -->
+<button class="w-full bg-primary-container text-on-primary font-label-md text-label-md py-[12px] rounded-lg hover:bg-primary transition-colors flex justify-center items-center mt-lg" type="button">
+                    Daftar Sekarang
+                </button>
+</form>
+<div class="mt-lg text-center">
+<p class="font-body-md text-body-md text-on-surface-variant">
+                    Sudah punya akun? <a class="text-[#2E5B82] font-semibold hover:underline" href="#">Masuk di sini</a>
+</p>
+</div>
+<!-- Footer -->
+<div class="mt-xl pt-lg border-t border-outline-variant text-center">
+<p class="font-body-md text-[12px] text-outline">© 2026 LOGISLOT — Internal Use Only</p>
+</div>
+</div>
+</div>
+</body></html>

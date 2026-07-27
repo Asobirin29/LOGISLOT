@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+
+<html lang="id"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Daftar Antrian Truk Hari Ini - Logislot</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "tertiary-container": "#4f2f00",
+                        "on-tertiary-fixed-variant": "#623f0f",
+                        "inverse-on-surface": "#eaf1ff",
+                        "surface-container-lowest": "#ffffff",
+                        "surface-container": "#e5eeff",
+                        "tertiary-fixed": "#ffddb9",
+                        "secondary-container": "#a5d0fd",
+                        "background": "#f8f9ff",
+                        "on-error-container": "#93000a",
+                        "inverse-surface": "#213145",
+                        "on-surface": "#0b1c30",
+                        "surface-container-highest": "#d3e4fe",
+                        "surface-container-high": "#dce9ff",
+                        "primary-container": "#1b365d",
+                        "on-error": "#ffffff",
+                        "surface-dim": "#cbdbf5",
+                        "primary-fixed-dim": "#aec7f7",
+                        "outline-variant": "#c4c6cf",
+                        "primary-fixed": "#d6e3ff",
+                        "error-container": "#ffdad6",
+                        "on-secondary-fixed-variant": "#194a70",
+                        "surface-bright": "#f8f9ff",
+                        "on-primary-fixed-variant": "#2e476f",
+                        "on-tertiary-container": "#c6965e",
+                        "surface": "#f8f9ff",
+                        "secondary": "#356289",
+                        "tertiary-fixed-dim": "#f1bd81",
+                        "on-secondary": "#ffffff",
+                        "tertiary": "#321c00",
+                        "primary": "#002046",
+                        "outline": "#74777f",
+                        "surface-container-low": "#eff4ff",
+                        "on-background": "#0b1c30",
+                        "secondary-fixed-dim": "#a0cbf7",
+                        "secondary-fixed": "#cfe5ff",
+                        "on-secondary-fixed": "#001d33",
+                        "on-secondary-container": "#2c5980",
+                        "on-primary-fixed": "#001b3d",
+                        "on-primary": "#ffffff",
+                        "on-tertiary-fixed": "#2b1700",
+                        "surface-variant": "#d3e4fe",
+                        "on-tertiary": "#ffffff",
+                        "error": "#ba1a1a",
+                        "surface-tint": "#465f88",
+                        "inverse-primary": "#aec7f7",
+                        "on-surface-variant": "#44474e",
+                        "on-primary-container": "#87a0cd"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "sm": "8px",
+                        "gutter": "24px",
+                        "md": "16px",
+                        "container-max": "1440px",
+                        "xl": "32px",
+                        "lg": "24px",
+                        "xs": "4px",
+                        "base": "8px"
+                    },
+                    "fontFamily": {
+                        "headline-lg-mobile": ["Inter"],
+                        "body-md": ["Inter"],
+                        "label-md": ["Inter"],
+                        "body-lg": ["Inter"],
+                        "headline-sm": ["Inter"],
+                        "headline-lg": ["Inter"],
+                        "headline-md": ["Inter"],
+                        "code": ["JetBrains Mono"]
+                    },
+                    "fontSize": {
+                        "headline-lg-mobile": ["24px", { "lineHeight": "32px", "letterSpacing": "-0.01em", "fontWeight": "700" }],
+                        "body-md": ["14px", { "lineHeight": "20px", "fontWeight": "400" }],
+                        "label-md": ["12px", { "lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "600" }],
+                        "body-lg": ["16px", { "lineHeight": "24px", "fontWeight": "400" }],
+                        "headline-sm": ["20px", { "lineHeight": "28px", "fontWeight": "600" }],
+                        "headline-lg": ["32px", { "lineHeight": "40px", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+                        "headline-md": ["24px", { "lineHeight": "32px", "fontWeight": "600" }],
+                        "code": ["13px", { "lineHeight": "20px", "fontWeight": "400" }]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 1, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background min-h-screen text-on-background font-body-lg flex flex-col items-center">
+<!-- TopAppBar -->
+<header class="bg-primary text-on-primary font-headline-md text-headline-md docked full-width top-0 bg-primary flat no shadows flex justify-between items-center px-lg w-full h-20 shadow-md">
+<div class="flex items-center gap-md">
+<span class="font-headline-md text-headline-md font-bold text-on-primary tracking-tight">LOGISLOT</span>
+</div>
+<div class="font-headline-md text-headline-md font-bold tracking-tight">
+            14:45:32
+        </div>
+<div class="flex items-center gap-md">
+<div class="flex items-center gap-sm">
+<img class="w-10 h-10 rounded-full object-cover border-2 border-on-primary" data-alt="A professional headshot of a logistics security officer, wearing a high-visibility vest over a navy blue uniform, set against a bright, modern industrial background. The lighting is crisp and clear, conveying a sense of authority and reliability." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCEuePXBOpF5acGOct1wsh6B1Q8Ocwnl1NMiYI_ff5nmbk1sLWSizT1UptYojkULm-HxAdSrAUanL6n564_3BqjRE8S122BcPAPnmKlJc_u25CgEuYTG4mq15I4HS-9jw8zSyBNDudeGNKwRBgDziKUho2nZf1ImemOG_mCPuqfATNFvIN3SXPgqo4jiOh1Z0B00osKWqrhLvlFXuF5yfqCFIqOqgWv4dSueQ0T0nkTKfbdvFE1zt_Z2CWhVO-ror7KRDt_IfIs5A"/>
+</div>
+<button class="p-2 rounded-full hover:bg-primary-container transition-colors flex items-center justify-center">
+<span class="material-symbols-outlined" data-icon="emergency_home" data-weight="fill">emergency_home</span>
+</button>
+</div>
+</header>
+<!-- Main Content Canvas -->
+<main class="w-full max-w-container-max px-gutter md:px-lg py-xl flex flex-col gap-lg pb-32">
+<!-- Header Section -->
+<div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-md">
+<div class="flex items-center gap-md">
+<h1 class="font-headline-lg text-headline-lg text-on-background tracking-tight">Daftar Truk Diijinkan Masuk Hari Ini</h1>
+<span class="bg-primary text-on-primary font-headline-md text-headline-md rounded-full w-12 h-12 flex items-center justify-center shadow-sm border-2 border-primary-container">12</span>
+</div>
+</div>
+<!-- Search Bar -->
+<div class="relative w-full shadow-sm bg-surface-container-lowest rounded-lg border border-outline-variant overflow-hidden focus-within:border-secondary focus-within:ring-1 focus-within:ring-secondary transition-all">
+<div class="absolute inset-y-0 left-0 pl-md flex items-center pointer-events-none">
+<span class="material-symbols-outlined text-outline" data-icon="search">search</span>
+</div>
+<input class="w-full pl-12 pr-md py-4 font-headline-sm text-headline-sm text-on-background bg-transparent border-none focus:ring-0 placeholder:text-outline h-16" placeholder="Filter Plat Nomor (Contoh: B 1234 CD)..." type="text"/>
+</div>
+<!-- Truck List -->
+<div class="flex flex-col gap-sm">
+<!-- Warning Card (Late, Not Checked In) -->
+<div class="bg-surface-container-lowest rounded-lg border border-outline-variant border-l-8 border-l-error shadow-sm overflow-hidden flex items-stretch hover:shadow-md transition-shadow cursor-pointer min-h-[100px]">
+<!-- Time Badge -->
+<div class="w-32 bg-error-container text-on-error-container flex flex-col items-center justify-center border-r border-outline-variant shrink-0">
+<span class="font-headline-md text-headline-md">08:00</span>
+<span class="font-label-md text-label-md mt-1 uppercase text-error">Terlambat</span>
+</div>
+<!-- Core Info -->
+<div class="flex-grow flex flex-col justify-center px-lg py-md">
+<div class="font-headline-lg text-headline-lg tracking-tight text-on-background">B 1234 CD</div>
+<div class="font-body-lg text-body-lg text-on-surface-variant mt-1 flex items-center gap-2">
+<span class="material-symbols-outlined text-outline" data-icon="business">business</span>
+                        PT. Logistik Sukses Makmur
+                    </div>
+</div>
+<!-- Status Badge -->
+<div class="w-48 flex items-center justify-center bg-surface px-md border-l border-outline-variant shrink-0">
+<div class="bg-surface-variant text-on-surface-variant px-4 py-2 rounded-full font-label-md text-label-md flex items-center gap-2 border border-outline-variant">
+<span class="material-symbols-outlined text-base" data-icon="pending">pending</span>
+                        Belum Tiba
+                    </div>
+</div>
+</div>
+<!-- Standard Card (On Time, Checked In) -->
+<div class="bg-surface-container-lowest rounded-lg border border-outline-variant border-l-8 border-l-primary shadow-sm overflow-hidden flex items-stretch hover:shadow-md transition-shadow cursor-pointer min-h-[100px]">
+<div class="w-32 bg-surface-container flex flex-col items-center justify-center border-r border-outline-variant shrink-0">
+<span class="font-headline-md text-headline-md text-on-surface">14:30</span>
+<span class="font-label-md text-label-md mt-1 text-on-surface-variant">SLOT</span>
+</div>
+<div class="flex-grow flex flex-col justify-center px-lg py-md">
+<div class="font-headline-lg text-headline-lg tracking-tight text-on-background">D 5678 EF</div>
+<div class="font-body-lg text-body-lg text-on-surface-variant mt-1 flex items-center gap-2">
+<span class="material-symbols-outlined text-outline" data-icon="business">business</span>
+                        CV. Maju Jaya Trans
+                    </div>
+</div>
+<div class="w-48 flex items-center justify-center bg-surface px-md border-l border-outline-variant shrink-0">
+<div class="bg-[#e6f4ea] text-[#137333] px-4 py-2 rounded-full font-label-md text-label-md flex items-center gap-2 border border-[#ceead6]">
+<span class="material-symbols-outlined text-base" data-icon="check_circle" data-weight="fill">check_circle</span>
+                        Sudah Check-in
+                    </div>
+</div>
+</div>
+<!-- Standard Card (Upcoming, Not Checked In) -->
+<div class="bg-surface-container-lowest rounded-lg border border-outline-variant border-l-8 border-l-outline-variant shadow-sm overflow-hidden flex items-stretch hover:shadow-md transition-shadow cursor-pointer min-h-[100px] opacity-80">
+<div class="w-32 bg-surface flex flex-col items-center justify-center border-r border-outline-variant shrink-0">
+<span class="font-headline-md text-headline-md text-outline">15:00</span>
+<span class="font-label-md text-label-md mt-1 text-outline">SLOT</span>
+</div>
+<div class="flex-grow flex flex-col justify-center px-lg py-md">
+<div class="font-headline-lg text-headline-lg tracking-tight text-on-background">L 9012 GH</div>
+<div class="font-body-lg text-body-lg text-on-surface-variant mt-1 flex items-center gap-2">
+<span class="material-symbols-outlined text-outline" data-icon="business">business</span>
+                        Bintang Express Logistics
+                    </div>
+</div>
+<div class="w-48 flex items-center justify-center bg-surface px-md border-l border-outline-variant shrink-0">
+<div class="bg-surface-variant text-on-surface-variant px-4 py-2 rounded-full font-label-md text-label-md flex items-center gap-2 border border-outline-variant">
+<span class="material-symbols-outlined text-base" data-icon="schedule">schedule</span>
+                        Menunggu Tiba
+                    </div>
+</div>
+</div>
+<!-- Standard Card (Upcoming, Not Checked In) -->
+<div class="bg-surface-container-lowest rounded-lg border border-outline-variant border-l-8 border-l-outline-variant shadow-sm overflow-hidden flex items-stretch hover:shadow-md transition-shadow cursor-pointer min-h-[100px] opacity-80">
+<div class="w-32 bg-surface flex flex-col items-center justify-center border-r border-outline-variant shrink-0">
+<span class="font-headline-md text-headline-md text-outline">16:30</span>
+<span class="font-label-md text-label-md mt-1 text-outline">SLOT</span>
+</div>
+<div class="flex-grow flex flex-col justify-center px-lg py-md">
+<div class="font-headline-lg text-headline-lg tracking-tight text-on-background">B 3456 JK</div>
+<div class="font-body-lg text-body-lg text-on-surface-variant mt-1 flex items-center gap-2">
+<span class="material-symbols-outlined text-outline" data-icon="business">business</span>
+                        Nusantara Cargo
+                    </div>
+</div>
+<div class="w-48 flex items-center justify-center bg-surface px-md border-l border-outline-variant shrink-0">
+<div class="bg-surface-variant text-on-surface-variant px-4 py-2 rounded-full font-label-md text-label-md flex items-center gap-2 border border-outline-variant">
+<span class="material-symbols-outlined text-base" data-icon="schedule">schedule</span>
+                        Menunggu Tiba
+                    </div>
+</div>
+</div>
+</div>
+</main>
+<!-- BottomNavBar (Tablet/Mobile only for specific destinations, hiding for this specific intent as per layout context, but providing it if required by system. For a tablet security view, this might be structural) -->
+<nav class="md:hidden bg-surface-container-highest dark:bg-surface-container-lowest text-primary dark:text-primary-fixed font-label-md text-label-md docked full-width bottom-0 border-t border-outline-variant flat no shadows fixed bottom-0 w-full z-50 flex justify-around items-center h-24 px-gutter bg-surface-container-highest">
+<!-- Tab 1 -->
+<a class="flex flex-col items-center justify-center text-on-surface-variant hover:bg-surface-container-high w-20 h-full transition-colors group" href="#">
+<div class="px-4 py-1 rounded-full group-hover:bg-surface-variant transition-colors flex items-center justify-center mb-1">
+<span class="material-symbols-outlined text-2xl" data-icon="visibility">visibility</span>
+</div>
+<span>Patrol</span>
+</a>
+<!-- Tab 2: Active -->
+<a class="flex flex-col items-center justify-center bg-primary text-on-primary rounded-xl px-6 py-2 scale-95 transition-transform hover:bg-surface-container-high" href="#">
+<span class="material-symbols-outlined text-2xl mb-1" data-icon="report_problem" data-weight="fill">report_problem</span>
+<span>Incidents</span>
+</a>
+<!-- Tab 3 -->
+<a class="flex flex-col items-center justify-center text-on-surface-variant hover:bg-surface-container-high w-20 h-full transition-colors group" href="#">
+<div class="px-4 py-1 rounded-full group-hover:bg-surface-variant transition-colors flex items-center justify-center mb-1">
+<span class="material-symbols-outlined text-2xl" data-icon="location_on">location_on</span>
+</div>
+<span>Checkpoints</span>
+</a>
+<!-- Tab 4 -->
+<a class="flex flex-col items-center justify-center text-on-surface-variant hover:bg-surface-container-high w-20 h-full transition-colors group" href="#">
+<div class="px-4 py-1 rounded-full group-hover:bg-surface-variant transition-colors flex items-center justify-center mb-1">
+<span class="material-symbols-outlined text-2xl" data-icon="settings">settings</span>
+</div>
+<span>Settings</span>
+</a>
+</nav>
+</body></html>

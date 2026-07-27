@@ -1,0 +1,441 @@
+<!DOCTYPE html>
+
+<html lang="id"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Booking Saya - LOGISLOT</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&amp;family=JetBrains+Mono&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": {
+                      "on-secondary-fixed": "#001d33",
+                      "inverse-primary": "#aec7f7",
+                      "tertiary": "#321c00",
+                      "primary-container": "#1b365d",
+                      "on-surface": "#0b1c30",
+                      "primary-fixed-dim": "#aec7f7",
+                      "surface-container-highest": "#d3e4fe",
+                      "surface-variant": "#d3e4fe",
+                      "on-background": "#0b1c30",
+                      "surface-container-low": "#eff4ff",
+                      "surface-bright": "#f8f9ff",
+                      "secondary-fixed": "#cfe5ff",
+                      "on-surface-variant": "#44474e",
+                      "on-secondary-container": "#2c5980",
+                      "tertiary-fixed-dim": "#f1bd81",
+                      "error": "#ba1a1a",
+                      "outline": "#74777f",
+                      "surface-container": "#e5eeff",
+                      "tertiary-fixed": "#ffddb9",
+                      "on-secondary-fixed-variant": "#194a70",
+                      "primary": "#002046",
+                      "surface-dim": "#cbdbf5",
+                      "secondary-container": "#a5d0fd",
+                      "on-tertiary-fixed-variant": "#623f0f",
+                      "background": "#f8f9ff",
+                      "surface": "#f8f9ff",
+                      "surface-container-lowest": "#ffffff",
+                      "outline-variant": "#c4c6cf",
+                      "on-primary": "#ffffff",
+                      "error-container": "#ffdad6",
+                      "on-tertiary-fixed": "#2b1700",
+                      "on-primary-container": "#87a0cd",
+                      "on-secondary": "#ffffff",
+                      "surface-container-high": "#dce9ff",
+                      "secondary-fixed-dim": "#a0cbf7",
+                      "secondary": "#356289",
+                      "tertiary-container": "#4f2f00",
+                      "inverse-surface": "#213145",
+                      "inverse-on-surface": "#eaf1ff",
+                      "surface-tint": "#465f88",
+                      "on-error": "#ffffff",
+                      "on-primary-fixed-variant": "#2e476f",
+                      "on-primary-fixed": "#001b3d",
+                      "primary-fixed": "#d6e3ff",
+                      "on-error-container": "#93000a",
+                      "on-tertiary": "#ffffff",
+                      "on-tertiary-container": "#c6965e"
+              },
+              "borderRadius": {
+                      "DEFAULT": "0.25rem",
+                      "lg": "0.5rem",
+                      "xl": "0.75rem",
+                      "full": "9999px"
+              },
+              "spacing": {
+                      "xl": "32px",
+                      "lg": "24px",
+                      "gutter": "24px",
+                      "xs": "4px",
+                      "container-max": "1440px",
+                      "base": "8px",
+                      "sm": "8px",
+                      "md": "16px"
+              },
+              "fontFamily": {
+                      "label-md": [
+                              "Inter"
+                      ],
+                      "headline-lg-mobile": [
+                              "Inter"
+                      ],
+                      "headline-sm": [
+                              "Inter"
+                      ],
+                      "headline-lg": [
+                              "Inter"
+                      ],
+                      "headline-md": [
+                              "Inter"
+                      ],
+                      "body-md": [
+                              "Inter"
+                      ],
+                      "code": [
+                              "JetBrains Mono"
+                      ],
+                      "body-lg": [
+                              "Inter"
+                      ]
+              },
+              "fontSize": {
+                      "label-md": [
+                              "12px",
+                              {
+                                      "lineHeight": "16px",
+                                      "letterSpacing": "0.05em",
+                                      "fontWeight": "600"
+                              }
+                      ],
+                      "headline-lg-mobile": [
+                              "24px",
+                              {
+                                      "lineHeight": "32px",
+                                      "letterSpacing": "-0.01em",
+                                      "fontWeight": "700"
+                              }
+                      ],
+                      "headline-sm": [
+                              "20px",
+                              {
+                                      "lineHeight": "28px",
+                                      "fontWeight": "600"
+                              }
+                      ],
+                      "headline-lg": [
+                              "32px",
+                              {
+                                      "lineHeight": "40px",
+                                      "letterSpacing": "-0.02em",
+                                      "fontWeight": "700"
+                              }
+                      ],
+                      "headline-md": [
+                              "24px",
+                              {
+                                      "lineHeight": "32px",
+                                      "fontWeight": "600"
+                              }
+                      ],
+                      "body-md": [
+                              "14px",
+                              {
+                                      "lineHeight": "20px",
+                                      "fontWeight": "400"
+                              }
+                      ],
+                      "code": [
+                              "13px",
+                              {
+                                      "lineHeight": "20px",
+                                      "fontWeight": "400"
+                              }
+                      ],
+                      "body-lg": [
+                              "16px",
+                              {
+                                      "lineHeight": "24px",
+                                      "fontWeight": "400"
+                              }
+                      ]
+              }
+      },
+          },
+        }
+      </script>
+</head>
+<body class="bg-background text-on-background font-body-md min-h-screen flex">
+<!-- SideNavBar -->
+<nav class="fixed left-0 top-0 h-full w-64 bg-primary dark:bg-on-secondary-fixed border-r border-outline-variant dark:border-outline flex flex-col py-lg z-50">
+<div class="px-lg mb-8">
+<div class="flex items-center gap-3">
+<img alt="User profile photo" class="w-8 h-8 rounded-full bg-white object-cover" data-alt="A small, professional corporate logo placeholder icon. Clean vector style, white on transparent background, suitable for a logistics enterprise software sidebar. Minimalist and sharp." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBqc1j22CxzUFl3hlRpft5q3kj1lADWpvx_PgLyQ-8JhyUpd6yH-gPQY1qbH0zgzdon46j-jfUEo8AwF6ZqrgR8gEMEmwhMBFeLGc9sya1Z9hKPavpOXWHXbvO1HSkninVNsk2CfvfHKkCDxJnqIz2_Lfo7dOYvzJJk6dIns0K17nr-RUHkcccZjTmQutNjIzkbw0aqy2As4y3GwUAY3MEb_eYZpud_QHPtAwuezQ2VvrsG-1Jc8Z3J6Q7gO5Bg4gsEtZDUV914SA"/>
+<div>
+<h1 class="font-headline-md text-headline-md font-bold text-on-primary dark:text-inverse-primary">LOGISLOT</h1>
+<p class="font-label-md text-label-md text-on-primary opacity-80">Enterprise Logistics</p>
+</div>
+</div>
+</div>
+<div class="px-4 mb-6">
+<button class="w-full bg-surface-container-highest text-primary-container font-label-md text-label-md py-2 rounded-lg hover:bg-inverse-primary transition-colors flex items-center justify-center gap-2">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">add</span>
+                New Shipment
+            </button>
+</div>
+<div class="flex-1 overflow-y-auto">
+<ul class="space-y-1">
+<li>
+<a class="flex items-center gap-3 px-4 py-3 text-on-primary opacity-80 hover:opacity-100 hover:bg-on-primary-fixed-variant transition-colors mx-2 my-1 rounded-lg" href="#">
+<span class="material-symbols-outlined">home</span>
+<span class="font-label-md text-label-md">Home</span>
+</a>
+</li>
+<li>
+<a class="flex items-center gap-3 px-4 py-3 text-on-primary opacity-80 hover:opacity-100 hover:bg-on-primary-fixed-variant transition-colors mx-2 my-1 rounded-lg" href="#">
+<span class="material-symbols-outlined">add_box</span>
+<span class="font-label-md text-label-md">Create Booking</span>
+</a>
+</li>
+<li>
+<a class="flex items-center gap-3 px-4 py-3 bg-primary-container text-on-primary-container rounded-lg mx-2 my-1 scale-95 duration-150 shadow-sm" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">calendar_month</span>
+<span class="font-label-md text-label-md">My Bookings</span>
+</a>
+</li>
+<li>
+<a class="flex items-center gap-3 px-4 py-3 text-on-primary opacity-80 hover:opacity-100 hover:bg-on-primary-fixed-variant transition-colors mx-2 my-1 rounded-lg" href="#">
+<span class="material-symbols-outlined">history</span>
+<span class="font-label-md text-label-md">History</span>
+</a>
+</li>
+</ul>
+</div>
+<div class="mt-auto px-4 pt-4 border-t border-outline-variant/30">
+<ul class="space-y-1">
+<li>
+<a class="flex items-center gap-3 px-4 py-3 text-on-primary opacity-80 hover:opacity-100 hover:bg-on-primary-fixed-variant transition-colors mx-2 my-1 rounded-lg" href="#">
+<span class="material-symbols-outlined">settings</span>
+<span class="font-label-md text-label-md">Settings</span>
+</a>
+</li>
+<li>
+<a class="flex items-center gap-3 px-4 py-3 text-on-primary opacity-80 hover:opacity-100 hover:bg-on-primary-fixed-variant transition-colors mx-2 my-1 rounded-lg" href="#">
+<span class="material-symbols-outlined">help</span>
+<span class="font-label-md text-label-md">Support</span>
+</a>
+</li>
+</ul>
+</div>
+</nav>
+<!-- Main Content Area -->
+<div class="flex-1 ml-64 flex flex-col min-h-screen">
+<!-- TopNavBar -->
+<header class="sticky top-0 z-40 w-full bg-surface dark:bg-surface-dim border-b border-outline-variant dark:border-outline flex justify-between items-center h-16 px-gutter">
+<div class="flex items-center">
+<h2 class="font-headline-md text-headline-md font-bold text-primary dark:text-inverse-primary hidden md:block">Booking Saya</h2>
+</div>
+<div class="flex items-center gap-4">
+<div class="relative hidden sm:block">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-on-surface-variant">search</span>
+<input class="w-64 pl-10 pr-4 py-2 bg-surface-container-lowest border border-outline-variant rounded-lg text-body-md focus:border-secondary focus:ring-1 focus:ring-secondary outline-none transition-shadow" placeholder="Search..." type="text"/>
+</div>
+<button class="text-on-surface-variant hover:bg-surface-container-low p-2 rounded-full transition-colors relative">
+<span class="material-symbols-outlined">notifications</span>
+<span class="absolute top-1.5 right-1.5 w-2 h-2 bg-error rounded-full"></span>
+</button>
+<button class="text-on-surface-variant hover:bg-surface-container-low p-2 rounded-full transition-colors hidden sm:block">
+<span class="material-symbols-outlined">apps</span>
+</button>
+<div class="w-8 h-8 rounded-full border border-outline-variant overflow-hidden cursor-pointer ml-2">
+<img alt="User avatar" class="w-full h-full object-cover" data-alt="A professional headshot of a corporate user, smiling slightly, well-lit, plain light grey background, high resolution, suitable for an enterprise web application avatar." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDxRH4Y73mNvXzHeDpl3VATgHiMZstDpMroCwXPbhZg4aDpoKn6R6ngAPlrxK0SxCPCyXmR3tzgmsh7SJRSblXu9OoxUAS5mOYLpCmhal7k_puCwV48fSKc5Y0uR5LagpzJtZ_OU5OUkPWvVlbZBhPCuertit-2f7x9VZrBMkKEdykQz5MoiOWqi2saGvhecPdfmUbhdYdVekQOEqHvyGAiqePH5RPYmeLtI4EnwscAEGhOzo0ovHqu9WylzkzaTEN9hHmpDbGqsQ"/>
+</div>
+</div>
+</header>
+<!-- Canvas -->
+<main class="flex-1 p-lg max-w-[1440px] w-full mx-auto">
+<!-- Page Header -->
+<div class="mb-lg">
+<h1 class="text-[22px] font-bold text-primary-container mb-2">Booking Saya</h1>
+<p class="font-body-md text-body-md text-on-surface-variant">Kelola seluruh jadwal pengiriman Anda</p>
+</div>
+<!-- Filter Bar -->
+<div class="bg-surface-container-lowest p-4 rounded-xl border border-outline-variant mb-lg flex flex-col sm:flex-row gap-4 items-center justify-between">
+<div class="flex flex-col sm:flex-row gap-4 w-full sm:w-auto">
+<!-- Dropdown -->
+<div class="relative min-w-[160px]">
+<select class="w-full appearance-none bg-surface-container-lowest border border-outline-variant rounded-lg py-2 pl-4 pr-10 font-body-md text-body-md text-on-surface focus:border-secondary focus:ring-1 focus:ring-secondary outline-none cursor-pointer">
+<option>Semua Status</option>
+<option>Booked</option>
+<option>Arrived</option>
+<option>Completed</option>
+<option>Cancelled</option>
+</select>
+<span class="material-symbols-outlined absolute right-3 top-1/2 -translate-y-1/2 text-on-surface-variant pointer-events-none">expand_more</span>
+</div>
+<!-- Date Picker -->
+<div class="relative min-w-[180px]">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-on-surface-variant">calendar_today</span>
+<input class="w-full pl-10 pr-4 py-2 bg-surface-container-lowest border border-outline-variant rounded-lg font-body-md text-body-md text-on-surface focus:border-secondary focus:ring-1 focus:ring-secondary outline-none cursor-pointer" placeholder="Pilih Tanggal" type="text"/>
+</div>
+</div>
+<!-- Search Box -->
+<div class="relative w-full sm:w-80">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-on-surface-variant">search</span>
+<input class="w-full pl-10 pr-4 py-2 bg-surface-container-lowest border border-outline-variant rounded-lg font-body-md text-body-md text-on-surface focus:border-secondary focus:ring-1 focus:ring-secondary outline-none" placeholder="Cari PO atau Plat Nomor..." type="text"/>
+</div>
+</div>
+<!-- Card List -->
+<div class="space-y-[12px] mb-xl">
+<!-- Card 1: Booked -->
+<div class="bg-surface-container-lowest rounded-[10px] border border-outline-variant p-4 flex flex-col sm:flex-row items-start sm:items-center justify-between hover:shadow-[0_4px_12px_rgba(27,54,93,0.08)] transition-shadow">
+<div class="flex items-center gap-4 mb-4 sm:mb-0 w-full sm:w-auto">
+<div class="px-3 py-1 rounded-full bg-secondary-container text-on-secondary-container font-label-md text-label-md shrink-0 w-24 text-center">
+                            Booked
+                        </div>
+<div>
+<div class="flex items-center gap-3 mb-1">
+<span class="font-headline-sm text-headline-sm text-on-surface">PO-20231025-01</span>
+<span class="px-2 py-0.5 bg-surface-container-low border border-outline-variant rounded text-xs font-code text-on-surface-variant">B 1234 CD</span>
+</div>
+<div class="font-body-md text-body-md text-on-surface-variant flex items-center gap-2">
+<span class="material-symbols-outlined text-[16px]">calendar_month</span> 25 Okt 2023
+                                <span class="w-1 h-1 rounded-full bg-outline-variant mx-1"></span>
+<span class="material-symbols-outlined text-[16px]">schedule</span> 14:00 - 15:00
+                                <span class="w-1 h-1 rounded-full bg-outline-variant mx-1"></span>
+<span class="material-symbols-outlined text-[16px]">warehouse</span> Dock A1
+                            </div>
+</div>
+</div>
+<div class="flex items-center gap-2 self-end sm:self-auto border-t sm:border-t-0 pt-3 sm:pt-0 border-outline-variant/50 w-full sm:w-auto justify-end">
+<button aria-label="Lihat Tiket" class="p-2 text-on-surface-variant hover:bg-surface-container-low rounded-lg transition-colors tooltip-trigger relative group">
+<span class="material-symbols-outlined">visibility</span>
+<span class="absolute -top-8 left-1/2 -translate-x-1/2 bg-inverse-surface text-inverse-on-surface text-xs px-2 py-1 rounded opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap pointer-events-none">Lihat Tiket</span>
+</button>
+<button aria-label="Edit" class="p-2 text-on-surface-variant hover:bg-surface-container-low rounded-lg transition-colors tooltip-trigger relative group">
+<span class="material-symbols-outlined">edit</span>
+<span class="absolute -top-8 left-1/2 -translate-x-1/2 bg-inverse-surface text-inverse-on-surface text-xs px-2 py-1 rounded opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap pointer-events-none">Edit</span>
+</button>
+<button aria-label="Batalkan" class="p-2 text-error hover:bg-error-container hover:text-on-error-container rounded-lg transition-colors tooltip-trigger relative group">
+<span class="material-symbols-outlined">close</span>
+<span class="absolute -top-8 left-1/2 -translate-x-1/2 bg-inverse-surface text-inverse-on-surface text-xs px-2 py-1 rounded opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap pointer-events-none">Batalkan</span>
+</button>
+</div>
+</div>
+<!-- Card 2: Arrived -->
+<div class="bg-surface-container-lowest rounded-[10px] border border-outline-variant p-4 flex flex-col sm:flex-row items-start sm:items-center justify-between hover:shadow-[0_4px_12px_rgba(27,54,93,0.08)] transition-shadow">
+<div class="flex items-center gap-4 mb-4 sm:mb-0 w-full sm:w-auto">
+<div class="px-3 py-1 rounded-full bg-tertiary-fixed text-on-tertiary-fixed font-label-md text-label-md shrink-0 w-24 text-center">
+                            Arrived
+                        </div>
+<div>
+<div class="flex items-center gap-3 mb-1">
+<span class="font-headline-sm text-headline-sm text-on-surface">PO-20231025-02</span>
+<span class="px-2 py-0.5 bg-surface-container-low border border-outline-variant rounded text-xs font-code text-on-surface-variant">D 5678 EF</span>
+</div>
+<div class="font-body-md text-body-md text-on-surface-variant flex items-center gap-2">
+<span class="material-symbols-outlined text-[16px]">calendar_month</span> 25 Okt 2023
+                                <span class="w-1 h-1 rounded-full bg-outline-variant mx-1"></span>
+<span class="material-symbols-outlined text-[16px]">schedule</span> 10:00 - 11:30
+                                <span class="w-1 h-1 rounded-full bg-outline-variant mx-1"></span>
+<span class="material-symbols-outlined text-[16px]">warehouse</span> Dock B2
+                            </div>
+</div>
+</div>
+<div class="flex items-center gap-2 self-end sm:self-auto border-t sm:border-t-0 pt-3 sm:pt-0 border-outline-variant/50 w-full sm:w-auto justify-end">
+<button aria-label="Lihat Tiket" class="p-2 text-on-surface-variant hover:bg-surface-container-low rounded-lg transition-colors tooltip-trigger relative group">
+<span class="material-symbols-outlined">visibility</span>
+</button>
+<button aria-label="Edit" class="p-2 text-on-surface-variant opacity-50 cursor-not-allowed rounded-lg" disabled="">
+<span class="material-symbols-outlined">edit</span>
+</button>
+<button aria-label="Batalkan" class="p-2 text-error opacity-50 cursor-not-allowed rounded-lg" disabled="">
+<span class="material-symbols-outlined">close</span>
+</button>
+</div>
+</div>
+<!-- Card 3: Completed -->
+<div class="bg-surface-bright rounded-[10px] border border-outline-variant p-4 flex flex-col sm:flex-row items-start sm:items-center justify-between hover:shadow-[0_4px_12px_rgba(27,54,93,0.08)] transition-shadow">
+<div class="flex items-center gap-4 mb-4 sm:mb-0 w-full sm:w-auto">
+<div class="px-3 py-1 rounded-full bg-[#E6F4EA] text-[#137333] font-label-md text-label-md shrink-0 w-24 text-center">
+                            Completed
+                        </div>
+<div>
+<div class="flex items-center gap-3 mb-1">
+<span class="font-headline-sm text-headline-sm text-on-surface">PO-20231024-05</span>
+<span class="px-2 py-0.5 bg-surface-container-low border border-outline-variant rounded text-xs font-code text-on-surface-variant">L 9012 GH</span>
+</div>
+<div class="font-body-md text-body-md text-on-surface-variant flex items-center gap-2">
+<span class="material-symbols-outlined text-[16px]">calendar_month</span> 24 Okt 2023
+                                <span class="w-1 h-1 rounded-full bg-outline-variant mx-1"></span>
+<span class="material-symbols-outlined text-[16px]">schedule</span> 08:00 - 09:00
+                                <span class="w-1 h-1 rounded-full bg-outline-variant mx-1"></span>
+<span class="material-symbols-outlined text-[16px]">warehouse</span> Dock A2
+                            </div>
+</div>
+</div>
+<div class="flex items-center gap-2 self-end sm:self-auto border-t sm:border-t-0 pt-3 sm:pt-0 border-outline-variant/50 w-full sm:w-auto justify-end">
+<button aria-label="Lihat Tiket" class="p-2 text-on-surface-variant hover:bg-surface-container-low rounded-lg transition-colors tooltip-trigger relative group">
+<span class="material-symbols-outlined">visibility</span>
+</button>
+</div>
+</div>
+<!-- Card 4: Cancelled -->
+<div class="bg-[#F8F9FA] rounded-[10px] border border-outline-variant p-4 flex flex-col sm:flex-row items-start sm:items-center justify-between opacity-75">
+<div class="flex items-center gap-4 mb-4 sm:mb-0 w-full sm:w-auto">
+<div class="px-3 py-1 rounded-full bg-[#F1F3F4] text-[#5F6368] font-label-md text-label-md shrink-0 w-24 text-center border border-outline-variant/50">
+                            Cancelled
+                        </div>
+<div>
+<div class="flex items-center gap-3 mb-1">
+<span class="font-headline-sm text-headline-sm text-on-surface line-through decoration-outline-variant">PO-20231026-01</span>
+<span class="px-2 py-0.5 bg-surface-container-low border border-outline-variant rounded text-xs font-code text-on-surface-variant opacity-70">B 4321 XY</span>
+</div>
+<div class="font-body-md text-body-md text-on-surface-variant flex items-center gap-2">
+<span class="material-symbols-outlined text-[16px]">calendar_month</span> 26 Okt 2023
+                                <span class="w-1 h-1 rounded-full bg-outline-variant mx-1"></span>
+<span class="material-symbols-outlined text-[16px]">schedule</span> 15:00 - 16:30
+                                <span class="w-1 h-1 rounded-full bg-outline-variant mx-1"></span>
+<span class="material-symbols-outlined text-[16px]">warehouse</span> Dock C1
+                            </div>
+</div>
+</div>
+<div class="flex items-center gap-2 self-end sm:self-auto border-t sm:border-t-0 pt-3 sm:pt-0 border-outline-variant/50 w-full sm:w-auto justify-end">
+<button aria-label="Lihat Detail" class="p-2 text-on-surface-variant hover:bg-surface-container-low rounded-lg transition-colors tooltip-trigger relative group">
+<span class="material-symbols-outlined">info</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Pagination -->
+<div class="flex items-center justify-between border-t border-outline-variant pt-4">
+<div class="font-body-md text-body-md text-on-surface-variant hidden sm:block">
+                    Menampilkan 1-4 dari 42 booking
+                </div>
+<div class="flex items-center gap-2 mx-auto sm:mx-0">
+<button class="w-8 h-8 flex items-center justify-center rounded border border-outline-variant text-on-surface-variant hover:bg-surface-container-low disabled:opacity-50 disabled:cursor-not-allowed transition-colors" disabled="">
+<span class="material-symbols-outlined text-sm">chevron_left</span>
+</button>
+<button class="w-8 h-8 flex items-center justify-center rounded bg-primary text-on-primary font-label-md text-label-md">
+                        1
+                    </button>
+<button class="w-8 h-8 flex items-center justify-center rounded border border-outline-variant text-on-surface-variant hover:bg-surface-container-low font-label-md text-label-md transition-colors">
+                        2
+                    </button>
+<button class="w-8 h-8 flex items-center justify-center rounded border border-outline-variant text-on-surface-variant hover:bg-surface-container-low font-label-md text-label-md transition-colors">
+                        3
+                    </button>
+<span class="text-on-surface-variant">...</span>
+<button class="w-8 h-8 flex items-center justify-center rounded border border-outline-variant text-on-surface-variant hover:bg-surface-container-low transition-colors">
+<span class="material-symbols-outlined text-sm">chevron_right</span>
+</button>
+</div>
+</div>
+</main>
+</div>
+</body></html>

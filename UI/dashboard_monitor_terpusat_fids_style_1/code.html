@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+
+<html class="h-full" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>LOGISLOT - Monitoring Armada Real-Time</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&amp;family=JetBrains+Mono:wght@400&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "error": "#ba1a1a",
+                        "surface": "#f8f9ff",
+                        "surface-container-low": "#eff4ff",
+                        "on-primary-fixed-variant": "#2e476f",
+                        "on-error-container": "#93000a",
+                        "surface-container-highest": "#d3e4fe",
+                        "on-surface": "#0b1c30",
+                        "primary": "#002046",
+                        "on-secondary-container": "#2c5980",
+                        "on-background": "#0b1c30",
+                        "on-tertiary-fixed-variant": "#623f0f",
+                        "tertiary": "#321c00",
+                        "surface-variant": "#d3e4fe",
+                        "primary-fixed": "#d6e3ff",
+                        "secondary-fixed": "#cfe5ff",
+                        "on-secondary-fixed-variant": "#194a70",
+                        "secondary-fixed-dim": "#a0cbf7",
+                        "inverse-primary": "#aec7f7",
+                        "on-tertiary": "#ffffff",
+                        "on-tertiary-container": "#c6965e",
+                        "surface-container": "#e5eeff",
+                        "on-tertiary-fixed": "#2b1700",
+                        "surface-container-high": "#dce9ff",
+                        "tertiary-fixed-dim": "#f1bd81",
+                        "secondary-container": "#a5d0fd",
+                        "surface-dim": "#cbdbf5",
+                        "surface-container-lowest": "#ffffff",
+                        "on-secondary-fixed": "#001d33",
+                        "surface-tint": "#465f88",
+                        "inverse-surface": "#213145",
+                        "primary-container": "#1b365d",
+                        "outline-variant": "#c4c6cf",
+                        "on-primary-fixed": "#001b3d",
+                        "secondary": "#356289",
+                        "on-primary-container": "#87a0cd",
+                        "on-surface-variant": "#44474e",
+                        "tertiary-container": "#4f2f00",
+                        "on-secondary": "#ffffff",
+                        "inverse-on-surface": "#eaf1ff",
+                        "background": "#f8f9ff",
+                        "error-container": "#ffdad6",
+                        "surface-bright": "#f8f9ff",
+                        "tertiary-fixed": "#ffddb9",
+                        "outline": "#74777f",
+                        "on-primary": "#ffffff",
+                        "on-error": "#ffffff",
+                        "primary-fixed-dim": "#aec7f7",
+                        "alert-bg": "#FDECEA",
+                        "badge-booked": "#356289",
+                        "badge-arrived": "#EAB308",
+                        "badge-unloading": "#CA8A04",
+                        "badge-completed": "#22C55E"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "base": "8px",
+                        "gutter": "24px",
+                        "md": "16px",
+                        "lg": "24px",
+                        "sm": "8px",
+                        "xl": "32px",
+                        "container-max": "1440px",
+                        "xs": "4px"
+                    },
+                    "fontFamily": {
+                        "headline-md": ["Inter"],
+                        "headline-lg": ["Inter"],
+                        "headline-lg-mobile": ["Inter"],
+                        "body-md": ["Inter"],
+                        "body-lg": ["Inter"],
+                        "label-md": ["Inter"],
+                        "headline-sm": ["Inter"],
+                        "code": ["JetBrains Mono"]
+                    },
+                    "fontSize": {
+                        "headline-md": ["24px", {"lineHeight": "32px", "fontWeight": "600"}],
+                        "headline-lg": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                        "headline-lg-mobile": ["24px", {"lineHeight": "32px", "letterSpacing": "-0.01em", "fontWeight": "700"}],
+                        "body-md": ["14px", {"lineHeight": "20px", "fontWeight": "400"}],
+                        "body-lg": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                        "label-md": ["12px", {"lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "600"}],
+                        "headline-sm": ["20px", {"lineHeight": "28px", "fontWeight": "600"}],
+                        "code": ["13px", {"lineHeight": "20px", "fontWeight": "400"}],
+                        "display": ["48px", {"lineHeight": "56px", "fontWeight": "700"}],
+                        "table-lg": ["24px", {"lineHeight": "32px", "fontWeight": "600"}]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        body {
+            background-color: #F4F6F9;
+            overflow: hidden; /* FIDS style, no scrollbars */
+        }
+        .blinking {
+            animation: blinker 1.5s linear infinite;
+        }
+        @keyframes blinker {
+            50% { opacity: 0; }
+        }
+        .scroll-indicator {
+            animation: bounce 2s infinite;
+        }
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
+            40% { transform: translateY(-10px); }
+            60% { transform: translateY(-5px); }
+        }
+    </style>
+</head>
+<body class="h-full flex flex-col font-headline-md text-on-surface">
+<!-- Header -->
+<header class="h-[100px] bg-primary-container flex items-center justify-between px-xl shrink-0">
+<div class="flex items-center gap-md">
+<span class="font-headline-lg text-headline-lg font-bold text-on-primary tracking-tight">LOGISLOT</span>
+</div>
+<div class="absolute left-1/2 -translate-x-1/2">
+<h1 class="text-display text-on-primary tracking-wide">MONITORING ARMADA REAL-TIME</h1>
+</div>
+<div class="flex items-center gap-lg">
+<div class="flex items-center gap-sm bg-surface-tint/30 px-md py-sm rounded-full">
+<div class="w-3 h-3 rounded-full bg-badge-completed blinking"></div>
+<span class="font-label-md text-label-md text-on-primary uppercase tracking-widest">Live</span>
+</div>
+<div class="text-right text-on-primary">
+<div class="text-[32px] font-bold leading-tight" id="clock">14:32:45</div>
+<div class="text-[18px] text-surface-variant font-medium" id="date">Kamis, 24 Okt 2024</div>
+</div>
+</div>
+</header>
+<!-- Summary Bar -->
+<section class="grid grid-cols-4 bg-surface-container-lowest shrink-0 shadow-sm border-b border-outline-variant">
+<div class="p-lg border-b-8 border-primary">
+<h2 class="font-label-md text-label-md text-on-surface-variant uppercase tracking-wider mb-sm">Total Hari Ini</h2>
+<div class="text-display text-on-surface">142</div>
+</div>
+<div class="p-lg border-b-8 border-badge-arrived bg-surface">
+<h2 class="font-label-md text-label-md text-on-surface-variant uppercase tracking-wider mb-sm">Di Gerbang</h2>
+<div class="text-display text-badge-arrived">18</div>
+</div>
+<div class="p-lg border-b-8 border-badge-unloading">
+<h2 class="font-label-md text-label-md text-on-surface-variant uppercase tracking-wider mb-sm">Sedang Bongkar</h2>
+<div class="text-display text-badge-unloading">34</div>
+</div>
+<div class="p-lg border-b-8 border-badge-completed bg-surface">
+<h2 class="font-label-md text-label-md text-on-surface-variant uppercase tracking-wider mb-sm">Selesai</h2>
+<div class="text-display text-badge-completed">90</div>
+</div>
+</section>
+<!-- Main Table Area -->
+<main class="flex-1 overflow-hidden relative bg-surface-container-lowest p-lg">
+<table class="w-full text-left border-collapse">
+<thead>
+<tr class="border-b-2 border-outline-variant">
+<th class="py-md px-lg font-headline-sm text-headline-sm text-on-surface-variant uppercase">Jam Slot</th>
+<th class="py-md px-lg font-headline-sm text-headline-sm text-on-surface-variant uppercase">Plat Nomor</th>
+<th class="py-md px-lg font-headline-sm text-headline-sm text-on-surface-variant uppercase">Supplier</th>
+<th class="py-md px-lg font-headline-sm text-headline-sm text-on-surface-variant uppercase">Dock Tujuan</th>
+<th class="py-md px-lg font-headline-sm text-headline-sm text-on-surface-variant uppercase">Status</th>
+<th class="py-md px-lg font-headline-sm text-headline-sm text-on-surface-variant uppercase">Durasi / Waktu Tunggu</th>
+</tr>
+</thead>
+<tbody class="text-table-lg">
+<!-- Normal Row -->
+<tr class="border-b border-outline-variant bg-surface">
+<td class="py-lg px-lg font-code">14:00 - 15:00</td>
+<td class="py-lg px-lg font-bold">B 9123 XZ</td>
+<td class="py-lg px-lg">PT. Global Logistik Prima</td>
+<td class="py-lg px-lg font-code font-bold">DOCK-04</td>
+<td class="py-lg px-lg">
+<span class="inline-flex items-center gap-sm bg-badge-unloading text-on-primary px-md py-sm rounded-full text-[18px]">
+<span class="material-symbols-outlined text-[20px]" data-icon="forklift">forklift</span>
+                            Sedang Bongkar
+                        </span>
+</td>
+<td class="py-lg px-lg font-code">00:25:12</td>
+</tr>
+<!-- Alert Row -->
+<tr class="border-b border-outline-variant bg-alert-bg">
+<td class="py-lg px-lg font-code">13:30 - 14:30</td>
+<td class="py-lg px-lg font-bold text-error">D 8842 KKL</td>
+<td class="py-lg px-lg">CV. Makmur Jaya</td>
+<td class="py-lg px-lg font-code font-bold">DOCK-01</td>
+<td class="py-lg px-lg">
+<span class="inline-flex items-center gap-sm bg-error text-on-error px-md py-sm rounded-full text-[18px]">
+<span class="material-symbols-outlined text-[20px] blinking" data-icon="warning">warning</span>
+                            Terlambat &gt;30 menit
+                        </span>
+</td>
+<td class="py-lg px-lg font-code text-error font-bold">01:15:00</td>
+</tr>
+<!-- Normal Row -->
+<tr class="border-b border-outline-variant bg-surface-container-lowest">
+<td class="py-lg px-lg font-code">14:30 - 15:30</td>
+<td class="py-lg px-lg font-bold">L 1290 HH</td>
+<td class="py-lg px-lg">Samudera Indonesia</td>
+<td class="py-lg px-lg font-code font-bold">DOCK-08</td>
+<td class="py-lg px-lg">
+<span class="inline-flex items-center gap-sm bg-badge-arrived text-on-primary px-md py-sm rounded-full text-[18px]">
+<span class="material-symbols-outlined text-[20px]" data-icon="login">login</span>
+                            Di Gerbang
+                        </span>
+</td>
+<td class="py-lg px-lg font-code">00:05:30 (Menunggu)</td>
+</tr>
+<!-- Normal Row -->
+<tr class="border-b border-outline-variant bg-surface">
+<td class="py-lg px-lg font-code">15:00 - 16:00</td>
+<td class="py-lg px-lg font-bold">B 7765 TY</td>
+<td class="py-lg px-lg">Kargo Tech</td>
+<td class="py-lg px-lg font-code font-bold">DOCK-12</td>
+<td class="py-lg px-lg">
+<span class="inline-flex items-center gap-sm bg-badge-booked text-on-primary px-md py-sm rounded-full text-[18px]">
+<span class="material-symbols-outlined text-[20px]" data-icon="schedule">schedule</span>
+                            Booked
+                        </span>
+</td>
+<td class="py-lg px-lg font-code text-surface-variant">-</td>
+</tr>
+<!-- Normal Row -->
+<tr class="border-b border-outline-variant bg-surface-container-lowest">
+<td class="py-lg px-lg font-code">13:00 - 14:00</td>
+<td class="py-lg px-lg font-bold">A 4432 DD</td>
+<td class="py-lg px-lg">Siba Surya</td>
+<td class="py-lg px-lg font-code font-bold">DOCK-02</td>
+<td class="py-lg px-lg">
+<span class="inline-flex items-center gap-sm bg-badge-completed text-on-primary px-md py-sm rounded-full text-[18px]">
+<span class="material-symbols-outlined text-[20px]" data-icon="check_circle">check_circle</span>
+                            Selesai
+                        </span>
+</td>
+<td class="py-lg px-lg font-code">Selesai 14:10</td>
+</tr>
+</tbody>
+</table>
+<!-- Auto-scroll indicator -->
+<div class="absolute right-lg bottom-xl flex flex-col items-center gap-xs text-on-surface-variant opacity-50">
+<span class="font-label-md text-label-md uppercase">Auto Scroll</span>
+<span class="material-symbols-outlined text-[32px] scroll-indicator" data-icon="keyboard_double_arrow_down">keyboard_double_arrow_down</span>
+</div>
+</main>
+<script>
+        function updateTime() {
+            const now = new Date();
+            const timeOptions = { hour: '2-digit', minute: '2-digit', second: '2-digit', hour12: false };
+            const dateOptions = { weekday: 'long', year: 'numeric', month: 'short', day: 'numeric' };
+            
+            document.getElementById('clock').textContent = now.toLocaleTimeString('id-ID', timeOptions);
+            
+            // Simple Indonesian date formatting fallback if id-ID locale lacks full support in some browsers
+            const days = ['Minggu', 'Senin', 'Selasa', 'Rabu', 'Kamis', 'Jumat', 'Sabtu'];
+            const months = ['Jan', 'Feb', 'Mar', 'Apr', 'Mei', 'Jun', 'Jul', 'Agu', 'Sep', 'Okt', 'Nov', 'Des'];
+            const dayName = days[now.getDay()];
+            const day = now.getDate();
+            const monthName = months[now.getMonth()];
+            const year = now.getFullYear();
+            
+            document.getElementById('date').textContent = `${dayName}, ${day} ${monthName} ${year}`;
+        }
+
+        setInterval(updateTime, 1000);
+        updateTime();
+    </script>
+</body></html>

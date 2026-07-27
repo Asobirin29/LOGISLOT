@@ -1,0 +1,509 @@
+<!DOCTYPE html>
+
+<html lang="id"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Manajemen User - LOGISLOT Admin</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-error": "#ffffff",
+                        "inverse-on-surface": "#eaf1ff",
+                        "surface-variant": "#d3e4fe",
+                        "on-error-container": "#93000a",
+                        "secondary-fixed": "#cfe5ff",
+                        "tertiary-fixed": "#ffddb9",
+                        "surface": "#f8f9ff",
+                        "on-tertiary-fixed-variant": "#623f0f",
+                        "surface-tint": "#465f88",
+                        "on-tertiary": "#ffffff",
+                        "surface-container-lowest": "#ffffff",
+                        "surface-container": "#e5eeff",
+                        "secondary-container": "#a5d0fd",
+                        "outline": "#74777f",
+                        "on-primary": "#ffffff",
+                        "primary": "#002046",
+                        "on-surface": "#0b1c30",
+                        "surface-bright": "#f8f9ff",
+                        "on-secondary-fixed-variant": "#194a70",
+                        "on-secondary": "#ffffff",
+                        "on-primary-fixed-variant": "#2e476f",
+                        "on-background": "#0b1c30",
+                        "inverse-surface": "#213145",
+                        "error-container": "#ffdad6",
+                        "outline-variant": "#c4c6cf",
+                        "surface-dim": "#cbdbf5",
+                        "primary-container": "#1b365d",
+                        "inverse-primary": "#aec7f7",
+                        "error": "#ba1a1a",
+                        "on-surface-variant": "#44474e",
+                        "background": "#f8f9ff",
+                        "tertiary-container": "#4f2f00",
+                        "tertiary-fixed-dim": "#f1bd81",
+                        "secondary": "#356289",
+                        "primary-fixed": "#d6e3ff",
+                        "tertiary": "#321c00",
+                        "surface-container-low": "#eff4ff",
+                        "primary-fixed-dim": "#aec7f7",
+                        "on-secondary-fixed": "#001d33",
+                        "secondary-fixed-dim": "#a0cbf7",
+                        "on-secondary-container": "#2c5980",
+                        "on-primary-container": "#87a0cd",
+                        "on-primary-fixed": "#001b3d",
+                        "surface-container-highest": "#d3e4fe",
+                        "on-tertiary-container": "#c6965e",
+                        "surface-container-high": "#dce9ff",
+                        "on-tertiary-fixed": "#2b1700",
+                        
+                        "role-supplier": "#d6e3ff",
+                        "role-supplier-text": "#001b3d",
+                        "role-ic": "#f3e8ff",
+                        "role-ic-text": "#581c87",
+                        "role-security": "#ffedd5",
+                        "role-security-text": "#9a3412",
+                        "role-warehouse": "#ccfbf1",
+                        "role-warehouse-text": "#115e59",
+                        "role-admin": "#1b365d",
+                        "role-admin-text": "#ffffff"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "md": "16px",
+                        "lg": "24px",
+                        "xl": "32px",
+                        "gutter": "24px",
+                        "container-max": "1440px",
+                        "xs": "4px",
+                        "base": "8px",
+                        "sm": "8px"
+                    },
+                    "fontFamily": {
+                        "headline-lg-mobile": ["Inter"],
+                        "headline-lg": ["Inter"],
+                        "body-lg": ["Inter"],
+                        "headline-sm": ["Inter"],
+                        "code": ["JetBrains Mono"],
+                        "headline-md": ["Inter"],
+                        "body-md": ["Inter"],
+                        "label-md": ["Inter"]
+                    },
+                    "fontSize": {
+                        "headline-lg-mobile": ["24px", { "lineHeight": "32px", "letterSpacing": "-0.01em", "fontWeight": "700" }],
+                        "headline-lg": ["32px", { "lineHeight": "40px", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+                        "body-lg": ["16px", { "lineHeight": "24px", "fontWeight": "400" }],
+                        "headline-sm": ["20px", { "lineHeight": "28px", "fontWeight": "600" }],
+                        "code": ["13px", { "lineHeight": "20px", "fontWeight": "400" }],
+                        "headline-md": ["24px", { "lineHeight": "32px", "fontWeight": "600" }],
+                        "body-md": ["14px", { "lineHeight": "20px", "fontWeight": "400" }],
+                        "label-md": ["12px", { "lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "600" }]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        body { font-family: 'Inter', sans-serif; background-color: #F4F6F9; }
+        
+        /* Slide-in panel animation */
+        @keyframes slideInRight {
+            from { transform: translateX(100%); }
+            to { transform: translateX(0); }
+        }
+        .slide-in-right {
+            animation: slideInRight 0.3s ease-out forwards;
+        }
+
+        /* Overlay fade-in */
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        .fade-in {
+            animation: fadeIn 0.2s ease-out forwards;
+        }
+
+        /* Toggle Switch CSS */
+        .toggle-checkbox:checked {
+            right: 0;
+            border-color: #68D391;
+        }
+        .toggle-checkbox:checked + .toggle-label {
+            background-color: #68D391;
+        }
+        .toggle-checkbox {
+            right: 0;
+            z-index: 1;
+            border-color: #e2e8f0;
+            transition: all 0.3s;
+        }
+        .toggle-label {
+            width: 2rem;
+            height: 1rem;
+            background-color: #e2e8f0;
+            border-radius: 9999px;
+            transition: all 0.3s;
+        }
+        
+        /* Table Scrollbar styling */
+        .table-container::-webkit-scrollbar {
+            height: 8px;
+            width: 8px;
+        }
+        .table-container::-webkit-scrollbar-track {
+            background: #f1f5f9;
+            border-radius: 4px;
+        }
+        .table-container::-webkit-scrollbar-thumb {
+            background: #cbd5e1;
+            border-radius: 4px;
+        }
+        .table-container::-webkit-scrollbar-thumb:hover {
+            background: #94a3b8;
+        }
+    </style>
+</head>
+<body class="bg-background text-on-background flex h-screen overflow-hidden">
+<!-- Sidebar Component (Anchored to SideNavBar JSON) -->
+<aside class="w-64 h-screen fixed left-0 top-0 bg-surface dark:bg-surface-container border-r border-outline-variant dark:border-outline flex flex-col h-full py-lg z-40">
+<!-- Logo Area -->
+<div class="px-lg pb-md">
+<h1 class="font-headline-sm text-headline-sm font-bold text-primary dark:text-inverse-primary tracking-tight">LOGISLOT</h1>
+</div>
+<!-- Admin Profile Area -->
+<div class="px-lg py-md flex items-center gap-md border-b border-outline-variant mb-md">
+<img alt="Admin Avatar" class="w-10 h-10 rounded-full object-cover border border-outline-variant" data-alt="A professional headshot portrait of an administrator in a corporate logistics setting, wearing business casual attire. The lighting is bright and modern, evoking a sense of authority and efficiency. The background is a slightly blurred office environment with a cool color palette." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBSh1y8CzqENfzffnvd7GAS25el2jSIYDPJ1jcwwA0v92TXn16JUWNwOyDtGo43pwVjIh480Vsu1Wc16EiKRRWXZVuihq-j0nBizmmKgbrXkdrzgZ4_Jvq9K-iutrgXNXLO9vi-MyoKIQPLJ83aQAo-DWQ348YchYIDLm3ZLIlUPeOH4WqXex2UNVsXn19d31RczXT-END4EfbrkkTO1OKGgp0LX8IxPt0St3SA8-6luTWyJvI4rI64h33JGog9739W1y8ZoTrd8A"/>
+<div>
+<p class="font-label-md text-label-md text-on-surface">Admin Console</p>
+<p class="font-body-md text-body-md text-on-surface-variant text-xs">System Control</p>
+</div>
+</div>
+<!-- Navigation Links -->
+<nav class="flex-1 overflow-y-auto px-md space-y-sm">
+<!-- Administrasi Sistem Section -->
+<div class="mt-lg mb-sm px-sm">
+<p class="font-label-md text-label-md text-on-surface-variant uppercase tracking-wider text-xs">Administrasi Sistem</p>
+</div>
+<a class="flex items-center gap-md px-sm py-sm rounded-md transition-all duration-200 ease-in-out text-primary dark:text-inverse-primary font-bold border-r-4 border-primary bg-surface-container-low" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">group</span>
+<span class="font-label-md text-label-md">Manajemen User</span>
+</a>
+<a class="flex items-center gap-md px-sm py-sm rounded-md transition-all duration-200 ease-in-out text-on-surface-variant dark:text-surface-variant hover:bg-surface-container-high dark:hover:bg-inverse-surface" href="#">
+<span class="material-symbols-outlined">dock</span>
+<span class="font-label-md text-label-md">Loading Dock</span>
+</a>
+<a class="flex items-center gap-md px-sm py-sm rounded-md transition-all duration-200 ease-in-out text-on-surface-variant dark:text-surface-variant hover:bg-surface-container-high dark:hover:bg-inverse-surface" href="#">
+<span class="material-symbols-outlined">schedule</span>
+<span class="font-label-md text-label-md">Time Slot &amp; Kuota</span>
+</a>
+<a class="flex items-center gap-md px-sm py-sm rounded-md transition-all duration-200 ease-in-out text-on-surface-variant dark:text-surface-variant hover:bg-surface-container-high dark:hover:bg-inverse-surface" href="#">
+<span class="material-symbols-outlined">history</span>
+<span class="font-label-md text-label-md">Audit Log</span>
+</a>
+<a class="flex items-center gap-md px-sm py-sm rounded-md transition-all duration-200 ease-in-out text-on-surface-variant dark:text-surface-variant hover:bg-surface-container-high dark:hover:bg-inverse-surface" href="#">
+<span class="material-symbols-outlined">health_and_safety</span>
+<span class="font-label-md text-label-md">Kesehatan Sistem</span>
+</a>
+</nav>
+<!-- Footer Links -->
+<div class="mt-auto px-md border-t border-outline-variant pt-md space-y-sm">
+<a class="flex items-center gap-md px-sm py-sm rounded-md transition-all duration-200 ease-in-out text-on-surface-variant dark:text-surface-variant hover:bg-surface-container-high dark:hover:bg-inverse-surface" href="#">
+<span class="material-symbols-outlined">settings</span>
+<span class="font-label-md text-label-md">Settings</span>
+</a>
+<a class="flex items-center gap-md px-sm py-sm rounded-md transition-all duration-200 ease-in-out text-on-surface-variant dark:text-surface-variant hover:bg-surface-container-high dark:hover:bg-inverse-surface text-error" href="#">
+<span class="material-symbols-outlined text-error">logout</span>
+<span class="font-label-md text-label-md">Logout</span>
+</a>
+</div>
+</aside>
+<!-- Main Content Area -->
+<main class="ml-64 flex-1 flex flex-col h-full bg-[#F4F6F9]">
+<!-- Top App Bar (Anchored to TopNavBar JSON conceptually for structure, adapted for content header) -->
+<header class="flex justify-between items-center px-lg py-lg w-full sticky top-0 z-30 bg-[#F4F6F9] border-b border-outline-variant">
+<h2 class="font-headline-lg text-headline-lg font-bold text-primary">Manajemen User</h2>
+<div class="flex items-center gap-md">
+<button class="bg-primary hover:bg-primary-container text-on-primary font-label-md text-label-md py-2 px-4 rounded-lg flex items-center gap-sm transition-colors shadow-sm">
+<span class="material-symbols-outlined" style="font-size: 18px;">add</span>
+                    Tambah User Baru
+                </button>
+</div>
+</header>
+<!-- Page Content -->
+<div class="flex-1 overflow-auto p-lg">
+<div class="max-w-[1440px] mx-auto space-y-lg">
+<!-- Filters & Search Bar -->
+<div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-md bg-surface p-md rounded-xl border border-outline-variant shadow-sm">
+<!-- Role Tabs -->
+<div class="flex flex-wrap items-center gap-sm">
+<button class="px-4 py-1.5 rounded-full bg-primary text-on-primary font-label-md text-label-md border border-primary transition-colors">
+                            Semua
+                        </button>
+<button class="px-4 py-1.5 rounded-full bg-transparent text-on-surface-variant font-label-md text-label-md border border-outline-variant hover:border-primary hover:text-primary transition-colors">
+                            Supplier
+                        </button>
+<button class="px-4 py-1.5 rounded-full bg-transparent text-on-surface-variant font-label-md text-label-md border border-outline-variant hover:border-primary hover:text-primary transition-colors">
+                            Inventory Control
+                        </button>
+<button class="px-4 py-1.5 rounded-full bg-transparent text-on-surface-variant font-label-md text-label-md border border-outline-variant hover:border-primary hover:text-primary transition-colors">
+                            Security
+                        </button>
+<button class="px-4 py-1.5 rounded-full bg-transparent text-on-surface-variant font-label-md text-label-md border border-outline-variant hover:border-primary hover:text-primary transition-colors">
+                            Warehouse
+                        </button>
+<button class="px-4 py-1.5 rounded-full bg-transparent text-on-surface-variant font-label-md text-label-md border border-outline-variant hover:border-primary hover:text-primary transition-colors">
+                            Admin
+                        </button>
+</div>
+<!-- Search Box -->
+<div class="relative w-full md:w-64">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-outline text-sm">search</span>
+<input class="w-full pl-10 pr-4 py-2 border border-outline-variant rounded-lg font-body-md text-body-md bg-white focus:outline-none focus:border-secondary focus:ring-1 focus:ring-secondary transition-shadow" placeholder="Cari user..." type="text"/>
+</div>
+</div>
+<!-- User Data Table (Card style) -->
+<div class="bg-surface rounded-xl border border-outline-variant overflow-hidden shadow-sm flex flex-col">
+<div class="table-container overflow-x-auto w-full">
+<table class="w-full text-left border-collapse">
+<thead>
+<tr class="bg-surface-container-low border-b border-outline-variant">
+<th class="py-3 px-4 font-label-md text-label-md text-on-surface-variant uppercase tracking-wider">Nama</th>
+<th class="py-3 px-4 font-label-md text-label-md text-on-surface-variant uppercase tracking-wider">Email</th>
+<th class="py-3 px-4 font-label-md text-label-md text-on-surface-variant uppercase tracking-wider">Instansi/Divisi</th>
+<th class="py-3 px-4 font-label-md text-label-md text-on-surface-variant uppercase tracking-wider">Role</th>
+<th class="py-3 px-4 font-label-md text-label-md text-on-surface-variant uppercase tracking-wider text-center">Status</th>
+<th class="py-3 px-4 font-label-md text-label-md text-on-surface-variant uppercase tracking-wider text-right">Aksi</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-outline-variant font-body-md text-body-md bg-white">
+<!-- Row 1 -->
+<tr class="hover:bg-surface-container-low transition-colors group">
+<td class="py-3 px-4 flex items-center gap-3">
+<div class="w-8 h-8 rounded-full bg-primary-container text-on-primary-container flex items-center justify-center font-bold text-sm">AW</div>
+<span class="font-semibold text-on-surface">Ahmad Wijaya</span>
+</td>
+<td class="py-3 px-4 text-on-surface-variant">ahmad.w@ptsinar.com</td>
+<td class="py-3 px-4 text-on-surface">PT Sinar Gemilang</td>
+<td class="py-3 px-4">
+<span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-semibold bg-role-supplier text-role-supplier-text">
+                                            Supplier
+                                        </span>
+</td>
+<td class="py-3 px-4 text-center">
+<div class="relative inline-block w-10 mr-2 align-middle select-none transition duration-200 ease-in">
+<input checked="" class="toggle-checkbox absolute block w-5 h-5 rounded-full bg-white border-4 appearance-none cursor-pointer" id="toggle1" name="toggle1" type="checkbox"/>
+<label class="toggle-label block overflow-hidden h-5 rounded-full bg-gray-300 cursor-pointer" for="toggle1"></label>
+</div>
+</td>
+<td class="py-3 px-4 text-right space-x-2">
+<button class="text-outline hover:text-primary transition-colors"><span class="material-symbols-outlined text-[20px]">edit</span></button>
+<button class="text-outline hover:text-on-surface transition-colors"><span class="material-symbols-outlined text-[20px]">more_vert</span></button>
+</td>
+</tr>
+<!-- Row 2 -->
+<tr class="bg-[#F8F9FF] hover:bg-surface-container-low transition-colors group">
+<td class="py-3 px-4 flex items-center gap-3">
+<div class="w-8 h-8 rounded-full bg-primary-container text-on-primary-container flex items-center justify-center font-bold text-sm">BS</div>
+<span class="font-semibold text-on-surface">Budi Santoso</span>
+</td>
+<td class="py-3 px-4 text-on-surface-variant">budi.ic@logislot.com</td>
+<td class="py-3 px-4 text-on-surface">Inventory Div</td>
+<td class="py-3 px-4">
+<span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-semibold bg-role-ic text-role-ic-text">
+                                            Inventory Control
+                                        </span>
+</td>
+<td class="py-3 px-4 text-center">
+<div class="relative inline-block w-10 mr-2 align-middle select-none transition duration-200 ease-in">
+<input checked="" class="toggle-checkbox absolute block w-5 h-5 rounded-full bg-white border-4 appearance-none cursor-pointer" id="toggle2" name="toggle2" type="checkbox"/>
+<label class="toggle-label block overflow-hidden h-5 rounded-full bg-gray-300 cursor-pointer" for="toggle2"></label>
+</div>
+</td>
+<td class="py-3 px-4 text-right space-x-2">
+<button class="text-outline hover:text-primary transition-colors"><span class="material-symbols-outlined text-[20px]">edit</span></button>
+<button class="text-outline hover:text-on-surface transition-colors"><span class="material-symbols-outlined text-[20px]">more_vert</span></button>
+</td>
+</tr>
+<!-- Row 3 -->
+<tr class="hover:bg-surface-container-low transition-colors group">
+<td class="py-3 px-4 flex items-center gap-3">
+<div class="w-8 h-8 rounded-full bg-primary-container text-on-primary-container flex items-center justify-center font-bold text-sm">CH</div>
+<span class="font-semibold text-on-surface">Citra Hapsari</span>
+</td>
+<td class="py-3 px-4 text-on-surface-variant">citra.sec@logislot.com</td>
+<td class="py-3 px-4 text-on-surface">Security Pos 1</td>
+<td class="py-3 px-4">
+<span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-semibold bg-role-security text-role-security-text">
+                                            Security
+                                        </span>
+</td>
+<td class="py-3 px-4 text-center">
+<div class="relative inline-block w-10 mr-2 align-middle select-none transition duration-200 ease-in">
+<input checked="" class="toggle-checkbox absolute block w-5 h-5 rounded-full bg-white border-4 appearance-none cursor-pointer" id="toggle3" name="toggle3" type="checkbox"/>
+<label class="toggle-label block overflow-hidden h-5 rounded-full bg-gray-300 cursor-pointer" for="toggle3"></label>
+</div>
+</td>
+<td class="py-3 px-4 text-right space-x-2">
+<button class="text-outline hover:text-primary transition-colors"><span class="material-symbols-outlined text-[20px]">edit</span></button>
+<button class="text-outline hover:text-on-surface transition-colors"><span class="material-symbols-outlined text-[20px]">more_vert</span></button>
+</td>
+</tr>
+<!-- Row 4 -->
+<tr class="bg-[#F8F9FF] hover:bg-surface-container-low transition-colors group">
+<td class="py-3 px-4 flex items-center gap-3">
+<div class="w-8 h-8 rounded-full bg-primary-container text-on-primary-container flex items-center justify-center font-bold text-sm">DP</div>
+<span class="font-semibold text-on-surface">Dedi Pratama</span>
+</td>
+<td class="py-3 px-4 text-on-surface-variant">dedi.wh@logislot.com</td>
+<td class="py-3 px-4 text-on-surface">Gudang Utama A</td>
+<td class="py-3 px-4">
+<span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-semibold bg-role-warehouse text-role-warehouse-text">
+                                            Warehouse
+                                        </span>
+</td>
+<td class="py-3 px-4 text-center">
+<div class="relative inline-block w-10 mr-2 align-middle select-none transition duration-200 ease-in">
+<input class="toggle-checkbox absolute block w-5 h-5 rounded-full bg-white border-4 appearance-none cursor-pointer" id="toggle4" name="toggle4" type="checkbox"/>
+<label class="toggle-label block overflow-hidden h-5 rounded-full bg-gray-300 cursor-pointer" for="toggle4"></label>
+</div>
+</td>
+<td class="py-3 px-4 text-right space-x-2">
+<button class="text-outline hover:text-primary transition-colors"><span class="material-symbols-outlined text-[20px]">edit</span></button>
+<button class="text-outline hover:text-on-surface transition-colors"><span class="material-symbols-outlined text-[20px]">more_vert</span></button>
+</td>
+</tr>
+<!-- Row 5 -->
+<tr class="hover:bg-surface-container-low transition-colors group">
+<td class="py-3 px-4 flex items-center gap-3">
+<div class="w-8 h-8 rounded-full bg-primary-container text-on-primary-container flex items-center justify-center font-bold text-sm">EK</div>
+<span class="font-semibold text-on-surface">Eko Kurniawan</span>
+</td>
+<td class="py-3 px-4 text-on-surface-variant">admin@logislot.com</td>
+<td class="py-3 px-4 text-on-surface">IT &amp; System</td>
+<td class="py-3 px-4">
+<span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-semibold bg-role-admin text-role-admin-text">
+                                            Admin
+                                        </span>
+</td>
+<td class="py-3 px-4 text-center">
+<div class="relative inline-block w-10 mr-2 align-middle select-none transition duration-200 ease-in">
+<input checked="" class="toggle-checkbox absolute block w-5 h-5 rounded-full bg-white border-4 appearance-none cursor-pointer" id="toggle5" name="toggle5" type="checkbox"/>
+<label class="toggle-label block overflow-hidden h-5 rounded-full bg-gray-300 cursor-pointer" for="toggle5"></label>
+</div>
+</td>
+<td class="py-3 px-4 text-right space-x-2">
+<button class="text-outline hover:text-primary transition-colors"><span class="material-symbols-outlined text-[20px]">edit</span></button>
+<button class="text-outline hover:text-on-surface transition-colors"><span class="material-symbols-outlined text-[20px]">more_vert</span></button>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<!-- Pagination (Simplified) -->
+<div class="p-4 border-t border-outline-variant flex justify-between items-center bg-surface">
+<span class="font-body-md text-on-surface-variant text-sm">Menampilkan 1-5 dari 124 user</span>
+<div class="flex gap-2">
+<button class="p-1 rounded border border-outline-variant text-outline hover:text-on-surface hover:bg-surface-container-low disabled:opacity-50"><span class="material-symbols-outlined">chevron_left</span></button>
+<button class="p-1 rounded border border-outline-variant text-outline hover:text-on-surface hover:bg-surface-container-low"><span class="material-symbols-outlined">chevron_right</span></button>
+</div>
+</div>
+</div>
+</div>
+</div>
+</main>
+<!-- Overlay & Slide-in Panel for "Tambah User Baru" -->
+<div class="fixed inset-0 z-50 flex justify-end">
+<!-- Backdrop -->
+<div class="absolute inset-0 bg-on-surface/40 backdrop-blur-sm fade-in"></div>
+<!-- Slide-in Panel -->
+<div class="relative w-full max-w-md bg-surface h-full shadow-2xl flex flex-col slide-in-right border-l border-outline-variant">
+<!-- Panel Header -->
+<div class="flex items-center justify-between p-lg border-b border-outline-variant bg-white">
+<h3 class="font-headline-md text-headline-md font-bold text-primary">Tambah User Baru</h3>
+<button class="text-outline hover:text-on-surface rounded-full p-1 hover:bg-surface-container-low transition-colors">
+<span class="material-symbols-outlined">close</span>
+</button>
+</div>
+<!-- Panel Form Content -->
+<div class="flex-1 overflow-y-auto p-lg space-y-lg bg-[#F8F9FF]">
+<!-- Nama Lengkap -->
+<div class="space-y-2">
+<label class="block font-label-md text-label-md text-on-surface">Nama Lengkap <span class="text-error">*</span></label>
+<input class="w-full px-3 py-2 border border-outline-variant rounded-lg font-body-md text-body-md bg-white focus:outline-none focus:border-secondary focus:ring-1 focus:ring-secondary transition-shadow" placeholder="Masukkan nama lengkap" type="text"/>
+</div>
+<!-- Email -->
+<div class="space-y-2">
+<label class="block font-label-md text-label-md text-on-surface">Email Aktif <span class="text-error">*</span></label>
+<input class="w-full px-3 py-2 border border-outline-variant rounded-lg font-body-md text-body-md bg-white focus:outline-none focus:border-secondary focus:ring-1 focus:ring-secondary transition-shadow" placeholder="contoh@domain.com" type="email"/>
+</div>
+<!-- Nomor Telepon -->
+<div class="space-y-2">
+<label class="block font-label-md text-label-md text-on-surface">Nomor Telepon</label>
+<input class="w-full px-3 py-2 border border-outline-variant rounded-lg font-body-md text-body-md bg-white focus:outline-none focus:border-secondary focus:ring-1 focus:ring-secondary transition-shadow" placeholder="+62 8..." type="tel"/>
+</div>
+<!-- Role Dropdown (Excluding Supplier) -->
+<div class="space-y-2">
+<label class="block font-label-md text-label-md text-on-surface">Role Internal <span class="text-error">*</span></label>
+<div class="relative">
+<select class="w-full px-3 py-2 border border-outline-variant rounded-lg font-body-md text-body-md bg-white focus:outline-none focus:border-secondary focus:ring-1 focus:ring-secondary appearance-none transition-shadow text-on-surface">
+<option disabled="" selected="" value="">Pilih Role</option>
+<option value="ic">Inventory Control</option>
+<option value="security">Security</option>
+<option value="warehouse">Warehouse</option>
+<option value="admin">Admin</option>
+</select>
+<span class="material-symbols-outlined absolute right-3 top-1/2 -translate-y-1/2 text-outline pointer-events-none">expand_more</span>
+</div>
+<p class="font-body-md text-xs text-on-surface-variant mt-1">Catatan: User Supplier dibuat otomatis saat pendaftaran Vendor.</p>
+</div>
+<!-- Instansi/Divisi -->
+<div class="space-y-2">
+<label class="block font-label-md text-label-md text-on-surface">Instansi/Divisi Penempatan <span class="text-error">*</span></label>
+<div class="relative">
+<select class="w-full px-3 py-2 border border-outline-variant rounded-lg font-body-md text-body-md bg-white focus:outline-none focus:border-secondary focus:ring-1 focus:ring-secondary appearance-none transition-shadow text-on-surface">
+<option disabled="" selected="" value="">Pilih Divisi</option>
+<option value="div_ic">Divisi Inventory Pusat</option>
+<option value="pos_1">Pos Security Gerbang Utama</option>
+<option value="wh_a">Gudang A - Bahan Baku</option>
+<option value="wh_b">Gudang B - Barang Jadi</option>
+<option value="it_sys">IT &amp; System Control</option>
+</select>
+<span class="material-symbols-outlined absolute right-3 top-1/2 -translate-y-1/2 text-outline pointer-events-none">expand_more</span>
+</div>
+</div>
+<!-- Toggle Email Credentials -->
+<div class="flex items-center justify-between p-4 bg-white border border-outline-variant rounded-lg mt-6">
+<div>
+<p class="font-label-md text-label-md text-on-surface">Kirim Kredensial via Email</p>
+<p class="font-body-md text-xs text-on-surface-variant mt-1">Kirim password sementara ke email user.</p>
+</div>
+<div class="relative inline-block w-10 align-middle select-none transition duration-200 ease-in">
+<input checked="" class="toggle-checkbox absolute block w-5 h-5 rounded-full bg-white border-4 appearance-none cursor-pointer" id="toggle_email" name="toggle_email" type="checkbox"/>
+<label class="toggle-label block overflow-hidden h-5 rounded-full bg-gray-300 cursor-pointer" for="toggle_email"></label>
+</div>
+</div>
+</div>
+<!-- Panel Footer Actions -->
+<div class="p-lg border-t border-outline-variant bg-white flex justify-end gap-md">
+<button class="px-6 py-2 rounded-lg border border-secondary text-secondary font-label-md text-label-md hover:bg-surface-container-low transition-colors">
+                    Batal
+                </button>
+<button class="px-6 py-2 rounded-lg bg-primary text-on-primary font-label-md text-label-md hover:bg-primary-container transition-colors shadow-sm w-full flex-1 md:flex-none">
+                    Simpan User
+                </button>
+</div>
+</div>
+</div>
+</body></html>

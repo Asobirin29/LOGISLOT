@@ -1,0 +1,403 @@
+<!DOCTYPE html>
+
+<html lang="id"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Audit Log - LOGISLOT</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&amp;family=JetBrains+Mono:wght@400&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "inverse-on-surface": "#eaf1ff",
+                        "tertiary-container": "#4f2f00",
+                        "on-primary-container": "#87a0cd",
+                        "on-primary-fixed": "#001b3d",
+                        "error-container": "#ffdad6",
+                        "inverse-surface": "#213145",
+                        "error": "#ba1a1a",
+                        "on-secondary": "#ffffff",
+                        "surface": "#f8f9ff",
+                        "primary-fixed": "#d6e3ff",
+                        "on-secondary-container": "#2c5980",
+                        "on-tertiary-container": "#c6965e",
+                        "secondary-fixed-dim": "#a0cbf7",
+                        "secondary": "#356289",
+                        "on-error": "#ffffff",
+                        "surface-container": "#e5eeff",
+                        "surface-container-highest": "#d3e4fe",
+                        "surface-container-high": "#dce9ff",
+                        "secondary-fixed": "#cfe5ff",
+                        "tertiary": "#321c00",
+                        "on-secondary-fixed-variant": "#194a70",
+                        "primary-container": "#1b365d",
+                        "on-secondary-fixed": "#001d33",
+                        "background": "#f8f9ff",
+                        "on-error-container": "#93000a",
+                        "on-primary-fixed-variant": "#2e476f",
+                        "surface-dim": "#cbdbf5",
+                        "on-background": "#0b1c30",
+                        "surface-variant": "#d3e4fe",
+                        "surface-tint": "#465f88",
+                        "on-primary": "#ffffff",
+                        "on-surface-variant": "#44474e",
+                        "on-surface": "#0b1c30",
+                        "primary": "#002046",
+                        "primary-fixed-dim": "#aec7f7",
+                        "outline-variant": "#c4c6cf",
+                        "surface-container-lowest": "#ffffff",
+                        "surface-bright": "#f8f9ff",
+                        "inverse-primary": "#aec7f7",
+                        "tertiary-fixed-dim": "#f1bd81",
+                        "surface-container-low": "#eff4ff",
+                        "on-tertiary-fixed-variant": "#623f0f",
+                        "secondary-container": "#a5d0fd",
+                        "on-tertiary": "#ffffff",
+                        "outline": "#74777f",
+                        "on-tertiary-fixed": "#2b1700",
+                        "tertiary-fixed": "#ffddb9"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "xs": "4px",
+                        "lg": "24px",
+                        "sm": "8px",
+                        "container-max": "1440px",
+                        "base": "8px",
+                        "md": "16px",
+                        "gutter": "24px",
+                        "xl": "32px"
+                    },
+                    "fontFamily": {
+                        "headline-sm": ["Inter"],
+                        "body-md": ["Inter"],
+                        "label-md": ["Inter"],
+                        "headline-lg-mobile": ["Inter"],
+                        "headline-lg": ["Inter"],
+                        "code": ["JetBrains Mono"],
+                        "body-lg": ["Inter"],
+                        "headline-md": ["Inter"]
+                    },
+                    "fontSize": {
+                        "headline-sm": ["20px", { "lineHeight": "28px", "fontWeight": "600" }],
+                        "body-md": ["14px", { "lineHeight": "20px", "fontWeight": "400" }],
+                        "label-md": ["12px", { "lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "600" }],
+                        "headline-lg-mobile": ["24px", { "lineHeight": "32px", "letterSpacing": "-0.01em", "fontWeight": "700" }],
+                        "headline-lg": ["32px", { "lineHeight": "40px", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+                        "code": ["13px", { "lineHeight": "20px", "fontWeight": "400" }],
+                        "body-lg": ["16px", { "lineHeight": "24px", "fontWeight": "400" }],
+                        "headline-md": ["24px", { "lineHeight": "32px", "fontWeight": "600" }]
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-background text-on-background font-body-md font-sans antialiased overflow-x-hidden selection:bg-secondary-container selection:text-on-secondary-container">
+<!-- App Container -->
+<div class="flex h-screen w-full mx-auto max-w-container-max relative bg-background">
+<!-- SideNavBar Component -->
+<!-- "name": "SideNavBar", "num_tabs": 5, "tab_labels": ["User Management", "Loading Dock", "Time Slot & Quota", "Audit Log", "System Health"], "tab_icons": ["group", "dock", "schedule", "history_edu", "monitor_heart"], ... -->
+<nav class="fixed left-0 top-0 h-screen flex flex-col p-md z-40 bg-surface dark:bg-inverse-surface border-r border-outline-variant dark:border-outline docked left-0 h-full w-64 hidden md:flex">
+<!-- Header -->
+<div class="mb-lg pb-md border-b border-outline-variant dark:border-outline">
+<div class="font-headline-sm text-headline-sm font-bold text-primary dark:text-primary-fixed mb-sm">
+                    LOGISLOT
+                </div>
+<div class="flex items-center gap-sm mt-md p-sm bg-surface-container-low dark:bg-inverse-surface rounded-lg">
+<div class="w-10 h-10 rounded-full bg-secondary-container flex items-center justify-center overflow-hidden shrink-0 border border-outline-variant">
+<img alt="System Admin" class="w-full h-full object-cover" data-alt="A close-up corporate headshot of a logistics administrator in a modern office. The lighting is bright and professional. The person looks focused and competent, wearing neat business casual attire against a clean, light-colored background. This image fits a modern B2B interface." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCzEOKOdaXxWpGuzKe-hVKFFXkZbuAIeLMHBGxhpmntoQk1zZLjI4tNpYizXrxrIfGh0syuZr3OXiPzjvmxs9YQ3GUDJwl4ZgwEUme98ftLHIUXCmP23gi1tvT85PAoeSuXtvukeK1IsURntudKhnY7gt4lbmRYAr-df90FP-O5PoY_a5PZ5RhTTNcQaZO2SjlSUJgf8CsaqEYMhB3nGTJUgzgFrXfr5MZS4_8CSzs2Bijw5qpqP_NHPcLaQXYj8h5IOBdb08jiVQ"/>
+</div>
+<div class="min-w-0">
+<div class="font-label-md text-label-md text-primary dark:text-primary-fixed truncate">Admin Console</div>
+<div class="text-xs text-on-surface-variant truncate">Management Portal</div>
+</div>
+</div>
+</div>
+<!-- Main Navigation -->
+<div class="flex-1 overflow-y-auto space-y-sm">
+<div class="font-label-md text-label-md text-on-surface-variant px-sm mb-sm uppercase tracking-wider text-[10px]">Administrasi Sistem</div>
+<!-- Tab: User Management (Inactive) -->
+<a class="flex items-center gap-md px-md py-sm rounded-lg text-on-surface-variant dark:text-on-secondary-fixed-variant hover:bg-surface-container-high hover:bg-surface-container-highest dark:hover:bg-primary-container transition-all group font-body-md text-body-md" href="#">
+<span class="material-symbols-outlined text-outline group-hover:text-primary transition-colors" data-icon="group">group</span>
+<span class="truncate">User Management</span>
+</a>
+<!-- Tab: Loading Dock (Inactive) -->
+<a class="flex items-center gap-md px-md py-sm rounded-lg text-on-surface-variant dark:text-on-secondary-fixed-variant hover:bg-surface-container-high hover:bg-surface-container-highest dark:hover:bg-primary-container transition-all group font-body-md text-body-md" href="#">
+<span class="material-symbols-outlined text-outline group-hover:text-primary transition-colors" data-icon="dock">dock</span>
+<span class="truncate">Loading Dock</span>
+</a>
+<!-- Tab: Time Slot & Quota (Inactive) -->
+<a class="flex items-center gap-md px-md py-sm rounded-lg text-on-surface-variant dark:text-on-secondary-fixed-variant hover:bg-surface-container-high hover:bg-surface-container-highest dark:hover:bg-primary-container transition-all group font-body-md text-body-md" href="#">
+<span class="material-symbols-outlined text-outline group-hover:text-primary transition-colors" data-icon="schedule">schedule</span>
+<span class="truncate">Time Slot &amp; Quota</span>
+</a>
+<!-- Tab: Audit Log (Active) -->
+<a class="flex items-center gap-md px-md py-sm rounded-lg bg-secondary-container dark:bg-secondary text-on-secondary-container dark:text-on-secondary font-bold hover:bg-surface-container-highest dark:hover:bg-primary-container transition-all scale-95 duration-75 font-body-md text-body-md" href="#">
+<span class="material-symbols-outlined" data-icon="history_edu" style="font-variation-settings: 'FILL' 1;">history_edu</span>
+<span class="truncate">Audit Log</span>
+</a>
+<!-- Tab: System Health (Inactive) -->
+<a class="flex items-center gap-md px-md py-sm rounded-lg text-on-surface-variant dark:text-on-secondary-fixed-variant hover:bg-surface-container-high hover:bg-surface-container-highest dark:hover:bg-primary-container transition-all group font-body-md text-body-md" href="#">
+<span class="material-symbols-outlined text-outline group-hover:text-primary transition-colors" data-icon="monitor_heart">monitor_heart</span>
+<span class="truncate">System Health</span>
+</a>
+</div>
+<!-- Footer Navigation -->
+<div class="pt-md mt-md border-t border-outline-variant dark:border-outline space-y-sm shrink-0">
+<a class="flex items-center gap-md px-md py-sm rounded-lg text-on-surface-variant dark:text-on-secondary-fixed-variant hover:bg-surface-container-high hover:bg-surface-container-highest dark:hover:bg-primary-container transition-all group font-body-md text-body-md" href="#">
+<span class="material-symbols-outlined text-outline group-hover:text-primary transition-colors" data-icon="logout">logout</span>
+<span class="truncate">Logout</span>
+</a>
+<a class="flex items-center gap-md px-md py-sm rounded-lg text-on-surface-variant dark:text-on-secondary-fixed-variant hover:bg-surface-container-high hover:bg-surface-container-highest dark:hover:bg-primary-container transition-all group font-body-md text-body-md" href="#">
+<span class="material-symbols-outlined text-outline group-hover:text-primary transition-colors" data-icon="contact_support">contact_support</span>
+<span class="truncate">Support</span>
+</a>
+</div>
+</nav>
+<!-- Main Content Area -->
+<main class="flex-1 flex flex-col md:ml-64 bg-background min-h-screen">
+<!-- Mobile Header (Visible only on small screens) -->
+<header class="md:hidden flex justify-between items-center w-full px-lg h-16 sticky top-0 z-50 bg-surface-container-lowest border-b border-outline-variant">
+<div class="font-headline-sm text-headline-sm font-bold text-primary">LOGISLOT</div>
+<button class="p-sm text-on-surface-variant hover:bg-surface-container-low rounded-lg transition-colors">
+<span class="material-symbols-outlined" data-icon="menu">menu</span>
+</button>
+</header>
+<div class="p-lg md:p-xl lg:px-10 flex-1 max-w-[1100px] mx-auto w-full">
+<!-- Page Header -->
+<div class="mb-lg">
+<h1 class="font-headline-lg text-headline-lg md:font-headline-lg md:text-headline-lg text-primary-container font-bold mb-xs">Audit Log Sistem</h1>
+<p class="font-body-md text-body-md text-on-surface-variant">Riwayat lengkap seluruh aktivitas dan perubahan status di sistem</p>
+</div>
+<!-- Filter & Action Bar -->
+<div class="bg-surface-container-lowest border border-outline-variant rounded-lg p-md mb-lg flex flex-col md:flex-row gap-md justify-between items-center shadow-sm">
+<div class="flex flex-wrap gap-sm w-full md:w-auto">
+<!-- Date Range -->
+<div class="relative flex-1 md:flex-none min-w-[200px]">
+<div class="absolute inset-y-0 left-0 pl-sm flex items-center pointer-events-none">
+<span class="material-symbols-outlined text-outline text-sm" data-icon="date_range">date_range</span>
+</div>
+<input class="block w-full pl-xl pr-sm py-sm border-outline-variant rounded-lg font-body-md text-body-md text-on-surface bg-surface-bright focus:border-secondary focus:ring-1 focus:ring-secondary transition-colors" readonly="" type="text" value="Last 7 Days"/>
+</div>
+<!-- Event Type -->
+<div class="relative flex-1 md:flex-none min-w-[180px]">
+<select class="block w-full pl-sm pr-xl py-sm border-outline-variant rounded-lg font-body-md text-body-md text-on-surface bg-surface-bright focus:border-secondary focus:ring-1 focus:ring-secondary appearance-none transition-colors">
+<option>Semua Jenis Event</option>
+<option>Booking</option>
+<option>Operasional</option>
+<option>Sistem</option>
+</select>
+<div class="absolute inset-y-0 right-0 flex items-center px-sm pointer-events-none text-outline">
+<span class="material-symbols-outlined text-sm" data-icon="arrow_drop_down">arrow_drop_down</span>
+</div>
+</div>
+<!-- User -->
+<div class="relative flex-1 md:flex-none min-w-[180px]">
+<select class="block w-full pl-sm pr-xl py-sm border-outline-variant rounded-lg font-body-md text-body-md text-on-surface bg-surface-bright focus:border-secondary focus:ring-1 focus:ring-secondary appearance-none transition-colors">
+<option>Semua Pengguna</option>
+<option>Admin</option>
+<option>Security</option>
+<option>Vendor</option>
+</select>
+<div class="absolute inset-y-0 right-0 flex items-center px-sm pointer-events-none text-outline">
+<span class="material-symbols-outlined text-sm" data-icon="arrow_drop_down">arrow_drop_down</span>
+</div>
+</div>
+</div>
+<!-- Export Action -->
+<button class="w-full md:w-auto flex items-center justify-center gap-xs px-md py-sm border border-secondary text-secondary rounded-lg font-label-md text-label-md hover:bg-secondary-container hover:text-on-secondary-container transition-colors shrink-0 bg-transparent">
+<span class="material-symbols-outlined text-[18px]" data-icon="download">download</span>
+<span>Export CSV</span>
+</button>
+</div>
+<!-- Audit Log Timeline Card -->
+<div class="bg-surface-container-lowest border border-outline-variant rounded-lg shadow-sm overflow-hidden">
+<div class="p-lg relative">
+<!-- Vertical Line (Timeline Backbone) -->
+<div class="absolute left-[28px] md:left-[144px] top-lg bottom-lg w-px bg-outline-variant opacity-50 hidden sm:block"></div>
+<div class="space-y-0">
+<!-- Log Entry 1 -->
+<div class="group flex flex-col sm:flex-row relative hover:bg-surface-container-low p-sm -mx-sm rounded-lg transition-colors items-start py-md border-b border-outline-variant/30 last:border-0">
+<!-- Timestamp (Left Column) -->
+<div class="w-full sm:w-[130px] shrink-0 font-code text-code text-on-surface-variant mb-xs sm:mb-0 sm:pt-[2px]">
+                                    28 Jul 2026<br/><span class="opacity-70 text-[11px]">14:32:07</span>
+</div>
+<!-- Timeline Node -->
+<div class="hidden sm:flex relative shrink-0 w-8 flex-col items-center justify-start mt-[4px]">
+<div class="w-3 h-3 rounded-full bg-secondary ring-4 ring-surface-container-lowest z-10"></div>
+</div>
+<!-- Content Body -->
+<div class="flex-1 min-w-0 pl-0 sm:pl-sm">
+<div class="flex flex-col sm:flex-row sm:items-start justify-between gap-sm">
+<div class="flex items-start gap-sm">
+<div class="w-8 h-8 rounded-full bg-secondary-container text-on-secondary-container flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-[16px]" data-icon="login">login</span>
+</div>
+<div>
+<p class="font-body-md text-body-md text-on-surface leading-tight">
+<span class="font-semibold text-primary">Security (Budi Santoso)</span> melakukan check-in untuk truk <span class="font-code text-[12px] bg-surface-container-high px-1 rounded border border-outline-variant">B 1234 XYZ</span> pada Booking <span class="font-semibold text-secondary">#LGS-20260728-0042</span>.
+                                                </p>
+<div class="mt-xs text-[11px] text-on-surface-variant flex gap-xs items-center">
+<span class="material-symbols-outlined text-[12px]" data-icon="devices">devices</span>
+<span>IP: 192.168.1.104 (Tablet Gate 1)</span>
+</div>
+</div>
+</div>
+<div class="shrink-0">
+<span class="inline-flex items-center px-2 py-0.5 rounded text-[10px] font-bold bg-secondary-container text-on-secondary-container border border-secondary/20">
+                                                Check-in
+                                            </span>
+</div>
+</div>
+</div>
+</div>
+<!-- Log Entry 2 -->
+<div class="group flex flex-col sm:flex-row relative hover:bg-surface-container-low p-sm -mx-sm rounded-lg transition-colors items-start py-md border-b border-outline-variant/30 last:border-0">
+<div class="w-full sm:w-[130px] shrink-0 font-code text-code text-on-surface-variant mb-xs sm:mb-0 sm:pt-[2px]">
+                                    28 Jul 2026<br/><span class="opacity-70 text-[11px]">13:45:12</span>
+</div>
+<div class="hidden sm:flex relative shrink-0 w-8 flex-col items-center justify-start mt-[4px]">
+<div class="w-3 h-3 rounded-full bg-emerald-600 ring-4 ring-surface-container-lowest z-10"></div>
+</div>
+<div class="flex-1 min-w-0 pl-0 sm:pl-sm">
+<div class="flex flex-col sm:flex-row sm:items-start justify-between gap-sm">
+<div class="flex items-start gap-sm">
+<div class="w-8 h-8 rounded-full bg-emerald-100 text-emerald-800 flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-[16px]" data-icon="add_circle">add_circle</span>
+</div>
+<div>
+<p class="font-body-md text-body-md text-on-surface leading-tight">
+<span class="font-semibold text-primary">Vendor (PT Logistik Cepat)</span> membuat booking slot baru untuk tanggal 30 Jul 2026 (08:00 - 10:00).
+                                                </p>
+<p class="mt-xs text-xs text-on-surface-variant">Refferensi: PO-99821</p>
+</div>
+</div>
+<div class="shrink-0">
+<span class="inline-flex items-center px-2 py-0.5 rounded text-[10px] font-bold bg-emerald-100 text-emerald-800 border border-emerald-200">
+                                                Booking Dibuat
+                                            </span>
+</div>
+</div>
+</div>
+</div>
+<!-- Log Entry 3 -->
+<div class="group flex flex-col sm:flex-row relative hover:bg-surface-container-low p-sm -mx-sm rounded-lg transition-colors items-start py-md border-b border-outline-variant/30 last:border-0">
+<div class="w-full sm:w-[130px] shrink-0 font-code text-code text-on-surface-variant mb-xs sm:mb-0 sm:pt-[2px]">
+                                    28 Jul 2026<br/><span class="opacity-70 text-[11px]">11:20:00</span>
+</div>
+<div class="hidden sm:flex relative shrink-0 w-8 flex-col items-center justify-start mt-[4px]">
+<div class="w-3 h-3 rounded-full bg-amber-500 ring-4 ring-surface-container-lowest z-10"></div>
+</div>
+<div class="flex-1 min-w-0 pl-0 sm:pl-sm">
+<div class="flex flex-col sm:flex-row sm:items-start justify-between gap-sm">
+<div class="flex items-start gap-sm">
+<div class="w-8 h-8 rounded-full bg-amber-100 text-amber-800 flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-[16px]" data-icon="conveyor_belt">conveyor_belt</span>
+</div>
+<div>
+<p class="font-body-md text-body-md text-on-surface leading-tight">
+<span class="font-semibold text-primary">Operator (Andi)</span> memulai proses bongkar muat untuk <span class="font-semibold text-secondary">#LGS-20260728-0035</span> di Dock A2.
+                                                </p>
+</div>
+</div>
+<div class="shrink-0">
+<span class="inline-flex items-center px-2 py-0.5 rounded text-[10px] font-bold bg-amber-100 text-amber-800 border border-amber-200">
+                                                Start Unloading
+                                            </span>
+</div>
+</div>
+</div>
+</div>
+<!-- Log Entry 4 (Error/Cancel) -->
+<div class="group flex flex-col sm:flex-row relative hover:bg-surface-container-low p-sm -mx-sm rounded-lg transition-colors items-start py-md border-b border-outline-variant/30 last:border-0">
+<div class="w-full sm:w-[130px] shrink-0 font-code text-code text-on-surface-variant mb-xs sm:mb-0 sm:pt-[2px]">
+                                    28 Jul 2026<br/><span class="opacity-70 text-[11px]">09:15:44</span>
+</div>
+<div class="hidden sm:flex relative shrink-0 w-8 flex-col items-center justify-start mt-[4px]">
+<div class="w-3 h-3 rounded-full bg-error ring-4 ring-surface-container-lowest z-10"></div>
+</div>
+<div class="flex-1 min-w-0 pl-0 sm:pl-sm">
+<div class="flex flex-col sm:flex-row sm:items-start justify-between gap-sm">
+<div class="flex items-start gap-sm">
+<div class="w-8 h-8 rounded-full bg-error-container text-on-error-container flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-[16px]" data-icon="cancel">cancel</span>
+</div>
+<div>
+<p class="font-body-md text-body-md text-on-surface leading-tight">
+<span class="font-semibold text-primary">System</span> membatalkan booking otomatis <span class="font-semibold text-secondary">#LGS-20260728-0012</span> karena melewati batas waktu toleransi kedatangan (No Show).
+                                                </p>
+</div>
+</div>
+<div class="shrink-0">
+<span class="inline-flex items-center px-2 py-0.5 rounded text-[10px] font-bold bg-error-container text-on-error-container border border-error/20">
+                                                Booking Dibatalkan
+                                            </span>
+</div>
+</div>
+</div>
+</div>
+<!-- Log Entry 5 -->
+<div class="group flex flex-col sm:flex-row relative hover:bg-surface-container-low p-sm -mx-sm rounded-lg transition-colors items-start py-md border-b border-outline-variant/30 last:border-0">
+<div class="w-full sm:w-[130px] shrink-0 font-code text-code text-on-surface-variant mb-xs sm:mb-0 sm:pt-[2px]">
+                                    27 Jul 2026<br/><span class="opacity-70 text-[11px]">16:50:01</span>
+</div>
+<div class="hidden sm:flex relative shrink-0 w-8 flex-col items-center justify-start mt-[4px]">
+<div class="w-3 h-3 rounded-full bg-primary ring-4 ring-surface-container-lowest z-10"></div>
+</div>
+<div class="flex-1 min-w-0 pl-0 sm:pl-sm">
+<div class="flex flex-col sm:flex-row sm:items-start justify-between gap-sm">
+<div class="flex items-start gap-sm">
+<div class="w-8 h-8 rounded-full bg-primary-container text-on-primary-container flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-[16px]" data-icon="person_add">person_add</span>
+</div>
+<div>
+<p class="font-body-md text-body-md text-on-surface leading-tight">
+<span class="font-semibold text-primary">Admin (Superuser)</span> menambahkan user baru: <span class="font-semibold">Siti Aminah (Operator Dock B)</span>.
+                                                </p>
+</div>
+</div>
+<div class="shrink-0">
+<span class="inline-flex items-center px-2 py-0.5 rounded text-[10px] font-bold bg-primary-container text-on-primary-container border border-primary/20">
+                                                User Baru Ditambahkan
+                                            </span>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Footer Pagination -->
+<div class="px-lg py-md border-t border-outline-variant bg-surface-bright flex flex-col sm:flex-row justify-between items-center gap-md">
+<div class="font-body-md text-[13px] text-on-surface-variant">
+                            Menampilkan <span class="font-semibold text-on-surface">1-50</span> dari <span class="font-semibold text-on-surface">1,204</span> log
+                        </div>
+<div class="flex items-center gap-xs">
+<button class="p-xs rounded text-outline hover:bg-surface-container-highest transition-colors disabled:opacity-50" disabled="">
+<span class="material-symbols-outlined text-[20px]" data-icon="chevron_left">chevron_left</span>
+</button>
+<button class="w-8 h-8 rounded bg-secondary text-on-secondary font-bold text-sm flex items-center justify-center">1</button>
+<button class="w-8 h-8 rounded hover:bg-surface-container-highest text-on-surface text-sm flex items-center justify-center transition-colors">2</button>
+<button class="w-8 h-8 rounded hover:bg-surface-container-highest text-on-surface text-sm flex items-center justify-center transition-colors">3</button>
+<span class="px-xs text-on-surface-variant">...</span>
+<button class="w-8 h-8 rounded hover:bg-surface-container-highest text-on-surface text-sm flex items-center justify-center transition-colors">25</button>
+<button class="p-xs rounded text-outline hover:bg-surface-container-highest transition-colors">
+<span class="material-symbols-outlined text-[20px]" data-icon="chevron_right">chevron_right</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+</main>
+</div>
+</body></html>

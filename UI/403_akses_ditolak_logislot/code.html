@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+
+<html lang="id"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>LOGISLOT - Akses Ditolak</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "tertiary-fixed": "#ffddb9",
+                    "outline": "#74777f",
+                    "on-error-container": "#93000a",
+                    "on-secondary-fixed-variant": "#194a70",
+                    "tertiary-container": "#4f2f00",
+                    "on-tertiary-fixed-variant": "#623f0f",
+                    "on-secondary-container": "#2c5980",
+                    "primary": "#002046",
+                    "error-container": "#ffdad6",
+                    "surface-container-lowest": "#ffffff",
+                    "secondary-container": "#a5d0fd",
+                    "inverse-on-surface": "#eaf1ff",
+                    "on-secondary": "#ffffff",
+                    "on-primary-fixed-variant": "#2e476f",
+                    "inverse-primary": "#aec7f7",
+                    "error": "#ba1a1a",
+                    "on-tertiary-container": "#c6965e",
+                    "surface-container": "#e5eeff",
+                    "on-surface": "#0b1c30",
+                    "on-primary-container": "#87a0cd",
+                    "primary-fixed": "#d6e3ff",
+                    "surface-variant": "#d3e4fe",
+                    "on-primary-fixed": "#001b3d",
+                    "surface-container-high": "#dce9ff",
+                    "background": "#f8f9ff",
+                    "tertiary": "#321c00",
+                    "primary-fixed-dim": "#aec7f7",
+                    "on-background": "#0b1c30",
+                    "on-tertiary-fixed": "#2b1700",
+                    "on-error": "#ffffff",
+                    "on-surface-variant": "#44474e",
+                    "surface-container-low": "#eff4ff",
+                    "surface-bright": "#f8f9ff",
+                    "surface-container-highest": "#d3e4fe",
+                    "surface-tint": "#465f88",
+                    "secondary": "#356289",
+                    "surface": "#f8f9ff",
+                    "on-tertiary": "#ffffff",
+                    "on-primary": "#ffffff",
+                    "primary-container": "#1b365d",
+                    "tertiary-fixed-dim": "#f1bd81",
+                    "surface-dim": "#cbdbf5",
+                    "on-secondary-fixed": "#001d33",
+                    "outline-variant": "#c4c6cf",
+                    "secondary-fixed-dim": "#a0cbf7",
+                    "inverse-surface": "#213145",
+                    "secondary-fixed": "#cfe5ff"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "gutter": "24px",
+                    "xs": "4px",
+                    "lg": "24px",
+                    "sm": "8px",
+                    "container-max": "1440px",
+                    "md": "16px",
+                    "base": "8px",
+                    "xl": "32px"
+            },
+            "fontFamily": {
+                    "headline-lg-mobile": [
+                            "Inter"
+                    ],
+                    "body-md": [
+                            "Inter"
+                    ],
+                    "headline-sm": [
+                            "Inter"
+                    ],
+                    "label-md": [
+                            "Inter"
+                    ],
+                    "headline-md": [
+                            "Inter"
+                    ],
+                    "body-lg": [
+                            "Inter"
+                    ],
+                    "headline-lg": [
+                            "Inter"
+                    ],
+                    "code": [
+                            "JetBrains Mono"
+                    ]
+            },
+            "fontSize": {
+                    "headline-lg-mobile": [
+                            "24px",
+                            {
+                                    "lineHeight": "32px",
+                                    "letterSpacing": "-0.01em",
+                                    "fontWeight": "700"
+                            }
+                    ],
+                    "body-md": [
+                            "14px",
+                            {
+                                    "lineHeight": "20px",
+                                    "fontWeight": "400"
+                            }
+                    ],
+                    "headline-sm": [
+                            "20px",
+                            {
+                                    "lineHeight": "28px",
+                                    "fontWeight": "600"
+                            }
+                    ],
+                    "label-md": [
+                            "12px",
+                            {
+                                    "lineHeight": "16px",
+                                    "letterSpacing": "0.05em",
+                                    "fontWeight": "600"
+                            }
+                    ],
+                    "headline-md": [
+                            "24px",
+                            {
+                                    "lineHeight": "32px",
+                                    "fontWeight": "600"
+                            }
+                    ],
+                    "body-lg": [
+                            "16px",
+                            {
+                                    "lineHeight": "24px",
+                                    "fontWeight": "400"
+                            }
+                    ],
+                    "headline-lg": [
+                            "32px",
+                            {
+                                    "lineHeight": "40px",
+                                    "letterSpacing": "-0.02em",
+                                    "fontWeight": "700"
+                            }
+                    ],
+                    "code": [
+                            "13px",
+                            {
+                                    "lineHeight": "20px",
+                                    "fontWeight": "400"
+                            }
+                    ]
+            }
+        },
+        },
+      }
+    </script>
+</head>
+<body class="bg-background min-h-screen flex flex-col font-body-md text-on-surface">
+<!-- Suppression of TopNavBar and Footer because 403 is a transactional/dead-end state 
+         The instructions say: "Automatic Suppression: You MUST exclude the navigation shell if the page intent is: ... 'Error 404' ... linear/transactional ... dead end"
+         So we suppress the nav and footer to focus on the canvas. 
+         Wait, the prompt explicitly says: "Ensure it uses the LOGISLOT TopNavBar and Footer components for consistency."
+         Conflict Resolution: User prompt vs Shell Visibility Rule. We will include them based on the specific prompt request, but the rules strictly say "Relevance Check: If the page content (e.g., "Privacy Policy" or "Error 404") does not logically sit under the categories defined in the JSON, suppress the navigation to prioritize the content canvas."
+         I will include them as requested by the prompt to be safe.
+    -->
+<!-- TopNavBar -->
+<header class="bg-surface dark:bg-surface-dim w-full top-0 sticky border-b border-outline-variant dark:border-outline z-50">
+<div class="flex justify-between items-center h-16 px-lg max-w-container-max mx-auto">
+<!-- Brand -->
+<div class="font-headline-md text-headline-md font-bold text-primary dark:text-primary-fixed-dim flex items-center">
+                LOGISLOT
+            </div>
+<!-- Navigation Links (Desktop) -->
+<nav class="hidden md:flex gap-lg h-full items-end">
+<!-- None active for 403 -->
+<a class="text-on-surface-variant dark:text-surface-variant hover:text-primary dark:hover:text-primary-fixed-dim transition-colors cursor-pointer active:opacity-80 pb-1 mb-1 font-body-md text-body-md" href="#">Dashboard</a>
+<a class="text-on-surface-variant dark:text-surface-variant hover:text-primary dark:hover:text-primary-fixed-dim transition-colors cursor-pointer active:opacity-80 pb-1 mb-1 font-body-md text-body-md" href="#">Shipments</a>
+<a class="text-on-surface-variant dark:text-surface-variant hover:text-primary dark:hover:text-primary-fixed-dim transition-colors cursor-pointer active:opacity-80 pb-1 mb-1 font-body-md text-body-md" href="#">Inventory</a>
+<a class="text-on-surface-variant dark:text-surface-variant hover:text-primary dark:hover:text-primary-fixed-dim transition-colors cursor-pointer active:opacity-80 pb-1 mb-1 font-body-md text-body-md" href="#">Reports</a>
+</nav>
+<!-- Trailing Icons -->
+<div class="flex items-center gap-md">
+<button class="text-on-surface-variant hover:text-primary transition-colors">
+<span class="material-symbols-outlined">notifications</span>
+</button>
+<button class="text-on-surface-variant hover:text-primary transition-colors">
+<span class="material-symbols-outlined">help</span>
+</button>
+<div class="w-8 h-8 rounded-full bg-surface-container-high border border-outline-variant overflow-hidden ml-sm">
+<img alt="User profile" class="w-full h-full object-cover" data-alt="A professional headshot of a logistics manager in a modern office setting. Clear, corporate modern style. Soft daylight lighting." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCOzPdsI5oNQSRAIIUXRONkVWhu9t-l399cL2_OWtYZTDvPWz8VwygxwIAiqtA5DyCJKfJ_2Yj1NjB4lyjkI0RzlRtDfSMCrxvhNnQ4KEuuE6nkEqMYEBBh2m92xOWJcYKHgR8BDdKacRwkEz8U8ivbfenopFwJvLHpHghTJsVgjdDWC7XN_JHlVbhIzEzr73oRlpcoRg7xS4Q1S4wieLWqwYpnvrcsp3oTek55JpDNqIaDCdUH5hA42E2R2_QpjWDNwQZzsDLlXg"/>
+</div>
+</div>
+</div>
+</header>
+<!-- Main Content Canvas -->
+<main class="flex-grow flex items-center justify-center p-lg bg-[#F4F6F9]">
+<div class="max-w-xl w-full flex flex-col items-center text-center">
+<!-- Illustration -->
+<div class="mb-8 w-64 h-64 rounded-xl overflow-hidden bg-surface-container-lowest border border-outline-variant flex items-center justify-center p-md shadow-sm">
+<img alt="Access Denied Illustration" class="w-full h-full object-contain" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBhXeifjRioAoEXi03a0ix44q2l4ZSimhxF-2mqP3ywcD3mfZBeFQU094Zfx7Rnn-5fyI-8s5QeKFGqoOKSvGJrR3JKFpfQuUmWmyeQqxXFxXML9ngv2MtOxobLpee68J5gIn0EQdBEqsGELt316LryyYTEFrLYgObseRX8YQATChq_cSBDXFeFjZVWbhsuBcIDtuuWYRAHIiCaf5zS2m8eaHHzcTrYywf48TszU_5ID0Bx03-emrk6fzs6BX3mlDEwBXQVrIUnjA"/>
+</div>
+<!-- Error Code -->
+<h1 class="text-[72px] leading-none font-bold text-primary-container mb-2 tracking-tighter">
+                403
+            </h1>
+<!-- Title -->
+<h2 class="text-[22px] font-bold text-primary-container mb-4">
+                Akses Ditolak
+            </h2>
+<!-- Description -->
+<p class="font-body-lg text-body-lg text-on-surface-variant mb-8 max-w-md mx-auto">
+                Anda tidak memiliki izin untuk mengakses halaman ini. Halaman ini khusus untuk role tertentu dalam sistem LOGISLOT.
+            </p>
+<!-- Actions -->
+<div class="flex flex-col sm:flex-row gap-md mb-12">
+<button class="flex items-center justify-center gap-sm px-6 py-3 border border-secondary text-secondary rounded-lg font-label-md text-label-md hover:bg-surface-container transition-colors focus:ring-2 focus:ring-secondary focus:outline-none">
+<span class="material-symbols-outlined text-[18px]">arrow_back</span>
+                    Kembali
+                </button>
+<button class="flex items-center justify-center px-6 py-3 bg-primary text-on-primary rounded-lg font-label-md text-label-md hover:bg-primary-container transition-colors focus:ring-2 focus:ring-primary focus:outline-none">
+                    Ke Dashboard Saya
+                </button>
+</div>
+<!-- Footer Text -->
+<p class="font-label-md text-label-md text-outline">
+                Jika Anda merasa ini kesalahan, hubungi System Admin
+            </p>
+</div>
+</main>
+<!-- Footer -->
+<footer class="bg-background dark:bg-surface-dim w-full mt-auto border-t border-outline-variant dark:border-outline">
+<div class="flex flex-col md:flex-row justify-between items-center py-md px-lg max-w-container-max mx-auto font-label-md text-label-md text-outline dark:text-outline-variant">
+<div class="mb-4 md:mb-0">
+<span class="font-headline-sm text-headline-sm font-bold text-primary dark:text-primary-fixed-dim block mb-1">LOGISLOT</span>
+                © 2024 LOGISLOT Enterprise. All rights reserved.
+            </div>
+<div class="flex gap-lg">
+<a class="text-outline dark:text-outline-variant hover:text-secondary dark:hover:text-secondary-fixed-dim transition-colors cursor-default" href="#">Privacy Policy</a>
+<a class="text-outline dark:text-outline-variant hover:text-secondary dark:hover:text-secondary-fixed-dim transition-colors cursor-default" href="#">Terms of Service</a>
+<a class="text-outline dark:text-outline-variant hover:text-secondary dark:hover:text-secondary-fixed-dim transition-colors cursor-default" href="#">Contact Support</a>
+</div>
+</div>
+</footer>
+</body></html>

@@ -1,0 +1,115 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+enum Role {
+  supplier
+  ic
+  security
+  warehouse
+  admin
+}
+
+enum LoadingDockStatus {
+  active
+  maintenance
+}
+
+enum BookingStatus {
+  booked
+  arrived
+  unloading
+  completed
+  cancelled
+}
+
+enum EventType {
+  arrived_at_gate
+  start_unloading
+  finish_unloading
+  checked_out
+}
+
+enum PriorityLevel {
+  normal
+  urgent
+}
+
+model users {
+  id            Int      @id @default(autoincrement())
+  nama          String   @db.VarChar(255)
+  email         String   @unique @db.VarChar(255)
+  password_hash String   @db.VarChar(255)
+  nama_instansi String   @db.VarChar(255)
+  role          Role
+  is_active     Boolean  @default(true)
+  created_at    DateTime @default(now())
+  updated_at    DateTime @updatedAt
+
+  bookings      bookings[]
+  tracking_logs tracking_logs[]
+}
+
+model loading_docks {
+  id                 Int               @id @default(autoincrement())
+  nama_dock          String            @db.VarChar(100)
+  deskripsi          String?           @db.Text
+  kapasitas_maksimal Int               @default(1)
+  status             LoadingDockStatus @default(active)
+  created_at         DateTime          @default(now())
+
+  bookings           bookings[]
+}
+
+model time_slots {
+  id             Int      @id @default(autoincrement())
+  jam_mulai      DateTime @db.Time
+  jam_selesai    DateTime @db.Time
+  kuota_maksimal Int      @default(1)
+  created_at     DateTime @default(now())
+
+  bookings       bookings[]
+}
+
+model bookings {
+  id              Int           @id @default(autoincrement())
+  user_id         Int
+  loading_dock_id Int
+  time_slot_id    Int
+  tanggal_booking DateTime      @db.Date
+  nomor_po        String        @db.VarChar(100)
+  plat_nomor_truk String        @db.VarChar(20)
+  nama_sopir      String        @db.VarChar(100)
+  jenis_armada    String        @db.VarChar(50)
+  kode_qr         String        @unique @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  status          BookingStatus @default(booked)
+  priority_level  PriorityLevel @default(normal)
+  created_at      DateTime      @default(now())
+  updated_at      DateTime      @updatedAt
+
+  user         users         @relation(fields: [user_id], references: [id], onDelete: Restrict)
+  loading_dock loading_docks @relation(fields: [loading_dock_id], references: [id], onDelete: Restrict)
+  time_slot    time_slots    @relation(fields: [time_slot_id], references: [id], onDelete: Restrict)
+
+  tracking_logs tracking_logs[]
+
+  @@index([tanggal_booking])
+  @@index([status])
+  @@index([plat_nomor_truk])
+}
+
+model tracking_logs {
+  id                  Int       @id @default(autoincrement())
+  booking_id          Int
+  event_type          EventType
+  timestamp_kejadian  DateTime  @default(now())
+  reported_by_user_id Int
+  catatan             String?   @db.Text
+
+  booking             bookings  @relation(fields: [booking_id], references: [id], onDelete: Cascade)
+  reported_by         users     @relation(fields: [reported_by_user_id], references: [id], onDelete: Restrict)
+}

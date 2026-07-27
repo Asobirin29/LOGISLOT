@@ -1,0 +1,281 @@
+openapi: 3.0.0
+info:
+  title: LogisSlot API Documentation
+  description: "API Backend untuk sistem manajemen antrean bongkar muat pabrik."
+  version: 1.0.0
+servers:
+  - url: http://localhost:5000
+    description: Local Server
+
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+
+  responses:
+    UnauthorizedError:
+      description: Unauthorized (Token hilang, invalid, atau expired)
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              message:
+                type: string
+                example: "Token tidak valid atau tidak disediakan"
+    ForbiddenError:
+      description: Forbidden (Role user tidak sesuai yang dipersyaratkan)
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              message:
+                type: string
+                example: "Akses ditolak"
+
+security:
+  - bearerAuth: []
+
+paths:
+  /api/auth/register:
+    post:
+      summary: Registrasi Akun Supplier
+      tags: [Auth]
+      security: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [nama, email, password, nama_instansi]
+              properties:
+                nama:
+                  type: string
+                email:
+                  type: string
+                  format: email
+                password:
+                  type: string
+                nama_instansi:
+                  type: string
+      responses:
+        '201':
+          description: Created
+        '400':
+          description: Bad Request (Field kurang atau email sudah terdaftar)
+
+  /api/auth/login:
+    post:
+      summary: Login User
+      tags: [Auth]
+      security: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [email, password]
+              properties:
+                email:
+                  type: string
+                password:
+                  type: string
+      responses:
+        '200':
+          description: Login berhasil
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  access_token:
+                    type: string
+                  refresh_token:
+                    type: string
+        '401':
+          description: Invalid email atau password
+
+  /api/auth/refresh:
+    post:
+      summary: Refresh Access Token
+      tags: [Auth]
+      security: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [refresh_token]
+              properties:
+                refresh_token:
+                  type: string
+      responses:
+        '200':
+          description: Token baru
+        '401':
+          description: Invalid refresh token
+
+  /api/auth/logout:
+    post:
+      summary: Logout User
+      tags: [Auth]
+      responses:
+        '200':
+          description: Logout berhasil
+
+  /api/slots/available:
+    get:
+      summary: Cek Ketersediaan Slot
+      tags: [Booking]
+      parameters:
+        - in: query
+          name: tanggal
+          required: true
+          schema:
+            type: string
+            format: date
+          example: '2023-11-20'
+      responses:
+        '200':
+          description: Daftar slot dan sisa kuota per dock
+
+  /api/bookings:
+    post:
+      summary: Buat Booking Baru
+      tags: [Booking]
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [loading_dock_id, time_slot_id, tanggal_booking, nomor_po, plat_nomor_truk, nama_sopir, jenis_armada]
+              properties:
+                loading_dock_id:
+                  type: string
+                time_slot_id:
+                  type: string
+                tanggal_booking:
+                  type: string
+                  format: date
+                nomor_po:
+                  type: string
+                plat_nomor_truk:
+                  type: string
+                nama_sopir:
+                  type: string
+                jenis_armada:
+                  type: string
+      responses:
+        '201':
+          description: Booking berhasil
+        '400':
+          description: Validasi error (H-1 limit terlampaui, plat tidak standar)
+        '409':
+          description: Slot penuh (Conflict)
+    get:
+      summary: Lihat Daftar Booking (IC/Admin)
+      tags: [Booking]
+      parameters:
+        - in: query
+          name: tanggal
+          schema:
+            type: string
+            format: date
+        - in: query
+          name: status
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Daftar booking
+        '403':
+          $ref: '#/components/responses/ForbiddenError'
+
+  /api/gate/scan:
+    post:
+      summary: Scan QR Code di Gerbang (Check-in/Check-out)
+      tags: [Gate]
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [kode_qr]
+              properties:
+                kode_qr:
+                  type: string
+      responses:
+        '200':
+          description: Berhasil scan
+        '404':
+          description: QR tidak valid
+
+  /api/warehouse/queue:
+    get:
+      summary: Antrean Truk (Gudang)
+      tags: [Warehouse]
+      responses:
+        '200':
+          description: Daftar truk yang sudah arrived, diurutkan ATA dan priority
+
+  /api/warehouse/bookings/{id}/assign-dock:
+    patch:
+      summary: Panggil Truk ke Dock
+      tags: [Warehouse]
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [loading_dock_id]
+              properties:
+                loading_dock_id:
+                  type: string
+      responses:
+        '200':
+          description: Berhasil assign
+        '400':
+          description: Dock sedang dipakai atau truk salah status
+
+  /api/warehouse/bookings/{id}/start-unloading:
+    patch:
+      summary: Mulai Bongkar Muat
+      tags: [Warehouse]
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Status diubah ke unloading
+
+  /api/warehouse/bookings/{id}/complete:
+    patch:
+      summary: Selesai Bongkar Muat
+      tags: [Warehouse]
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Status diubah ke completed
