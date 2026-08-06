@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 
@@ -8,6 +8,12 @@ export default function SecurityMainPage() {
   const [time, setTime] = useState<string>('--:--:--');
   const [isScannerOpen, setIsScannerOpen] = useState(false);
   const [scannedCode, setScannedCode] = useState('PO-20231025-01');
+  const [cameraState, setCameraState] = useState<'loading' | 'active' | 'error'>('loading');
+  const [cameraError, setCameraError] = useState<string | null>(null);
+  const [cameraMode, setCameraMode] = useState<'environment' | 'user'>('environment');
+  const [camerasList, setCamerasList] = useState<Array<{ id: string; label: string }>>([]);
+  const [selectedCameraId, setSelectedCameraId] = useState<string | null>(null);
+  const html5QrRef = useRef<any>(null);
   const router = useRouter();
 
   useEffect(() => {
@@ -24,11 +30,195 @@ export default function SecurityMainPage() {
     return () => clearInterval(interval);
   }, []);
 
+  // Initialize camera scanner when modal opens or camera selection changes
+  useEffect(() => {
+    if (!isScannerOpen) return;
+
+    let isMounted = true;
+
+    const startCamera = async () => {
+      try {
+        setCameraState('loading');
+        setCameraError(null);
+
+        // Safely stop & clear any existing scanner instance first
+        if (html5QrRef.current) {
+          try {
+            if (html5QrRef.current.isScanning) {
+              await html5QrRef.current.stop();
+            }
+            await html5QrRef.current.clear();
+          } catch (e) {
+            // Ignore cleanup error
+          }
+          html5QrRef.current = null;
+        }
+
+        const { Html5Qrcode } = await import('html5-qrcode');
+        if (!isMounted) return;
+
+        const elementId = 'security-qr-reader';
+        const el = document.getElementById(elementId);
+        if (!el) return;
+
+        const qrConfig = {
+          fps: 10,
+          qrbox: { width: 220, height: 220 },
+          aspectRatio: 1.0,
+        };
+
+        const onScanSuccess = (decodedText: string) => {
+          let code = decodedText;
+          try {
+            const parsed = JSON.parse(decodedText);
+            if (parsed.kode_qr) code = parsed.kode_qr;
+            else if (parsed.po) code = parsed.po;
+          } catch {}
+
+          setScannedCode(code);
+          handleProcessScan(code);
+        };
+
+        // Determine target camera configuration
+        let targetConfig: any = { facingMode: cameraMode };
+
+        try {
+          const devices = await Html5Qrcode.getCameras();
+          if (devices && devices.length > 0 && isMounted) {
+            setCamerasList(devices.map(d => ({ id: d.id, label: d.label })));
+
+            if (selectedCameraId) {
+              targetConfig = selectedCameraId;
+            } else {
+              const backCam = devices.find((d: any) =>
+                d.label.toLowerCase().includes('back') ||
+                d.label.toLowerCase().includes('rear') ||
+                d.label.toLowerCase().includes('belakang') ||
+                d.label.toLowerCase().includes('environment')
+              );
+              const userCam = devices.find((d: any) =>
+                d.label.toLowerCase().includes('front') ||
+                d.label.toLowerCase().includes('user') ||
+                d.label.toLowerCase().includes('depan')
+              );
+
+              if (cameraMode === 'environment' && backCam) {
+                targetConfig = backCam.id;
+              } else if (cameraMode === 'user' && userCam) {
+                targetConfig = userCam.id;
+              } else {
+                targetConfig = devices[0].id;
+              }
+            }
+          }
+        } catch (e) {
+          console.warn('Enumerate cameras fallback:', e);
+        }
+
+        // Helper function to create and start a scanner instance safely
+        const tryStart = async (configToUse: any): Promise<boolean> => {
+          try {
+            const scanner = new Html5Qrcode(elementId);
+            html5QrRef.current = scanner;
+            await scanner.start(configToUse, qrConfig, onScanSuccess, () => {});
+            return true;
+          } catch (err: any) {
+            console.warn('Camera start attempt failed:', err);
+            if (html5QrRef.current) {
+              try {
+                if (html5QrRef.current.isScanning) {
+                  await html5QrRef.current.stop();
+                }
+                await html5QrRef.current.clear();
+              } catch {}
+              html5QrRef.current = null;
+            }
+            return false;
+          }
+        };
+
+        // Attempt 1: Target camera
+        let success = await tryStart(targetConfig);
+
+        // Attempt 2: Fallback to requested cameraMode constraint
+        if (!success && isMounted) {
+          await new Promise(r => setTimeout(r, 250));
+          success = await tryStart({ facingMode: cameraMode });
+        }
+
+        // Attempt 3: Fallback to opposite cameraMode
+        if (!success && isMounted) {
+          await new Promise(r => setTimeout(r, 250));
+          const altMode = cameraMode === 'environment' ? 'user' : 'environment';
+          success = await tryStart({ facingMode: altMode });
+        }
+
+        if (isMounted) {
+          if (success) {
+            setCameraState('active');
+          } else {
+            setCameraState('error');
+            setCameraError('Kamera tidak dapat diakses (sedang digunakan oleh aplikasi/tab lain atau izin ditolak).');
+          }
+        }
+      } catch (e: any) {
+        console.error('Scanner init error:', e);
+        if (isMounted) {
+          setCameraState('error');
+          setCameraError('Gagal memuat modul kamera.');
+        }
+      }
+    };
+
+    startCamera();
+
+    return () => {
+      isMounted = false;
+      if (html5QrRef.current) {
+        const instance = html5QrRef.current;
+        html5QrRef.current = null;
+        if (instance.isScanning) {
+          instance.stop().then(() => {
+            instance.clear();
+          }).catch((e: any) => console.warn('Stop scanner error:', e));
+        } else {
+          try {
+            instance.clear();
+          } catch {}
+        }
+      }
+    };
+  }, [isScannerOpen, cameraMode, selectedCameraId]);
+
   const handleProcessScan = (codeToProcess?: string) => {
     const targetCode = codeToProcess || scannedCode;
     if (targetCode) {
       router.push(`/security/success?po=${encodeURIComponent(targetCode)}`);
     }
+  };
+
+  const handleSwitchCamera = () => {
+    if (camerasList.length > 1) {
+      const currentIndex = selectedCameraId
+        ? camerasList.findIndex(c => c.id === selectedCameraId)
+        : 0;
+      const nextIndex = (currentIndex + 1) % camerasList.length;
+      const nextCam = camerasList[nextIndex];
+      setSelectedCameraId(nextCam.id);
+      const isBack = nextCam.label.toLowerCase().includes('back') || nextCam.label.toLowerCase().includes('rear') || nextCam.label.toLowerCase().includes('belakang');
+      setCameraMode(isBack ? 'environment' : 'user');
+    } else {
+      const nextMode = cameraMode === 'environment' ? 'user' : 'environment';
+      setCameraMode(nextMode);
+      setSelectedCameraId(null);
+    }
+  };
+
+  const handleRetryCamera = () => {
+    setIsScannerOpen(false);
+    setTimeout(() => {
+      setIsScannerOpen(true);
+    }, 300);
   };
 
   return (
@@ -106,57 +296,104 @@ export default function SecurityMainPage() {
         </Link>
       </div>
 
-      {/* Interactive QR Scanner Simulation Modal */}
+      {/* Interactive QR Camera Scanner Modal */}
       {isScannerOpen && (
         <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
           <div className="absolute inset-0 bg-on-surface/60 backdrop-blur-md" onClick={() => setIsScannerOpen(false)}></div>
           <div className="relative bg-slate-900 text-white rounded-2xl w-full max-w-[480px] p-6 shadow-2xl z-10 border border-slate-700 flex flex-col items-center animate-in fade-in zoom-in-95">
             <div className="w-full flex justify-between items-center pb-4 border-b border-slate-800">
               <div className="flex items-center gap-2">
-                <span className="w-3 h-3 rounded-full bg-red-500 animate-ping"></span>
-                <h3 className="font-headline-md text-headline-md font-bold text-white">QR Code Camera Scanner</h3>
+                <span className={`w-3 h-3 rounded-full ${cameraState === 'active' ? 'bg-emerald-500 animate-ping' : cameraState === 'loading' ? 'bg-amber-400 animate-pulse' : 'bg-red-500'}`}></span>
+                <h3 className="font-headline-md text-headline-md font-bold text-white text-base md:text-lg">QR Camera Scanner</h3>
               </div>
-              <button onClick={() => setIsScannerOpen(false)} className="text-slate-400 hover:text-white p-1 rounded-full">
-                <span className="material-symbols-outlined">close</span>
-              </button>
+              <div className="flex items-center gap-2">
+                {/* Camera Switch Toggle (Front / Back Camera) */}
+                <button
+                  type="button"
+                  onClick={handleSwitchCamera}
+                  title="Ganti Kamera Depan / Belakang"
+                  className="flex items-center gap-1.5 px-2.5 py-1 rounded-lg bg-slate-800 hover:bg-slate-700 active:scale-95 text-emerald-400 border border-slate-700 text-xs font-medium transition-all"
+                >
+                  <span className="material-symbols-outlined text-sm">cameraswitch</span>
+                  <span>{cameraMode === 'environment' ? 'Kamera Belakang' : 'Kamera Depan'}</span>
+                </button>
+
+                <button onClick={() => setIsScannerOpen(false)} className="text-slate-400 hover:text-white p-1 rounded-full">
+                  <span className="material-symbols-outlined">close</span>
+                </button>
+              </div>
             </div>
 
-            {/* Camera Viewport Simulation */}
-            <div className="relative my-6 w-full aspect-square max-w-[320px] bg-slate-950 rounded-xl border-2 border-primary overflow-hidden flex items-center justify-center shadow-inner">
-              {/* Laser Scanner Line */}
-              <div className="absolute w-full h-1 bg-emerald-400 shadow-[0_0_15px_#34d399] top-1/2 -translate-y-1/2 animate-bounce"></div>
+            {/* Camera Viewport Container */}
+            <div className="relative my-6 w-full aspect-square max-w-[320px] bg-slate-950 rounded-xl border-2 border-emerald-500/80 overflow-hidden flex items-center justify-center shadow-inner">
+              
+              {/* HTML5 QR Code Scanner mounts video here */}
+              <div id="security-qr-reader" className="w-full h-full object-cover text-xs overflow-hidden" />
 
-              {/* Viewfinder Corners */}
-              <div className="absolute top-4 left-4 w-8 h-8 border-t-4 border-l-4 border-emerald-400"></div>
-              <div className="absolute top-4 right-4 w-8 h-8 border-t-4 border-r-4 border-emerald-400"></div>
-              <div className="absolute bottom-4 left-4 w-8 h-8 border-b-4 border-l-4 border-emerald-400"></div>
-              <div className="absolute bottom-4 right-4 w-8 h-8 border-b-4 border-r-4 border-emerald-400"></div>
+              {/* Viewfinder Overlays & Loading / Error States */}
+              <div className="absolute inset-0 pointer-events-none flex flex-col items-center justify-center z-10">
+                {/* Laser Scanner Line */}
+                <div className="absolute w-full h-0.5 bg-emerald-400 shadow-[0_0_15px_#34d399] top-1/2 -translate-y-1/2 animate-pulse"></div>
 
-              {/* QR Code graphic */}
-              <svg viewBox="0 0 100 100" className="w-40 h-40 opacity-80">
-                <rect x="0" y="0" width="100" height="100" fill="transparent" />
-                <path d="M10,10 h30 v30 h-30 z M15,15 v20 h20 v-20 z M20,20 h10 v10 h-10 z" fill="#34d399" />
-                <path d="M60,10 h30 v30 h-30 z M65,15 v20 h20 v-20 z M70,20 h10 v10 h-10 z" fill="#34d399" />
-                <path d="M10,60 h30 v30 h-30 z M15,65 v20 h20 v-20 z M20,70 h10 v10 h-10 z" fill="#34d399" />
-                <rect x="45" y="10" width="10" height="10" fill="#34d399" />
-                <rect x="45" y="30" width="10" height="20" fill="#34d399" />
-                <rect x="60" y="50" width="20" height="10" fill="#34d399" />
-                <rect x="50" y="70" width="30" height="20" fill="#34d399" />
-              </svg>
+                {/* Viewfinder Corners */}
+                <div className="absolute top-4 left-4 w-8 h-8 border-t-4 border-l-4 border-emerald-400 rounded-tl"></div>
+                <div className="absolute top-4 right-4 w-8 h-8 border-t-4 border-r-4 border-emerald-400 rounded-tr"></div>
+                <div className="absolute bottom-4 left-4 w-8 h-8 border-b-4 border-l-4 border-emerald-400 rounded-bl"></div>
+                <div className="absolute bottom-4 right-4 w-8 h-8 border-b-4 border-r-4 border-emerald-400 rounded-br"></div>
 
-              <span className="absolute bottom-3 text-xs font-mono text-emerald-400 bg-slate-900/80 px-2 py-1 rounded">
-                Kamera Aktif — Arahkan QR Code Tiket
+                {/* Switch Camera Overlay Button (Floating in Viewport Top-Right) */}
+                <div className="absolute top-3 right-3 pointer-events-auto z-20">
+                  <button
+                    type="button"
+                    onClick={handleSwitchCamera}
+                    title="Beralih Kamera Depan/Belakang"
+                    className="p-2 rounded-full bg-slate-900/80 hover:bg-slate-800 text-emerald-400 border border-emerald-500/30 shadow-md backdrop-blur-sm transition-transform active:scale-90 flex items-center justify-center"
+                  >
+                    <span className="material-symbols-outlined text-lg">flip_camera_ios</span>
+                  </button>
+                </div>
+
+                {/* Loading State Overlay */}
+                {cameraState === 'loading' && (
+                  <div className="absolute inset-0 bg-slate-950/90 flex flex-col items-center justify-center text-slate-300 gap-2">
+                    <span className="w-8 h-8 border-4 border-emerald-400 border-t-transparent rounded-full animate-spin"></span>
+                    <span className="text-xs font-medium">Membuka Kamera...</span>
+                  </div>
+                )}
+
+                {/* Error State Overlay */}
+                {cameraState === 'error' && (
+                  <div className="absolute inset-0 bg-slate-950/95 flex flex-col items-center justify-center text-slate-300 p-4 text-center gap-2 pointer-events-auto z-30">
+                    <span className="material-symbols-outlined text-amber-400 text-3xl">videocam_off</span>
+                    <span className="text-xs text-amber-200 font-semibold max-w-[260px]">{cameraError || 'Kamera Tidak Tersedia'}</span>
+                    <button
+                      onClick={handleRetryCamera}
+                      className="mt-1 px-3 py-1.5 bg-emerald-500/20 hover:bg-emerald-500/30 text-emerald-400 border border-emerald-500/40 rounded-lg text-xs font-semibold flex items-center gap-1.5 transition-colors"
+                    >
+                      <span className="material-symbols-outlined text-sm">refresh</span>
+                      Coba Lagi Kamera
+                    </button>
+                    <span className="text-[11px] text-slate-400 mt-1">Atau gunakan input manual / sampel tiket di bawah</span>
+                  </div>
+                )}
+              </div>
+
+              {/* Status Badge */}
+              <span className="absolute bottom-3 text-[11px] font-mono text-emerald-400 bg-slate-900/90 px-2.5 py-1 rounded-md z-20 pointer-events-none flex items-center gap-1.5 border border-slate-800 shadow-sm">
+                <span className={`w-2 h-2 rounded-full ${cameraState === 'active' ? 'bg-emerald-400 animate-ping' : 'bg-amber-400'}`}></span>
+                {cameraState === 'active' ? 'Kamera Aktif — Arahkan QR Code' : cameraState === 'loading' ? 'Menghubungkan Kamera...' : 'Kamera Nonaktif'}
               </span>
             </div>
 
-            {/* Quick Sample Selector for Demo Testing */}
-            <div className="w-full space-y-2 mb-4">
-              <label className="block text-xs text-slate-400">Pilih / Input Hasil Scan Tiket:</label>
+            {/* Manual Input / Quick Sample Selector */}
+            <div className="w-full space-y-2 mb-2">
+              <label className="block text-xs text-slate-400">Atau Pilih / Input Hasil Scan Tiket:</label>
               <div className="flex gap-2">
                 <input
                   type="text"
                   value={scannedCode}
                   onChange={(e) => setScannedCode(e.target.value)}
+                  placeholder="Input Kode PO..."
                   className="flex-1 px-3 py-2 bg-slate-800 border border-slate-700 rounded-lg text-white font-mono text-sm focus:outline-none focus:border-emerald-400"
                 />
                 <button
@@ -166,7 +403,7 @@ export default function SecurityMainPage() {
                   Proses Check-In
                 </button>
               </div>
-              <div className="flex gap-2 pt-1">
+              <div className="flex gap-2 pt-1 flex-wrap">
                 {['PO-20231025-01', 'PO-20231025-02', 'PO-20231024-05'].map(code => (
                   <button
                     key={code}
@@ -174,7 +411,7 @@ export default function SecurityMainPage() {
                       setScannedCode(code);
                       handleProcessScan(code);
                     }}
-                    className="text-xs bg-slate-800 hover:bg-slate-700 text-slate-300 px-2.5 py-1 rounded border border-slate-700"
+                    className="text-xs bg-slate-800 hover:bg-slate-700 text-slate-300 px-2.5 py-1 rounded border border-slate-700 font-mono transition-colors"
                   >
                     {code}
                   </button>
@@ -187,4 +424,5 @@ export default function SecurityMainPage() {
     </div>
   );
 }
+
 

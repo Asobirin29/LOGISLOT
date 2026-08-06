@@ -258,6 +258,9 @@ function QRScannerScreen({ onResult, onBack }: { onResult: (r: ScanResult) => vo
   const [scanning, setScanning] = useState(false);
   const [processing, setProcessing] = useState(false);
   const [error, setError] = useState('');
+  const [facingMode, setFacingMode] = useState<'environment' | 'user'>('environment');
+  const [camerasList, setCamerasList] = useState<Array<{ id: string; label: string }>>([]);
+  const [selectedCamId, setSelectedCamId] = useState<string | null>(null);
   const html5QrRef = useRef<any>(null);
 
   useEffect(() => {
@@ -265,34 +268,77 @@ function QRScannerScreen({ onResult, onBack }: { onResult: (r: ScanResult) => vo
 
     const startScanner = async () => {
       try {
+        if (html5QrRef.current) {
+          try {
+            if (html5QrRef.current.isScanning) {
+              await html5QrRef.current.stop();
+            }
+            await html5QrRef.current.clear();
+          } catch {}
+          html5QrRef.current = null;
+        }
+
         const { Html5Qrcode } = await import('html5-qrcode');
         scanner = new Html5Qrcode('qr-reader');
         html5QrRef.current = scanner;
 
-        await scanner.start(
-          { facingMode: 'environment' },
-          { fps: 15, qrbox: { width: 260, height: 260 } },
-          async (decodedText: string) => {
-            if (processing) return;
-            setProcessing(true);
-            try {
-              let qrData = decodedText;
-              // Handle JSON-encoded QR (from our ticket modal)
-              try {
-                const parsed = JSON.parse(decodedText);
-                if (parsed.kode_qr) qrData = parsed.kode_qr;
-              } catch { /* plain UUID */ }
-
-              const result = await scanQR(qrData);
-              await scanner?.stop();
-              onResult(result);
-            } catch (e) {
-              setProcessing(false);
+        let selectedCamera: any = { facingMode };
+        try {
+          const devices = await Html5Qrcode.getCameras();
+          if (devices && devices.length > 0) {
+            setCamerasList(devices.map(d => ({ id: d.id, label: d.label })));
+            if (selectedCamId) {
+              selectedCamera = selectedCamId;
+            } else {
+              const backCam = devices.find((d: any) =>
+                d.label.toLowerCase().includes('back') ||
+                d.label.toLowerCase().includes('rear') ||
+                d.label.toLowerCase().includes('belakang')
+              );
+              const userCam = devices.find((d: any) =>
+                d.label.toLowerCase().includes('front') ||
+                d.label.toLowerCase().includes('user') ||
+                d.label.toLowerCase().includes('depan')
+              );
+              if (facingMode === 'environment' && backCam) selectedCamera = backCam.id;
+              else if (facingMode === 'user' && userCam) selectedCamera = userCam.id;
+              else selectedCamera = devices[0].id;
             }
-          },
-          () => {} // qr error — ignore, keep scanning
-        );
-        setScanning(true);
+          }
+        } catch {}
+
+        const qrConfig = { fps: 15, qrbox: { width: 260, height: 260 } };
+
+        const handleDecoded = async (decodedText: string) => {
+          if (processing) return;
+          setProcessing(true);
+          try {
+            let qrData = decodedText;
+            try {
+              const parsed = JSON.parse(decodedText);
+              if (parsed.kode_qr) qrData = parsed.kode_qr;
+            } catch { /* plain UUID */ }
+
+            const result = await scanQR(qrData);
+            await scanner?.stop();
+            onResult(result);
+          } catch (e) {
+            setProcessing(false);
+          }
+        };
+
+        try {
+          await scanner.start(selectedCamera, qrConfig, handleDecoded, () => {});
+          setScanning(true);
+        } catch (e1) {
+          try {
+            await scanner.start({ facingMode }, qrConfig, handleDecoded, () => {});
+            setScanning(true);
+          } catch (e2) {
+            setError('Tidak bisa mengakses kamera. Pastikan izin kamera diberikan.');
+            console.error(e2);
+          }
+        }
       } catch (err: any) {
         setError('Tidak bisa mengakses kamera. Pastikan izin kamera diberikan.');
         console.error(err);
@@ -304,16 +350,41 @@ function QRScannerScreen({ onResult, onBack }: { onResult: (r: ScanResult) => vo
     return () => {
       html5QrRef.current?.stop().catch(() => {});
     };
-  }, []);
+  }, [facingMode, selectedCamId]);
+
+  const handleSwitchCamera = () => {
+    if (camerasList.length > 1) {
+      const currentIndex = selectedCamId ? camerasList.findIndex(c => c.id === selectedCamId) : 0;
+      const nextIndex = (currentIndex + 1) % camerasList.length;
+      const nextCam = camerasList[nextIndex];
+      setSelectedCamId(nextCam.id);
+      const isBack = nextCam.label.toLowerCase().includes('back') || nextCam.label.toLowerCase().includes('rear') || nextCam.label.toLowerCase().includes('belakang');
+      setFacingMode(isBack ? 'environment' : 'user');
+    } else {
+      const nextMode = facingMode === 'environment' ? 'user' : 'environment';
+      setFacingMode(nextMode);
+      setSelectedCamId(null);
+    }
+  };
 
   return (
     <div className="flex flex-col min-h-[calc(100vh-52px)] items-center justify-center px-4 py-6">
       <div className="w-full max-w-sm">
-        <div className="flex items-center gap-3 mb-6">
-          <button onClick={onBack} className="p-2 rounded-xl bg-white/10 hover:bg-white/20 transition text-white">
-            <X size={20} />
+        <div className="flex items-center justify-between mb-6">
+          <div className="flex items-center gap-3">
+            <button onClick={onBack} className="p-2 rounded-xl bg-white/10 hover:bg-white/20 transition text-white">
+              <X size={20} />
+            </button>
+            <h2 className="text-xl font-black">Scan QR Code</h2>
+          </div>
+          <button
+            onClick={handleSwitchCamera}
+            className="flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-white/10 hover:bg-white/20 text-xs font-semibold text-white border border-white/10 transition active:scale-95"
+            title="Ganti Kamera Depan / Belakang"
+          >
+            <span className="material-symbols-outlined text-sm">cameraswitch</span>
+            <span>{facingMode === 'environment' ? 'Belakang' : 'Depan'}</span>
           </button>
-          <h2 className="text-xl font-black">Scan QR Code</h2>
         </div>
 
         {error ? (
