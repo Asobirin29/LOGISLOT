@@ -12,7 +12,7 @@
 
 ---
 
-## 1. Ringkasan Eksekutif (Executive Summary)
+## 1. Ringkasan 
 
 LOGISLOT adalah platform logistik enterprise yang dirancang khusus untuk memodernisasi dan mendigitalisasi operasional lalu lintas armada truk di area pabrik dan gudang (Warehouse Inbound Logistics). 
 
@@ -26,7 +26,7 @@ Sistem ini menghilangkan inefisiensi antrean fisik manual, mengeliminasi risiko 
 
 ---
 
-## 2. Matriks Peran Pengguna (User Roles & Access Control)
+## 2.User Roles & Access Control
 
 LogisSlot menerapkan Role-Based Access Control (RBAC) yang membagi pengguna ke dalam 5 peran operasional dengan kredensial pengujian (seed data) sebagai berikut:
 
@@ -40,7 +40,7 @@ LogisSlot menerapkan Role-Based Access Control (RBAC) yang membagi pengguna ke d
 
 ---
 
-## 3. Alur Kerja & Lifecycle Armada (Armada Supply Chain Flow)
+## 3. Armada Supply Chain Flow
 
 Seluruh tahapan pergerakan truk dicatat secara otomatis ke dalam Tracking Logs dengan stempel waktu (timestamp) akurat:
 
@@ -64,7 +64,7 @@ sequenceDiagram
 
 ---
 
-## 4. Aturan Bisnis Utama (Business Rules & Tolerance)
+## 4. Business Rules & Tolerance
 
 1. **Jendela Pemesanan Slot (Booking Cut-off)**:
    - Pemesanan slot kedatangan hanya dapat dilakukan maksimal pada **H-1 sebelum pukul 15:00 WIB**.
