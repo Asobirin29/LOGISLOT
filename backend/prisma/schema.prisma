@@ -45,6 +45,7 @@ model users {
   email         String   @unique @db.VarChar(255)
   password_hash String   @db.VarChar(255)
   nama_instansi String   @db.VarChar(255)
+  logo_url      String?  @db.Text
   role          Role
   is_active     Boolean  @default(true)
   created_at    DateTime @default(now())

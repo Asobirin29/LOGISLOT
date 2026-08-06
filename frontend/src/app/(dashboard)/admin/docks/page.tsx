@@ -124,16 +124,18 @@ export default function LoadingDockPage() {
               key={dock.id}
               className="bg-surface-container-lowest rounded-xl border border-outline-variant p-lg flex flex-col relative group hover:border-secondary transition-colors duration-200 shadow-sm"
             >
-              <button 
-                onClick={() => handleOpenEdit(dock)}
-                className="absolute top-md right-md text-on-surface-variant hover:text-primary transition-colors p-1"
-                title="Edit Dock"
-              >
-                <span className="material-symbols-outlined">edit</span>
-              </button>
-              <div className="mb-md">
-                <h2 className="font-headline-md text-headline-md text-primary font-bold">{dock.name}</h2>
-                <p className="font-body-md text-body-md text-on-surface-variant mt-xs">{dock.category}</p>
+              <div className="flex items-start justify-between gap-2 mb-md">
+                <div>
+                  <h2 className="font-headline-md text-headline-md text-primary font-bold">{dock.name}</h2>
+                  <p className="font-body-md text-body-md text-on-surface-variant mt-xs">{dock.category}</p>
+                </div>
+                <button 
+                  onClick={() => handleOpenEdit(dock)}
+                  className="text-on-surface-variant hover:text-primary hover:bg-slate-100 p-2 rounded-lg transition-colors flex items-center justify-center shrink-0"
+                  title="Edit Dock"
+                >
+                  <span className="material-symbols-outlined text-[20px]">edit</span>
+                </button>
               </div>
               <div className="mb-lg">
                 <span className="inline-flex items-center px-sm py-xs rounded-full bg-surface-container-low text-on-surface text-label-md font-label-md border border-outline-variant">

@@ -103,7 +103,8 @@ export const login = async (req: Request, res: Response) => {
           nama: user.nama,
           email: user.email,
           role: user.role,
-          nama_instansi: user.nama_instansi
+          nama_instansi: user.nama_instansi,
+          logo_url: user.logo_url
         }
       }
     });
@@ -192,3 +193,40 @@ export const logout = async (req: Request, res: Response) => {
     return res.status(500).json({ status: 'error', message: 'Internal server error' });
   }
 };
+
+export const updateProfile = async (req: Request, res: Response) => {
+  try {
+    const userId = (req as any).user?.id;
+    const { nama, nama_instansi, logo_url } = req.body;
+
+    if (!userId) {
+      return res.status(401).json({ status: 'error', message: 'Unauthorized' });
+    }
+
+    const updatedUser = await prisma.users.update({
+      where: { id: userId },
+      data: {
+        ...(nama && { nama }),
+        ...(nama_instansi && { nama_instansi }),
+        ...(logo_url !== undefined && { logo_url }),
+      },
+    });
+
+    return res.status(200).json({
+      status: 'success',
+      message: 'Profil & logo perusahaan berhasil diperbarui',
+      data: {
+        id: updatedUser.id,
+        nama: updatedUser.nama,
+        email: updatedUser.email,
+        role: updatedUser.role,
+        nama_instansi: updatedUser.nama_instansi,
+        logo_url: updatedUser.logo_url,
+      },
+    });
+  } catch (error: any) {
+    console.error('[Update Profile Error]', error);
+    return res.status(500).json({ status: 'error', message: 'Internal server error' });
+  }
+};
+

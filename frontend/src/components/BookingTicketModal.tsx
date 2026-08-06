@@ -43,7 +43,7 @@ export default function BookingTicketModal({ booking, onClose }: BookingTicketMo
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 backdrop-blur-sm p-4">
       <div className="bg-white rounded-2xl shadow-2xl w-full max-w-md animate-in fade-in zoom-in-95 duration-200">
         {/* Modal Header */}
-        <div className="flex items-center justify-between px-6 pt-5 pb-4 border-b">
+        <div className="flex items-center justify-between px-6 pt-5 pb-4 border-b print:hidden">
           <h2 className="text-lg font-bold text-[#1B365D]">Tiket Booking</h2>
           <button onClick={onClose} className="p-1.5 rounded-full hover:bg-gray-100 transition">
             <X size={20} className="text-gray-500" />
@@ -65,9 +65,9 @@ export default function BookingTicketModal({ booking, onClose }: BookingTicketMo
 
           {/* Divider with holes */}
           <div className="relative flex items-center my-4">
-            <div className="absolute -left-8 w-6 h-6 bg-gray-100 rounded-full"></div>
+            <div className="absolute -left-8 w-6 h-6 bg-gray-100 rounded-full print:hidden"></div>
             <div className="flex-1 border-t-2 border-dashed border-gray-200"></div>
-            <div className="absolute -right-8 w-6 h-6 bg-gray-100 rounded-full"></div>
+            <div className="absolute -right-8 w-6 h-6 bg-gray-100 rounded-full print:hidden"></div>
           </div>
 
           {/* QR Code */}
@@ -103,7 +103,7 @@ export default function BookingTicketModal({ booking, onClose }: BookingTicketMo
         </div>
 
         {/* Action Buttons */}
-        <div className="px-6 pb-5 pt-2 flex gap-3">
+        <div className="px-6 pb-5 pt-2 flex gap-3 print:hidden">
           <button
             onClick={handlePrint}
             className="flex-1 flex items-center justify-center gap-2 border border-[#1B365D] text-[#1B365D] py-2 rounded-lg hover:bg-[#1B365D]/5 transition font-medium text-sm"

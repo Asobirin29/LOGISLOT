@@ -12,6 +12,7 @@ export interface User {
   role: Role;
   nama_instansi: string | null;
   nomor_telepon?: string | null;
+  logo_url?: string | null;
 }
 
 interface AuthContextType {
@@ -19,6 +20,7 @@ interface AuthContextType {
   loading: boolean;
   login: (data: any) => void;
   logout: () => Promise<void>;
+  updateUser: (updatedFields: Partial<User>) => void;
 }
 
 const AuthContext = createContext<AuthContextType>({
@@ -26,6 +28,7 @@ const AuthContext = createContext<AuthContextType>({
   loading: true,
   login: () => {},
   logout: async () => {},
+  updateUser: () => {},
 });
 
 const USER_STORAGE_KEY = 'logislot_user';
@@ -67,12 +70,15 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
         setAccessToken(token);
 
         const payload = JSON.parse(atob(token.split('.')[1]));
+        const parsedStored = storedUser ? JSON.parse(storedUser!) : {};
         const refreshedUser: User = {
           id: payload.id,
           email: payload.email,
           role: payload.role,
-          nama: payload.nama || (storedUser ? JSON.parse(storedUser!).nama : 'User'),
-          nama_instansi: storedUser ? JSON.parse(storedUser!).nama_instansi : null,
+          nama: payload.nama || parsedStored.nama || 'User',
+          nama_instansi: parsedStored.nama_instansi || null,
+          nomor_telepon: parsedStored.nomor_telepon || null,
+          logo_url: parsedStored.logo_url || null,
         };
         setUser(refreshedUser);
         localStorage.setItem(USER_STORAGE_KEY, JSON.stringify(refreshedUser));
@@ -99,6 +105,15 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
     localStorage.setItem(TOKEN_STORAGE_KEY, data.token);
   };
 
+  const updateUser = (updatedFields: Partial<User>) => {
+    setUser((prev) => {
+      if (!prev) return null;
+      const updated = { ...prev, ...updatedFields };
+      localStorage.setItem(USER_STORAGE_KEY, JSON.stringify(updated));
+      return updated;
+    });
+  };
+
   const logout = async () => {
     try {
       await api.post('/auth/logout');
@@ -114,10 +129,11 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
   };
 
   return (
-    <AuthContext.Provider value={{ user, loading, login, logout }}>
+    <AuthContext.Provider value={{ user, loading, login, logout, updateUser }}>
       {children}
     </AuthContext.Provider>
   );
 };
 
 export const useAuth = () => useContext(AuthContext);
+
