@@ -9,6 +9,9 @@ export const setAccessToken = (token: string | null) => {
 
 export const getAccessToken = () => accessToken;
 
+const TOKEN_STORAGE_KEY = 'logislot_token';
+const USER_STORAGE_KEY = 'logislot_user';
+
 const api = axios.create({
   baseURL: process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5000/api',
   withCredentials: true, // Important for reading/setting httpOnly cookies
@@ -16,8 +19,11 @@ const api = axios.create({
 
 api.interceptors.request.use(
   (config) => {
-    if (accessToken) {
-      config.headers.Authorization = `Bearer ${accessToken}`;
+    // Use in-memory token, or fall back to localStorage
+    const token = accessToken || (typeof window !== 'undefined' ? localStorage.getItem(TOKEN_STORAGE_KEY) : null);
+    if (token) {
+      config.headers.Authorization = `Bearer ${token}`;
+      if (!accessToken) setAccessToken(token); // sync back to memory
     }
     return config;
   },
@@ -29,8 +35,11 @@ api.interceptors.response.use(
   async (error) => {
     const originalRequest = error.config;
 
-    // If 401 and not already retrying, and it's not the login endpoint
-    if (error.response?.status === 401 && !originalRequest._retry && originalRequest.url !== '/auth/login') {
+    // Skip refresh loop for auth endpoints
+    const isAuthEndpoint = originalRequest.url?.includes('/auth/');
+
+    // If 401 and not already retrying, and it's not an auth endpoint
+    if (error.response?.status === 401 && !originalRequest._retry && !isAuthEndpoint) {
       originalRequest._retry = true;
       try {
         // Attempt to refresh the token using httpOnly cookie
@@ -42,15 +51,20 @@ api.interceptors.response.use(
         
         const newToken = res.data.data.token;
         setAccessToken(newToken);
+        if (typeof window !== 'undefined') {
+          localStorage.setItem(TOKEN_STORAGE_KEY, newToken);
+        }
         
         // Update header and retry request
         originalRequest.headers.Authorization = `Bearer ${newToken}`;
         return api(originalRequest);
       } catch (refreshError) {
-        // If refresh fails, clear token and maybe trigger a global logout event
+        // Refresh failed — clear session and redirect to login
         setAccessToken(null);
         if (typeof window !== 'undefined') {
-           window.location.href = '/login';
+          localStorage.removeItem(TOKEN_STORAGE_KEY);
+          localStorage.removeItem(USER_STORAGE_KEY);
+          window.location.href = '/login';
         }
         return Promise.reject(refreshError);
       }

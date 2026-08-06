@@ -211,7 +211,7 @@ export const manualCheckin = async (req: AuthRequest, res: Response) => {
     // Find matching booking for today with 'booked' status
     const booking = await prisma.bookings.findFirst({
       where: {
-        plat_nomor_truk: { equals: plat_nomor_truk.toUpperCase().trim(), mode: 'insensitive' },
+        plat_nomor_truk: { equals: plat_nomor_truk.toUpperCase().trim() },
         tanggal_booking: searchDate,
         status: BookingStatus.booked
       },

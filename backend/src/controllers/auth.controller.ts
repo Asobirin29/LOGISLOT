@@ -63,12 +63,7 @@ export const login = async (req: Request, res: Response) => {
       return res.status(401).json({ status: 'error', message: 'Invalid credentials or inactive account' });
     }
 
-    let isMatch = false;
-    if (user.password_hash === 'hashedpassword123' && password === 'hashedpassword123') {
-       isMatch = true; // For seed bypass
-    } else {
-       isMatch = await bcrypt.compare(password, user.password_hash);
-    }
+    const isMatch = await bcrypt.compare(password, user.password_hash);
 
     if (!isMatch) {
       return res.status(401).json({ status: 'error', message: 'Invalid credentials' });
@@ -134,14 +129,17 @@ export const refresh = async (req: Request, res: Response) => {
       return res.status(401).json({ status: 'error', message: 'Invalid or expired refresh token' });
     }
 
-    const storedHash = await redisClient.get(`refresh_token:${payload.id}`);
-    if (!storedHash) {
-      return res.status(401).json({ status: 'error', message: 'Refresh token revoked or expired in store' });
-    }
-
-    const isValid = await bcrypt.compare(refreshToken, storedHash);
-    if (!isValid) {
-      return res.status(401).json({ status: 'error', message: 'Invalid refresh token' });
+    // If Redis is available, verify the stored token hash (revocation check)
+    // If Redis is not available, fall back to JWT-only verification (safe for dev)
+    if (redisClient.isOpen) {
+      const storedHash = await redisClient.get(`refresh_token:${payload.id}`);
+      if (!storedHash) {
+        return res.status(401).json({ status: 'error', message: 'Refresh token revoked or expired in store' });
+      }
+      const isValid = await bcrypt.compare(refreshToken, storedHash);
+      if (!isValid) {
+        return res.status(401).json({ status: 'error', message: 'Invalid refresh token' });
+      }
     }
 
     const user = await prisma.users.findUnique({ where: { id: payload.id } });

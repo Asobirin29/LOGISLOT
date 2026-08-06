@@ -94,7 +94,9 @@ export default function BookingPage() {
             <div>
               <label className="block font-label-md text-label-md text-on-surface mb-xs" htmlFor="poNumber">Nomor PO <span className="text-error">*</span></label>
               <div className="relative">
-                <span className="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-outline">receipt</span>
+                <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-outline">
+                  <span className="material-symbols-outlined text-[20px]">receipt</span>
+                </div>
                 <input className="w-full bg-surface-container-lowest border border-outline-variant rounded-lg py-2 pl-10 pr-4 font-body-md text-on-surface focus:outline-none focus:border-secondary focus:ring-1 focus:ring-secondary transition-colors" id="poNumber" name="poNumber" placeholder="Masukkan Nomor Purchase Order" required type="text"/>
               </div>
             </div>
@@ -102,7 +104,9 @@ export default function BookingPage() {
             <div>
               <label className="block font-label-md text-label-md text-on-surface mb-xs" htmlFor="truckPlate">Plat Nomor Truk <span className="text-error">*</span></label>
               <div className="relative">
-                <span className="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-outline">pin</span>
+                <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-outline">
+                  <span className="material-symbols-outlined text-[20px]">pin</span>
+                </div>
                 <input className="w-full bg-surface-container-lowest border border-outline-variant rounded-lg py-2 pl-10 pr-4 font-body-md text-on-surface uppercase focus:outline-none focus:border-secondary focus:ring-1 focus:ring-secondary transition-colors" id="truckPlate" name="truckPlate" placeholder="B 1234 XYZ" required type="text"/>
               </div>
               <p className="font-label-md text-label-md text-on-surface-variant mt-1 font-normal opacity-80">Format: Area - Nomor - Huruf Belakang</p>
@@ -111,7 +115,9 @@ export default function BookingPage() {
             <div>
               <label className="block font-label-md text-label-md text-on-surface mb-xs" htmlFor="driverName">Nama Sopir <span className="text-error">*</span></label>
               <div className="relative">
-                <span className="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-outline">person</span>
+                <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-outline">
+                  <span className="material-symbols-outlined text-[20px]">person</span>
+                </div>
                 <input className="w-full bg-surface-container-lowest border border-outline-variant rounded-lg py-2 pl-10 pr-4 font-body-md text-on-surface focus:outline-none focus:border-secondary focus:ring-1 focus:ring-secondary transition-colors" id="driverName" name="driverName" placeholder="Nama Lengkap Sopir" required type="text"/>
               </div>
             </div>
@@ -119,7 +125,9 @@ export default function BookingPage() {
             <div>
               <label className="block font-label-md text-label-md text-on-surface mb-xs" htmlFor="vehicleType">Jenis Armada <span className="text-error">*</span></label>
               <div className="relative">
-                <span className="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-outline z-10 pointer-events-none">local_shipping</span>
+                <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-outline z-10">
+                  <span className="material-symbols-outlined text-[20px]">local_shipping</span>
+                </div>
                 <select className="w-full bg-surface-container-lowest border border-outline-variant rounded-lg py-2 pl-10 pr-10 font-body-md text-on-surface appearance-none focus:outline-none focus:border-secondary focus:ring-1 focus:ring-secondary transition-colors cursor-pointer" id="vehicleType" name="vehicleType" required defaultValue="">
                   <option disabled value="">Pilih Jenis Armada</option>
                   <option value="Truk Box">Truk Box</option>
@@ -127,7 +135,9 @@ export default function BookingPage() {
                   <option value="Truk Fuso">Truk Fuso</option>
                   <option value="Trailer">Trailer</option>
                 </select>
-                <span className="material-symbols-outlined absolute right-3 top-1/2 -translate-y-1/2 text-outline pointer-events-none">arrow_drop_down</span>
+                <div className="absolute inset-y-0 right-0 pr-3 flex items-center pointer-events-none text-outline">
+                  <span className="material-symbols-outlined text-[20px]">arrow_drop_down</span>
+                </div>
               </div>
             </div>
           </form>

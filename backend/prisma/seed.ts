@@ -1,10 +1,30 @@
 import { PrismaClient, Role, LoadingDockStatus, BookingStatus, EventType } from '@prisma/client';
+import { PrismaMariaDb } from '@prisma/adapter-mariadb';
 import crypto from 'crypto';
+import bcrypt from 'bcryptjs';
 
-const prisma = new PrismaClient();
+const adapter = new PrismaMariaDb({
+  host: 'localhost',
+  user: 'root',
+  password: '',
+  database: 'logislot',
+  port: 3306,
+});
+
+const prisma = new PrismaClient({ adapter });
 
 async function main() {
   console.log('Start seeding...');
+
+  // Hash the default password for all seed users
+  const salt = await bcrypt.genSalt(10);
+  const hashedPassword = await bcrypt.hash('password123', salt);
+
+  // Reset database tables in correct order to avoid Foreign Key violations
+  await prisma.tracking_logs.deleteMany();
+  await prisma.bookings.deleteMany();
+  await prisma.loading_docks.deleteMany();
+  await prisma.time_slots.deleteMany();
 
   // 1. Create 5 Users (One for each role)
   const users = await Promise.all([
@@ -14,7 +34,7 @@ async function main() {
       create: {
         nama: 'Supplier Budi',
         email: 'supplier@logislot.com',
-        password_hash: 'hashedpassword123',
+        password_hash: hashedPassword,
         nama_instansi: 'PT Pemasok Sukses',
         role: Role.supplier,
       },
@@ -25,7 +45,7 @@ async function main() {
       create: {
         nama: 'IC Clara',
         email: 'ic@logislot.com',
-        password_hash: 'hashedpassword123',
+        password_hash: hashedPassword,
         nama_instansi: 'Gudang Utama',
         role: Role.ic,
       },
@@ -36,7 +56,7 @@ async function main() {
       create: {
         nama: 'Security Danu',
         email: 'security@logislot.com',
-        password_hash: 'hashedpassword123',
+        password_hash: hashedPassword,
         nama_instansi: 'Gudang Utama',
         role: Role.security,
       },
@@ -47,7 +67,7 @@ async function main() {
       create: {
         nama: 'Warehouse Eko',
         email: 'warehouse@logislot.com',
-        password_hash: 'hashedpassword123',
+        password_hash: hashedPassword,
         nama_instansi: 'Gudang Utama',
         role: Role.warehouse,
       },
@@ -58,7 +78,7 @@ async function main() {
       create: {
         nama: 'Admin Fajar',
         email: 'admin@logislot.com',
-        password_hash: 'hashedpassword123',
+        password_hash: hashedPassword,
         nama_instansi: 'Gudang Utama',
         role: Role.admin,
       },
@@ -73,14 +93,12 @@ async function main() {
     { nama_dock: 'Dock C - Spareparts', deskripsi: 'Untuk suku cadang mesin', kapasitas_maksimal: 1, status: LoadingDockStatus.maintenance },
   ];
 
-  await prisma.loading_docks.deleteMany(); // Reset for clean seed
   const docks = await Promise.all(
     docksData.map((d) => prisma.loading_docks.create({ data: d }))
   );
   console.log(`Created ${docks.length} loading docks.`);
 
   // 3. Create 8 Time Slots (07:00 - 15:00) per 1 hour, quota 5
-  await prisma.time_slots.deleteMany(); // Reset
   const timeSlotsData = [];
   for (let i = 7; i <= 14; i++) {
     timeSlotsData.push({
@@ -95,9 +113,6 @@ async function main() {
   console.log(`Created ${timeSlots.length} time slots.`);
 
   // 4. Create 10 Bookings with diverse statuses
-  await prisma.tracking_logs.deleteMany();
-  await prisma.bookings.deleteMany();
-  
   const supplierId = users[0].id;
   const securityId = users[2].id;
   

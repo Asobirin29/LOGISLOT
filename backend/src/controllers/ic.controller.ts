@@ -2,7 +2,7 @@ import { Request, Response } from 'express';
 import { prisma } from '../prisma';
 import { AuthRequest } from '../middlewares/auth';
 import { broadcastBookingChanged } from '../utils/socket';
-import { BookingStatus } from '@prisma/client';
+import { BookingStatus, PriorityLevel } from '@prisma/client';
 
 
 
@@ -27,7 +27,7 @@ export const getAllBookings = async (req: AuthRequest, res: Response) => {
       where.loading_dock_id = Number(loading_dock_id);
     }
     if (nomor_po && typeof nomor_po === 'string') {
-      where.nomor_po = { contains: nomor_po, mode: 'insensitive' };
+      where.nomor_po = { contains: nomor_po };
     }
 
     const bookings = await prisma.bookings.findMany({

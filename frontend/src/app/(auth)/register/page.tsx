@@ -67,34 +67,34 @@ export default function RegisterPage() {
           <h2 className="font-headline-md text-headline-md text-primary-container mb-xs">Daftar sebagai Supplier</h2>
           <p className="font-body-md text-body-md text-on-surface-variant mb-xl">Lengkapi data perusahaan Anda untuk mulai memesan slot pengiriman.</p>
           
-          <form className="space-y-md">
+          <form className="space-y-md" suppressHydrationWarning>
             <div>
               <label className="block font-label-md text-label-md text-on-surface mb-xs" htmlFor="picName">Nama Lengkap PIC</label>
               <div className="relative">
-                <div className="absolute inset-y-0 left-0 pl-sm flex items-center pointer-events-none">
-                  <span className="material-symbols-outlined text-outline">person</span>
+                <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-outline">
+                  <span className="material-symbols-outlined text-[20px]">person</span>
                 </div>
-                <input className="block w-full pl-[40px] pr-sm py-sm bg-surface-container-lowest border border-outline-variant rounded-lg text-on-surface focus:ring-secondary focus:border-secondary transition-colors" id="picName" placeholder="Masukkan nama lengkap" type="text" />
+                <input className="block w-full pl-10 pr-3 py-sm bg-surface-container-lowest border border-outline-variant rounded-lg text-on-surface focus:ring-secondary focus:border-secondary transition-colors" id="picName" placeholder="Masukkan nama lengkap" type="text" suppressHydrationWarning />
               </div>
             </div>
             
             <div>
               <label className="block font-label-md text-label-md text-on-surface mb-xs" htmlFor="companyName">Nama Perusahaan/Instansi</label>
               <div className="relative">
-                <div className="absolute inset-y-0 left-0 pl-sm flex items-center pointer-events-none">
-                  <span className="material-symbols-outlined text-outline">domain</span>
+                <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-outline">
+                  <span className="material-symbols-outlined text-[20px]">domain</span>
                 </div>
-                <input className="block w-full pl-[40px] pr-sm py-sm bg-surface-container-lowest border border-outline-variant rounded-lg text-on-surface focus:ring-secondary focus:border-secondary transition-colors" id="companyName" placeholder="PT. Contoh Logistik" type="text" />
+                <input className="block w-full pl-10 pr-3 py-sm bg-surface-container-lowest border border-outline-variant rounded-lg text-on-surface focus:ring-secondary focus:border-secondary transition-colors" id="companyName" placeholder="PT. Contoh Logistik" type="text" suppressHydrationWarning />
               </div>
             </div>
             
             <div>
               <label className="block font-label-md text-label-md text-on-surface mb-xs" htmlFor="email">Email Perusahaan</label>
               <div className="relative">
-                <div className="absolute inset-y-0 left-0 pl-sm flex items-center pointer-events-none">
-                  <span className="material-symbols-outlined text-outline">mail</span>
+                <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-outline">
+                  <span className="material-symbols-outlined text-[20px]">mail</span>
                 </div>
-                <input className="block w-full pl-[40px] pr-sm py-sm bg-surface-container-lowest border border-outline-variant rounded-lg text-on-surface focus:ring-secondary focus:border-secondary transition-colors" id="email" placeholder="email@perusahaan.com" type="email" />
+                <input className="block w-full pl-10 pr-3 py-sm bg-surface-container-lowest border border-outline-variant rounded-lg text-on-surface focus:ring-secondary focus:border-secondary transition-colors" id="email" placeholder="email@perusahaan.com" type="email" suppressHydrationWarning />
               </div>
               <p className="font-body-md text-[12px] text-on-surface-variant mt-xs">Gunakan email resmi perusahaan</p>
             </div>
@@ -105,17 +105,17 @@ export default function RegisterPage() {
                 <span className="inline-flex items-center px-sm py-sm rounded-l-lg border border-r-0 border-outline-variant bg-surface-container-low text-on-surface font-body-md">
                   +62
                 </span>
-                <input className="block w-full px-sm py-sm bg-surface-container-lowest border border-outline-variant rounded-r-lg text-on-surface focus:ring-secondary focus:border-secondary transition-colors" id="phone" placeholder="81234567890" type="tel" />
+                <input className="block w-full px-sm py-sm bg-surface-container-lowest border border-outline-variant rounded-r-lg text-on-surface focus:ring-secondary focus:border-secondary transition-colors" id="phone" placeholder="81234567890" type="tel" suppressHydrationWarning />
               </div>
             </div>
             
             <div>
               <label className="block font-label-md text-label-md text-on-surface mb-xs" htmlFor="password">Kata Sandi</label>
               <div className="relative">
-                <div className="absolute inset-y-0 left-0 pl-sm flex items-center pointer-events-none">
-                  <span className="material-symbols-outlined text-outline">lock</span>
+                <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-outline">
+                  <span className="material-symbols-outlined text-[20px]">lock</span>
                 </div>
-                <input className="block w-full pl-[40px] pr-sm py-sm bg-surface-container-lowest border border-outline-variant rounded-lg text-on-surface focus:ring-secondary focus:border-secondary transition-colors" id="password" placeholder="••••••••" type="password" />
+                <input className="block w-full pl-10 pr-3 py-sm bg-surface-container-lowest border border-outline-variant rounded-lg text-on-surface focus:ring-secondary focus:border-secondary transition-colors" id="password" placeholder="••••••••" type="password" suppressHydrationWarning />
               </div>
               <div className="mt-sm">
                 <div className="h-[4px] w-full bg-surface-container-highest rounded-full overflow-hidden flex">
@@ -129,23 +129,23 @@ export default function RegisterPage() {
             <div>
               <label className="block font-label-md text-label-md text-on-surface mb-xs" htmlFor="confirmPassword">Konfirmasi Kata Sandi</label>
               <div className="relative">
-                <div className="absolute inset-y-0 left-0 pl-sm flex items-center pointer-events-none">
-                  <span className="material-symbols-outlined text-outline">lock</span>
+                <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-outline">
+                  <span className="material-symbols-outlined text-[20px]">lock</span>
                 </div>
-                <input className="block w-full pl-[40px] pr-sm py-sm bg-surface-container-lowest border border-outline-variant rounded-lg text-on-surface focus:ring-secondary focus:border-secondary transition-colors" id="confirmPassword" placeholder="••••••••" type="password" />
+                <input className="block w-full pl-10 pr-3 py-sm bg-surface-container-lowest border border-outline-variant rounded-lg text-on-surface focus:ring-secondary focus:border-secondary transition-colors" id="confirmPassword" placeholder="••••••••" type="password" suppressHydrationWarning />
               </div>
             </div>
             
             <div className="flex items-start pt-xs">
               <div className="flex items-center h-5">
-                <input className="w-4 h-4 border border-outline-variant rounded bg-surface-container-lowest focus:ring-secondary text-primary-container" id="terms" type="checkbox" />
+                <input className="w-4 h-4 border border-outline-variant rounded bg-surface-container-lowest focus:ring-secondary text-primary-container" id="terms" type="checkbox" suppressHydrationWarning />
               </div>
               <label className="ml-sm font-body-md text-[13px] text-on-surface-variant leading-tight" htmlFor="terms">
                 Saya menyetujui Syarat &amp; Ketentuan penggunaan sistem LOGISLOT
               </label>
             </div>
             
-            <Link href="/register/success" className="w-full bg-primary-container text-on-primary font-label-md text-label-md py-[12px] rounded-lg hover:bg-primary transition-colors flex justify-center items-center mt-lg" type="button">
+            <Link href="/register/success" className="w-full bg-primary-container text-on-primary font-label-md text-label-md py-[12px] rounded-lg hover:bg-primary transition-colors flex justify-center items-center mt-lg" type="button" suppressHydrationWarning>
               Daftar Sekarang
             </Link>
           </form>
@@ -154,10 +154,6 @@ export default function RegisterPage() {
             <p className="font-body-md text-body-md text-on-surface-variant">
               Sudah punya akun? <Link className="text-[#2E5B82] font-semibold hover:underline" href="/login">Masuk di sini</Link>
             </p>
-          </div>
-          
-          <div className="mt-xl pt-lg border-t border-outline-variant text-center">
-            <p className="font-body-md text-[12px] text-outline">© 2026 LOGISLOT — Internal Use Only</p>
           </div>
         </div>
       </div>

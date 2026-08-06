@@ -11,17 +11,17 @@ export default function DashboardLayout({
 }: {
   children: React.ReactNode;
 }) {
-  const { user, isAuthenticated, loading } = useAuth();
+  const { user, loading } = useAuth();
   const router = useRouter();
   const pathname = usePathname();
 
   useEffect(() => {
-    if (!loading && !isAuthenticated) {
+    if (!loading && !user) {
       router.push('/login');
     }
-  }, [loading, isAuthenticated, router]);
+  }, [loading, user, router]);
 
-  if (loading || !isAuthenticated) {
+  if (loading || !user) {
     return (
       <div className="flex h-screen w-full items-center justify-center bg-background">
         <span className="material-symbols-outlined animate-spin text-primary text-4xl">progress_activity</span>

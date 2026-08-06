@@ -1,6 +1,7 @@
 import { Request, Response } from 'express';
 import bcrypt from 'bcryptjs';
 import { prisma } from '../prisma';
+import { Role } from '@prisma/client';
 import redisClient from '../utils/redis';
 import { getIO, broadcastDockChanged } from '../utils/socket';
 

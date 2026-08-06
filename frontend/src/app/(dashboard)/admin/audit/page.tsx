@@ -14,35 +14,35 @@ export default function AdminAuditLogPage() {
         <div className="flex flex-wrap gap-sm w-full md:w-auto">
           {/* Date Range */}
           <div className="relative flex-1 md:flex-none min-w-[200px]">
-            <div className="absolute inset-y-0 left-0 pl-sm flex items-center pointer-events-none">
-              <span className="material-symbols-outlined text-outline text-sm">date_range</span>
+            <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+              <span className="material-symbols-outlined text-outline text-[18px]">date_range</span>
             </div>
-            <input className="block w-full pl-xl pr-sm py-sm border border-outline-variant rounded-lg font-body-md text-body-md text-on-surface bg-surface-bright focus:border-secondary focus:ring-1 focus:ring-secondary transition-colors" readOnly type="text" defaultValue="Last 7 Days"/>
+            <input className="block w-full pl-10 pr-3 py-sm border border-outline-variant rounded-lg font-body-md text-body-md text-on-surface bg-surface-bright focus:border-secondary focus:ring-1 focus:ring-secondary transition-colors" readOnly type="text" defaultValue="Last 7 Days"/>
           </div>
           
           {/* Event Type */}
           <div className="relative flex-1 md:flex-none min-w-[180px]">
-            <select className="block w-full pl-sm pr-xl py-sm border border-outline-variant rounded-lg font-body-md text-body-md text-on-surface bg-surface-bright focus:border-secondary focus:ring-1 focus:ring-secondary appearance-none transition-colors">
+            <select className="block w-full pl-3 pr-9 py-sm border border-outline-variant rounded-lg font-body-md text-body-md text-on-surface bg-surface-bright focus:border-secondary focus:ring-1 focus:ring-secondary appearance-none transition-colors">
               <option>Semua Jenis Event</option>
               <option>Booking</option>
               <option>Operasional</option>
               <option>Sistem</option>
             </select>
-            <div className="absolute inset-y-0 right-0 flex items-center px-sm pointer-events-none text-outline">
-              <span className="material-symbols-outlined text-sm">arrow_drop_down</span>
+            <div className="absolute inset-y-0 right-0 flex items-center pr-2 pointer-events-none text-outline">
+              <span className="material-symbols-outlined text-[20px]">arrow_drop_down</span>
             </div>
           </div>
           
           {/* User */}
           <div className="relative flex-1 md:flex-none min-w-[180px]">
-            <select className="block w-full pl-sm pr-xl py-sm border border-outline-variant rounded-lg font-body-md text-body-md text-on-surface bg-surface-bright focus:border-secondary focus:ring-1 focus:ring-secondary appearance-none transition-colors">
+            <select className="block w-full pl-3 pr-9 py-sm border border-outline-variant rounded-lg font-body-md text-body-md text-on-surface bg-surface-bright focus:border-secondary focus:ring-1 focus:ring-secondary appearance-none transition-colors">
               <option>Semua Pengguna</option>
               <option>Admin</option>
               <option>Security</option>
               <option>Vendor</option>
             </select>
-            <div className="absolute inset-y-0 right-0 flex items-center px-sm pointer-events-none text-outline">
-              <span className="material-symbols-outlined text-sm">arrow_drop_down</span>
+            <div className="absolute inset-y-0 right-0 flex items-center pr-2 pointer-events-none text-outline">
+              <span className="material-symbols-outlined text-[20px]">arrow_drop_down</span>
             </div>
           </div>
         </div>

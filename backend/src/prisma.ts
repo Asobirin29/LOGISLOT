@@ -1,9 +1,12 @@
 import { PrismaClient } from '@prisma/client';
-import { Pool } from 'pg';
-import { PrismaPg } from '@prisma/adapter-pg';
+import { PrismaMariaDb } from '@prisma/adapter-mariadb';
 
-const connectionString = process.env.DATABASE_URL || 'postgresql://user:password@localhost:5432/logislot';
+const adapter = new PrismaMariaDb({
+  host: 'localhost',
+  user: 'root',
+  password: '',
+  database: 'logislot',
+  port: 3306,
+});
 
-const pool = new Pool({ connectionString });
-const adapter = new PrismaPg(pool);
 export const prisma = new PrismaClient({ adapter });

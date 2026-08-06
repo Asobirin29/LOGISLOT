@@ -11,6 +11,7 @@ export default function LoginPage() {
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
   const [isLoading, setIsLoading] = useState(false);
+  const [showPassword, setShowPassword] = useState(false);
   const router = useRouter();
   const { login } = useAuth();
 
@@ -25,8 +26,14 @@ export default function LoginPage() {
         const { token, user } = res.data.data;
         login({ user, token });
         
-        // Redirect to dashboard
-        router.push('/dashboard');
+        const roleRedirects: Record<string, string> = {
+          admin: '/admin',
+          supplier: '/supplier',
+          ic: '/ic',
+          security: '/security',
+          warehouse: '/warehouse',
+        };
+        router.push(roleRedirects[user.role] || '/supplier');
       }
     } catch (err: any) {
       setError(err.response?.data?.message || 'Login failed. Please check your credentials.');
@@ -81,21 +88,22 @@ export default function LoginPage() {
           </div>
           
           {error && <div className="p-sm mb-sm bg-error/10 text-error rounded-md text-sm">{error}</div>}
-          <form className="space-y-lg" onSubmit={handleSubmit}>
+          <form className="space-y-lg" onSubmit={handleSubmit} suppressHydrationWarning>
             {/* Email Field */}
             <div>
               <label className="block font-label-md text-label-md text-on-surface mb-xs">Email</label>
               <div className="relative">
-                <div className="absolute inset-y-0 left-0 pl-sm flex items-center pointer-events-none">
-                  <span className="material-symbols-outlined text-outline">mail</span>
+                <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-outline">
+                  <span className="material-symbols-outlined text-[20px]">mail</span>
                 </div>
                 <input 
-                  className="w-full pl-xl pr-sm py-sm font-body-md text-body-md text-on-surface border border-outline-variant focus:ring-2 focus:ring-secondary focus:border-secondary rounded-lg transition-colors placeholder:text-outline" 
+                  className="w-full pl-10 pr-3 py-sm font-body-md text-body-md text-on-surface border border-outline-variant focus:ring-2 focus:ring-secondary focus:border-secondary rounded-lg transition-colors placeholder:text-outline" 
                   placeholder="Masukkan email" 
                   type="email"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                   required 
+                  suppressHydrationWarning
                 />
               </div>
             </div>
@@ -107,19 +115,25 @@ export default function LoginPage() {
                 <Link className="font-label-md text-label-md text-secondary hover:text-primary transition-colors" href="/forgot-password">Lupa kata sandi?</Link>
               </div>
               <div className="relative">
-                <div className="absolute inset-y-0 left-0 pl-sm flex items-center pointer-events-none">
-                  <span className="material-symbols-outlined text-outline">lock</span>
+                <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-outline">
+                  <span className="material-symbols-outlined text-[20px]">lock</span>
                 </div>
                 <input 
-                  className="w-full pl-xl pr-xl py-sm font-body-md text-body-md text-on-surface border border-outline-variant focus:ring-2 focus:ring-secondary focus:border-secondary rounded-lg transition-colors placeholder:text-outline" 
+                  className="w-full pl-10 pr-10 py-sm font-body-md text-body-md text-on-surface border border-outline-variant focus:ring-2 focus:ring-secondary focus:border-secondary rounded-lg transition-colors placeholder:text-outline" 
                   placeholder="Masukkan kata sandi" 
-                  type="password"
+                  type={showPassword ? 'text' : 'password'}
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
                   required 
+                  suppressHydrationWarning
                 />
-                <button className="absolute inset-y-0 right-0 pr-sm flex items-center text-outline hover:text-on-surface transition-colors" type="button">
-                  <span className="material-symbols-outlined">visibility_off</span>
+                <button 
+                  className="absolute inset-y-0 right-0 pr-3 flex items-center text-outline hover:text-on-surface transition-colors" 
+                  type="button"
+                  onClick={() => setShowPassword(!showPassword)}
+                  suppressHydrationWarning
+                >
+                  <span className="material-symbols-outlined text-[20px]">{showPassword ? 'visibility' : 'visibility_off'}</span>
                 </button>
               </div>
             </div>
@@ -129,6 +143,7 @@ export default function LoginPage() {
               className="w-full bg-primary hover:bg-primary/90 text-on-primary font-body-lg text-body-lg font-bold py-md rounded-lg transition-colors flex justify-center items-center gap-sm mt-md disabled:opacity-50" 
               type="submit"
               disabled={isLoading}
+              suppressHydrationWarning
             >
               {isLoading ? 'Memproses...' : 'Masuk'}
             </button>
@@ -150,10 +165,6 @@ export default function LoginPage() {
           </form>
         </div>
         
-        {/* Footer */}
-        <div className="absolute bottom-lg w-full text-center px-lg">
-          <p className="font-label-md text-label-md text-outline">© 2026 LOGISLOT — Internal Use Only</p>
-        </div>
       </div>
     </div>
   );
