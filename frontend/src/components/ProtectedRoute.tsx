@@ -20,11 +20,11 @@ export default function ProtectedRoute({ children, allowedRoles }: ProtectedRout
       } else if (allowedRoles && !allowedRoles.includes(user.role)) {
         // Redirect to their default dashboard if unauthorized for this route
         const routes: Record<Role, string> = {
-          supplier: '/supplier/dashboard',
-          ic: '/ic/dashboard',
-          security: '/security/gate',
-          warehouse: '/warehouse/dashboard',
-          admin: '/admin/dashboard'
+          supplier: '/supplier',
+          ic: '/ic',
+          security: '/security',
+          warehouse: '/warehouse',
+          admin: '/admin'
         };
         router.replace(routes[user.role]);
       }

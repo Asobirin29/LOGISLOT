@@ -99,7 +99,7 @@ export default function ICMonitoringPage() {
       )}
 
       {/* Page Header */}
-      <div className="flex justify-between items-center mb-xl">
+      <div data-tour="ic-monitoring-header" className="flex justify-between items-center mb-xl">
         <div className="flex items-center space-x-3">
           <h2 className="font-headline-lg text-headline-lg text-[#1B365D] font-bold">Monitoring Kedatangan Material</h2>
           <div className="flex items-center bg-green-100 text-green-800 px-3 py-1 rounded-full text-label-md border border-green-200">
@@ -111,7 +111,7 @@ export default function ICMonitoringPage() {
       </div>
 
       {/* Summary Cards */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-md mb-xl">
+      <div data-tour="ic-priority-toggle" className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-md mb-xl">
         <div className="bg-white p-lg rounded-lg border border-outline-variant flex items-center justify-between shadow-sm">
           <div>
             <p className="font-label-md text-label-md text-outline uppercase mb-1">Total Hari Ini</p>

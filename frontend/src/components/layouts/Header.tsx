@@ -1,5 +1,7 @@
 'use client';
 
+import DriverTourButton from '../DriverTourButton';
+
 interface HeaderProps {
   title: string;
   user: any;
@@ -12,7 +14,10 @@ export default function Header({ title, user }: HeaderProps) {
         <h2 className="font-headline-sm text-headline-sm font-bold text-primary">{title}</h2>
       </div>
       <div className="flex items-center gap-md">
-        <button className="text-on-surface-variant hover:bg-surface-container transition-colors duration-200 ease-in-out p-sm rounded-full flex items-center justify-center">
+        <div data-tour="header-tour-btn">
+          <DriverTourButton variant="header" />
+        </div>
+        <button data-tour="header-notifications" className="text-on-surface-variant hover:bg-surface-container transition-colors duration-200 ease-in-out p-sm rounded-full flex items-center justify-center">
           <span className="material-symbols-outlined">notifications</span>
         </button>
         <button className="text-on-surface-variant hover:bg-surface-container transition-colors duration-200 ease-in-out p-sm rounded-full flex items-center justify-center">
@@ -25,3 +30,4 @@ export default function Header({ title, user }: HeaderProps) {
     </header>
   );
 }
+

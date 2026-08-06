@@ -19,9 +19,9 @@ export default function SupplierDashboard() {
   return (
     <div className="flex gap-gutter w-full h-full">
       {/* Left Column: Calendar (60%) */}
-      <div className="w-[60%] flex flex-col gap-md">
+      <div className="w-[60%] flex flex-col gap-md" data-tour="supplier-calendar-overview">
         <div className="bg-surface-container-lowest border border-outline-variant rounded-lg p-lg flex flex-col h-full">
-          <div className="flex justify-between items-center mb-xl">
+          <div className="flex justify-between items-center mb-xl" data-tour="supplier-calendar-month">
             <h3 className="font-headline-sm text-headline-sm text-primary font-bold">{currentMonth}</h3>
             <div className="flex gap-sm">
               <button className="w-8 h-8 rounded flex items-center justify-center border border-outline-variant text-on-surface-variant hover:bg-surface-container transition-colors">
@@ -89,7 +89,7 @@ export default function SupplierDashboard() {
       </div>
 
       {/* Right Column: Available Slots (40%) */}
-      <div className="w-[40%] flex flex-col">
+      <div className="w-[40%] flex flex-col" data-tour="supplier-slot-list">
         <div className="bg-surface-container-lowest border border-outline-variant rounded-lg flex flex-col h-full overflow-hidden">
           <div className="p-lg border-b border-outline-variant bg-surface-container-lowest sticky top-0 z-10">
             <h3 className="font-headline-sm text-headline-sm text-primary font-bold">Slot Tersedia — {selectedDate} {currentMonth}</h3>

@@ -37,6 +37,7 @@ export default function Sidebar({ user }: SidebarProps) {
     ],
     ic: [
       { label: 'Monitoring Kedatangan', icon: 'monitoring', path: '/ic' },
+      { label: 'Laporan SLA', icon: 'analytics', path: '/ic/reports' },
     ]
   };
 
@@ -54,7 +55,7 @@ export default function Sidebar({ user }: SidebarProps) {
         </div>
       </div>
       
-      <nav className="flex-1 space-y-sm px-xs">
+      <nav className="flex-1 space-y-sm px-xs" data-tour="sidebar-menu">
         {currentMenu.map((item) => {
           const isActive = pathname === item.path || pathname.startsWith(`${item.path}/`);
           return (
@@ -74,7 +75,7 @@ export default function Sidebar({ user }: SidebarProps) {
         })}
       </nav>
 
-      <div className="mt-auto px-xs space-y-sm">
+      <div className="mt-auto px-xs space-y-sm" data-tour="sidebar-help-settings">
         <Link href="/settings" className="text-on-primary hover:bg-on-primary-fixed-variant rounded-lg mx-2 my-1 flex items-center gap-md px-md py-sm transition-colors duration-200 ease-in-out">
           <span className="material-symbols-outlined">settings</span>
           <span>Settings</span>
@@ -85,7 +86,7 @@ export default function Sidebar({ user }: SidebarProps) {
         </Link>
       </div>
 
-      <div className="mt-lg border-t border-on-primary-fixed-variant p-md flex items-center gap-md">
+      <div className="mt-lg border-t border-on-primary-fixed-variant p-md flex items-center gap-md" data-tour="sidebar-profile-card">
         <div className="w-10 h-10 rounded-full bg-surface-variant flex items-center justify-center text-primary font-bold uppercase">
           {user?.nama ? user.nama.substring(0, 2) : 'US'}
         </div>

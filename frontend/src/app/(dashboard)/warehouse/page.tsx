@@ -110,11 +110,14 @@ export default function WarehouseDashboardPage() {
         </div>
       )}
 
-      <header className="flex justify-between items-center w-full max-w-[1440px] mx-auto">
-        <h2 className="font-headline-lg text-headline-lg text-primary font-bold">Denah Loading Dock — Real-Time</h2>
+      <header data-tour="wh-stat-summary" className="w-full max-w-[1440px] mx-auto flex flex-col sm:flex-row justify-between items-start sm:items-center gap-md">
+        <div>
+          <h1 className="font-headline-md text-headline-md text-on-surface font-bold">Dashboard Operational Gudang</h1>
+          <p className="font-body-md text-body-md text-on-surface-variant">Monitoring Real-Time Aktivitas Loading Dock & Antrean</p>
+        </div>
         <button 
           onClick={() => setIsManageDocksOpen(true)}
-          className="bg-surface-container-lowest border border-secondary text-secondary hover:bg-surface-container-low transition-colors px-md py-sm rounded-lg font-label-md text-label-md flex items-center gap-xs shadow-sm"
+          className="bg-surface-container-lowest border border-outline-variant text-primary px-4 py-2 rounded-lg font-label-md text-label-md font-semibold hover:bg-surface-container-low transition-colors shadow-sm flex items-center gap-2"
         >
           <span className="material-symbols-outlined text-[18px]">tune</span>
           Kelola Status Dock
@@ -122,7 +125,7 @@ export default function WarehouseDashboardPage() {
       </header>
 
       {/* Bento Grid for Docks */}
-      <div className="w-full max-w-[1440px] mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-md">
+      <div data-tour="wh-dock-monitor" className="w-full max-w-[1440px] mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-md">
         {docks.map((dock) => {
           if (dock.status === 'Tersedia') {
             return (

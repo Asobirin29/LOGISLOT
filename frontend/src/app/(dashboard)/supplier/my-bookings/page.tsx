@@ -161,7 +161,7 @@ export default function MyBookingsPage() {
       </div>
       
       {/* Filter Bar */}
-      <div className="bg-surface-container-lowest p-4 rounded-xl border border-outline-variant mb-lg flex flex-col sm:flex-row gap-4 items-center justify-between">
+      <div data-tour="bookings-filter" className="bg-surface-container-lowest p-4 rounded-xl border border-outline-variant mb-lg flex flex-col sm:flex-row gap-4 items-center justify-between">
         <div className="flex flex-col sm:flex-row gap-4 w-full sm:w-auto">
           {/* Dropdown Status */}
           <div className="relative min-w-[160px]">
@@ -210,7 +210,7 @@ export default function MyBookingsPage() {
       </div>
       
       {/* Card List */}
-      <div className="space-y-[12px] mb-xl">
+      <div data-tour="bookings-table" className="space-y-[12px] mb-xl">
         {filteredBookings.length === 0 ? (
           <div className="p-12 text-center text-on-surface-variant bg-surface-container-lowest rounded-xl border border-outline-variant">
             Tidak ada data booking matching pencarian.
@@ -247,6 +247,7 @@ export default function MyBookingsPage() {
               {/* Actions */}
               <div className="flex items-center gap-2 self-end sm:self-auto border-t sm:border-t-0 pt-3 sm:pt-0 border-outline-variant/50 w-full sm:w-auto justify-end">
                 <button 
+                  data-tour="ticket-qr-btn"
                   onClick={() => setTicketModalBooking(b)}
                   aria-label="Lihat Tiket" 
                   className="p-2 text-on-surface-variant hover:bg-surface-container-low rounded-lg transition-colors tooltip-trigger relative group"

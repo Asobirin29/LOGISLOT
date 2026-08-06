@@ -30,7 +30,7 @@ async function main() {
   const users = await Promise.all([
     prisma.users.upsert({
       where: { email: 'supplier@logislot.com' },
-      update: {},
+      update: { password_hash: hashedPassword, is_active: true },
       create: {
         nama: 'Supplier Budi',
         email: 'supplier@logislot.com',
@@ -41,7 +41,7 @@ async function main() {
     }),
     prisma.users.upsert({
       where: { email: 'ic@logislot.com' },
-      update: {},
+      update: { password_hash: hashedPassword, is_active: true },
       create: {
         nama: 'IC Clara',
         email: 'ic@logislot.com',
@@ -52,7 +52,7 @@ async function main() {
     }),
     prisma.users.upsert({
       where: { email: 'security@logislot.com' },
-      update: {},
+      update: { password_hash: hashedPassword, is_active: true },
       create: {
         nama: 'Security Danu',
         email: 'security@logislot.com',
@@ -63,7 +63,7 @@ async function main() {
     }),
     prisma.users.upsert({
       where: { email: 'warehouse@logislot.com' },
-      update: {},
+      update: { password_hash: hashedPassword, is_active: true },
       create: {
         nama: 'Warehouse Eko',
         email: 'warehouse@logislot.com',
@@ -74,7 +74,7 @@ async function main() {
     }),
     prisma.users.upsert({
       where: { email: 'admin@logislot.com' },
-      update: {},
+      update: { password_hash: hashedPassword, is_active: true },
       create: {
         nama: 'Admin Fajar',
         email: 'admin@logislot.com',

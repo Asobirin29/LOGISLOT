@@ -61,7 +61,7 @@ api.interceptors.response.use(
       } catch (refreshError) {
         // Refresh failed — clear session and redirect to login
         setAccessToken(null);
-        if (typeof window !== 'undefined') {
+        if (typeof window !== 'undefined' && window.location.pathname !== '/login') {
           localStorage.removeItem(TOKEN_STORAGE_KEY);
           localStorage.removeItem(USER_STORAGE_KEY);
           window.location.href = '/login';

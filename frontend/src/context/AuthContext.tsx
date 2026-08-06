@@ -11,6 +11,7 @@ export interface User {
   email: string;
   role: Role;
   nama_instansi: string | null;
+  nomor_telepon?: string | null;
 }
 
 interface AuthContextType {
@@ -61,7 +62,7 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
         }
 
         // Token missing/expired — try server refresh (needs refresh token cookie)
-        const res = await api.post('/auth/refresh');
+        const res = await api.post('/auth/refresh', {}, { timeout: 3000 });
         const token = res.data.data.token;
         setAccessToken(token);
 
@@ -70,7 +71,7 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
           id: payload.id,
           email: payload.email,
           role: payload.role,
-          nama: payload.nama || storedUser ? JSON.parse(storedUser!).nama : 'User',
+          nama: payload.nama || (storedUser ? JSON.parse(storedUser!).nama : 'User'),
           nama_instansi: storedUser ? JSON.parse(storedUser!).nama_instansi : null,
         };
         setUser(refreshedUser);
@@ -92,6 +93,7 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
   const login = (data: { user: User; token: string }) => {
     setAccessToken(data.token);
     setUser(data.user);
+    setLoading(false);
     // Persist to localStorage so session survives hard refresh
     localStorage.setItem(USER_STORAGE_KEY, JSON.stringify(data.user));
     localStorage.setItem(TOKEN_STORAGE_KEY, data.token);

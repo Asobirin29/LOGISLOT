@@ -62,6 +62,7 @@ export default function SecurityMainPage() {
       <main className="flex-grow flex flex-col justify-center items-center px-lg py-xl relative">
         {/* Large QR Scan Button */}
         <button 
+          data-tour="security-scanner"
           onClick={() => setIsScannerOpen(true)}
           className="w-[85%] md:w-[70%] max-w-[600px] aspect-square md:aspect-auto md:h-[400px] rounded-2xl bg-gradient-to-br from-primary-container to-secondary shadow-[0_8px_30px_rgb(27,54,93,0.3)] flex flex-col items-center justify-center gap-xl transition-transform active:scale-95 hover:shadow-[0_12px_40px_rgb(27,54,93,0.4)] group relative overflow-hidden"
         >
@@ -84,6 +85,7 @@ export default function SecurityMainPage() {
         
         {/* Manual Input Button */}
         <Link 
+          data-tour="security-manual-btn"
           href="/security/manual"
           className="w-[85%] md:w-[70%] max-w-[600px] h-[80px] rounded-lg border-2 border-primary-container bg-surface-container-lowest text-primary-container flex items-center justify-center gap-md hover:bg-surface-container-low transition-colors active:bg-surface-container shadow-sm"
         >
@@ -93,7 +95,7 @@ export default function SecurityMainPage() {
       </main>
       
       {/* Bottom Status Bar */}
-      <div className="w-full bg-surface-container border-t border-outline-variant px-lg py-md flex items-center justify-between z-10 shadow-[0_-4px_12px_rgba(0,0,0,0.05)] mt-auto">
+      <div data-tour="security-queue-bar" className="w-full bg-surface-container border-t border-outline-variant px-lg py-md flex items-center justify-between z-10 shadow-[0_-4px_12px_rgba(0,0,0,0.05)] mt-auto">
         <div className="flex items-center gap-sm">
           <span className="material-symbols-outlined text-secondary">local_shipping</span>
           <span className="font-headline-sm text-headline-sm text-on-surface">Antrian Hari Ini: <strong className="font-bold text-primary">12 truk</strong></span>
